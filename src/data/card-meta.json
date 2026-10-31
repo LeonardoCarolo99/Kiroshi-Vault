@@ -1,0 +1,95 @@
+{
+  "generatedAt": "2026-10-31T04:01:49.888Z",
+  "count": 151,
+  "sets": [
+    {
+      "code": "embracingpowerretailstarterdeck",
+      "name": "Embracing Power — Retail Starter Deck"
+    },
+    {
+      "code": "PRM01",
+      "name": "Set 1 Promos"
+    },
+    {
+      "code": "theheistretailstarterdeck",
+      "name": "The Heist — Retail Starter Deck"
+    },
+    {
+      "code": "welcometonightcityretail",
+      "name": "Welcome to Night City — Retail"
+    }
+  ],
+  "colors": [
+    "Blue",
+    "Green",
+    "Red",
+    "Yellow"
+  ],
+  "types": [
+    "Gear",
+    "Legend",
+    "Program",
+    "Unit"
+  ],
+  "rarities": [
+    "Common",
+    "Epic",
+    "Nova Rare",
+    "Rare",
+    "Secret",
+    "Uncommon"
+  ],
+  "classifications": [
+    "6th Street",
+    "AI",
+    "Aldecaldo",
+    "Animal",
+    "Arasaka",
+    "Braindance",
+    "Corpo",
+    "Cyberware",
+    "Doll",
+    "Drone",
+    "Extreme",
+    "Fixer",
+    "Ganger",
+    "Maelstrom",
+    "Maine's Crew",
+    "Medtech",
+    "Merc",
+    "Militech",
+    "Mox",
+    "Mystic",
+    "NCPD",
+    "Netrunner",
+    "Netwatch",
+    "Nomad",
+    "Plan",
+    "Quickhack",
+    "Raffen Shiv",
+    "Ripperdoc",
+    "Rocker",
+    "Samurai",
+    "Scavenger",
+    "Techie",
+    "Trauma Team",
+    "Tyger Claws",
+    "Valentino",
+    "Vehicle",
+    "Voodoo Boys",
+    "Weapon",
+    "Zetatech"
+  ],
+  "keywords": [
+    "Adrenaline",
+    "Attack",
+    "Blocker",
+    "Call",
+    "Defeated",
+    "Go Solo",
+    "Play",
+    "Quick",
+    "Sell",
+    "Spend"
+  ]
+}
