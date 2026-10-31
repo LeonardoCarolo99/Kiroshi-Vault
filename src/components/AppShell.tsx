@@ -62,7 +62,7 @@ function BootScreen() {
       } catch (e) {
         console.error(e);
       }
-    }, 4000);
+    }, 10);
     return () => clearTimeout(timer);
   }, []);
 
