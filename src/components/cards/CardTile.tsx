@@ -6,6 +6,7 @@ import type { Card } from "@/lib/types";
 import { COLOR_HEX, RARITY_COLOR } from "@/lib/cards";
 import { cn } from "@/lib/utils";
 import { Stepper } from "@/components/ui/Stepper";
+import { useSound } from "@/hooks/useSound";
 
 type CardTileProps = {
   card: Card;
@@ -28,6 +29,7 @@ export function CardTile({
   onAdd,
   addDisabled,
 }: CardTileProps) {
+  const { playSelect, playClick } = useSound();
   const color = card.color ? COLOR_HEX[card.color] : "#7f91a8";
   const rarity = RARITY_COLOR[card.rarity] ?? "#7f91a8";
 
@@ -35,7 +37,10 @@ export function CardTile({
     <article className="card-shell group flex flex-col">
       <button
         type="button"
-        onClick={() => onOpen(card)}
+        onClick={() => {
+          playSelect();
+          onOpen(card);
+        }}
         className="relative block w-full text-left"
         aria-label={`Inspect ${card.displayName}`}
       >
@@ -77,7 +82,14 @@ export function CardTile({
       </button>
 
       <div className="flex flex-1 flex-col gap-2 p-2.5">
-        <button type="button" onClick={() => onOpen(card)} className="min-w-0 text-left">
+        <button
+          type="button"
+          onClick={() => {
+            playSelect();
+            onOpen(card);
+          }}
+          className="min-w-0 text-left"
+        >
           <h3 className="font-display truncate text-[12px] font-semibold uppercase leading-tight tracking-[0.04em] text-fog transition-colors group-hover:text-cp-yellow">
             {card.name}
           </h3>
@@ -120,7 +132,10 @@ export function CardTile({
             </span>
             <button
               type="button"
-              onClick={() => onAdd(card)}
+              onClick={() => {
+                playClick();
+                onAdd(card);
+              }}
               disabled={addDisabled}
               className="icon-btn h-7 w-7 border-cp-yellow/30 text-cp-yellow hover:border-cp-yellow hover:bg-cp-yellow/10 disabled:opacity-30"
               aria-label={`Add ${card.displayName} to deck`}

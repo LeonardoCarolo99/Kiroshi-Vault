@@ -8,6 +8,7 @@ import { Modal } from "@/components/ui/Modal";
 import { Stepper } from "@/components/ui/Stepper";
 import { RulesText } from "@/components/cards/RulesText";
 import { cn } from "@/lib/utils";
+import { useSound } from "@/hooks/useSound";
 
 type CardDetailModalProps = {
   card: Card | null;
@@ -34,6 +35,7 @@ function Stat({ label, value, tone }: { label: string; value: React.ReactNode; t
 }
 
 export function CardDetailModal({ card, owned, onClose, onAdjust, deckContext }: CardDetailModalProps) {
+  const { playClick } = useSound();
   if (!card) return null;
   const color = card.color ? COLOR_HEX[card.color] : "#7f91a8";
   const rarity = RARITY_COLOR[card.rarity] ?? "#7f91a8";
@@ -74,10 +76,26 @@ export function CardDetailModal({ card, owned, onClose, onAdjust, deckContext }:
               <div className="mt-2 flex items-center justify-between">
                 <span className="font-mono text-xs text-fog">{deckContext.count} in deck</span>
                 <div className="flex gap-1">
-                  <button type="button" className="icon-btn" onClick={deckContext.onRemove} aria-label="Remove from deck">
+                  <button
+                    type="button"
+                    className="icon-btn"
+                    onClick={() => {
+                      playClick();
+                      deckContext.onRemove();
+                    }}
+                    aria-label="Remove from deck"
+                  >
                     <Minus className="h-3.5 w-3.5" />
                   </button>
-                  <button type="button" className="icon-btn" onClick={deckContext.onAdd} aria-label="Add to deck">
+                  <button
+                    type="button"
+                    className="icon-btn"
+                    onClick={() => {
+                      playClick();
+                      deckContext.onAdd();
+                    }}
+                    aria-label="Add to deck"
+                  >
                     <Plus className="h-3.5 w-3.5" />
                   </button>
                 </div>

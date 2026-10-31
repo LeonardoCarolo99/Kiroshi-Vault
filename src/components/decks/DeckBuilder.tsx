@@ -16,6 +16,8 @@ import {
   ShieldCheck,
   Trash2,
   BarChart3,
+  Globe,
+  Lock,
 } from "lucide-react";
 import type { Card } from "@/lib/types";
 import { useVaultStore } from "@/lib/store";
@@ -30,11 +32,13 @@ import { LegendPicker } from "@/components/decks/LegendPicker";
 import { CardDetailModal } from "@/components/cards/CardDetailModal";
 import { Modal } from "@/components/ui/Modal";
 import { cn } from "@/lib/utils";
+import { useSound } from "@/hooks/useSound";
 
 type MobileTab = "deck" | "add" | "analysis";
 
 export function DeckBuilder({ deckId }: { deckId: string }) {
   const router = useRouter();
+  const { playClick, playSuccess } = useSound();
   const decks = useVaultStore((state) => state.decks);
   const collection = useVaultStore((state) => state.collection);
   const adjustCollection = useVaultStore((state) => state.adjustCollection);
@@ -101,6 +105,7 @@ export function DeckBuilder({ deckId }: { deckId: string }) {
   };
 
   const saveSettings = () => {
+    playSuccess();
     updateDeck(deck.id, {
       name: nameDraft.trim() || deck.name,
       description: descriptionDraft.trim(),
@@ -111,6 +116,7 @@ export function DeckBuilder({ deckId }: { deckId: string }) {
   const copyList = async () => {
     try {
       await navigator.clipboard.writeText(exportText);
+      playClick();
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1600);
     } catch {
@@ -119,6 +125,7 @@ export function DeckBuilder({ deckId }: { deckId: string }) {
   };
 
   const downloadList = () => {
+    playClick();
     const blob = new Blob([exportText], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
@@ -173,11 +180,23 @@ export function DeckBuilder({ deckId }: { deckId: string }) {
             <button type="button" className="icon-btn h-8 w-8" onClick={downloadList} aria-label="Download deck list">
               <ArrowDownToLine className="h-3.5 w-3.5" />
             </button>
+            <button
+              type="button"
+              className={cn("icon-btn h-8 w-8", deck.public ? "text-cp-cyan border-cp-cyan/40" : "")}
+              onClick={() => updateDeck(deck.id, { public: !deck.public })}
+              aria-label={deck.public ? "Make deck private" : "Make deck public"}
+              title={deck.public ? "Public - visible to friends" : "Private"}
+            >
+              {deck.public ? <Globe className="h-4 w-4" /> : <Lock className="h-4 w-4" />}
+            </button>
           </div>
           <button
             type="button"
             className="icon-btn h-8 w-8"
-            onClick={openSettings}
+            onClick={() => {
+              playClick();
+              openSettings();
+            }}
             aria-label="Deck settings"
           >
             <Settings2 className="h-4 w-4" />
@@ -185,7 +204,10 @@ export function DeckBuilder({ deckId }: { deckId: string }) {
           <button
             type="button"
             className="icon-btn h-8 w-8 hover:border-cp-red/50 hover:text-cp-red"
-            onClick={() => setDeleteOpen(true)}
+            onClick={() => {
+              playClick();
+              setDeleteOpen(true);
+            }}
             aria-label="Delete deck"
           >
             <Trash2 className="h-4 w-4" />
@@ -279,7 +301,10 @@ export function DeckBuilder({ deckId }: { deckId: string }) {
           <button
             key={tab.key}
             type="button"
-            onClick={() => setMobileTab(tab.key)}
+            onClick={() => {
+              playClick();
+              setMobileTab(tab.key);
+            }}
             className={cn(
               "font-mono flex items-center justify-center gap-1.5 border px-2 py-2 text-[9px] tracking-[0.1em] uppercase transition-colors",
               mobileTab === tab.key
@@ -344,7 +369,7 @@ export function DeckBuilder({ deckId }: { deckId: string }) {
         size="md"
         footer={
           <div className="flex justify-end gap-2">
-            <button type="button" className="btn-cyber btn-cyber-ghost" onClick={() => setSettingsOpen(false)}>
+            <button type="button" className="btn-cyber btn-cyber-ghost" onClick={() => { playClick(); setSettingsOpen(false); }}>
               Cancel
             </button>
             <button type="button" className="btn-cyber" onClick={saveSettings}>
@@ -385,13 +410,14 @@ export function DeckBuilder({ deckId }: { deckId: string }) {
         size="sm"
         footer={
           <div className="flex justify-end gap-2">
-            <button type="button" className="btn-cyber btn-cyber-ghost" onClick={() => setDeleteOpen(false)}>
+            <button type="button" className="btn-cyber btn-cyber-ghost" onClick={() => { playClick(); setDeleteOpen(false); }}>
               Keep Deck
             </button>
             <button
               type="button"
               className="btn-cyber btn-cyber-red"
               onClick={() => {
+                playClick();
                 deleteDeck(deck.id);
                 router.push("/decks");
               }}

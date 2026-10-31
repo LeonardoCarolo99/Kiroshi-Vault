@@ -22,9 +22,11 @@ import { Modal } from "@/components/ui/Modal";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { relativeDate } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { useSound } from "@/hooks/useSound";
 
 export function DecksView() {
   const router = useRouter();
+  const { playClick, playSuccess, playNavigate } = useSound();
   const decks = useVaultStore((state) => state.decks);
   const matches = useVaultStore((state) => state.matches);
   const createDeck = useVaultStore((state) => state.createDeck);
@@ -50,6 +52,7 @@ export function DecksView() {
   const legalCount = deckRows.filter((row) => row.summary.legal).length;
 
   const submitCreate = () => {
+    playSuccess();
     const id = createDeck(name.trim() || "Untitled Deck", description.trim());
     setCreateOpen(false);
     setName("");
@@ -71,7 +74,7 @@ export function DecksView() {
               <ShieldCheck className="h-3 w-3" />
               {legalCount} legal
             </span>
-            <button type="button" className="btn-cyber" onClick={() => setCreateOpen(true)}>
+            <button type="button" className="btn-cyber" onClick={() => { playClick(); setCreateOpen(true); }}>
               <Plus className="h-4 w-4" />
               New Deck
             </button>
@@ -175,7 +178,10 @@ export function DecksView() {
                   <button
                     type="button"
                     className="icon-btn h-8 w-8"
-                    onClick={() => duplicateDeck(deck.id)}
+                    onClick={() => {
+                      playClick();
+                      duplicateDeck(deck.id);
+                    }}
                     aria-label={`Duplicate ${deck.name}`}
                   >
                     <Copy className="h-3.5 w-3.5" />
@@ -183,7 +189,10 @@ export function DecksView() {
                   <button
                     type="button"
                     className="icon-btn h-8 w-8 hover:border-cp-red/50 hover:text-cp-red"
-                    onClick={() => setDeleteTarget(deck.id)}
+                    onClick={() => {
+                      playClick();
+                      setDeleteTarget(deck.id);
+                    }}
                     aria-label={`Delete ${deck.name}`}
                   >
                     <Trash2 className="h-3.5 w-3.5" />
@@ -203,7 +212,7 @@ export function DecksView() {
         size="md"
         footer={
           <div className="flex justify-end gap-2">
-            <button type="button" className="btn-cyber btn-cyber-ghost" onClick={() => setCreateOpen(false)}>
+            <button type="button" className="btn-cyber btn-cyber-ghost" onClick={() => { playClick(); setCreateOpen(false); }}>
               Cancel
             </button>
             <button type="button" className="btn-cyber" onClick={submitCreate}>
@@ -256,13 +265,14 @@ export function DecksView() {
         size="sm"
         footer={
           <div className="flex justify-end gap-2">
-            <button type="button" className="btn-cyber btn-cyber-ghost" onClick={() => setDeleteTarget(null)}>
+            <button type="button" className="btn-cyber btn-cyber-ghost" onClick={() => { playClick(); setDeleteTarget(null); }}>
               Keep Deck
             </button>
             <button
               type="button"
               className="btn-cyber btn-cyber-red"
               onClick={() => {
+                playClick();
                 if (deleteTarget) deleteDeck(deleteTarget);
                 setDeleteTarget(null);
               }}

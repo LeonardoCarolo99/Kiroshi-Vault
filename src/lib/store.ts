@@ -6,6 +6,7 @@ import type { User } from "firebase/auth";
 import type { BuyListEntry, BuyListPriority, Deck, MatchRecord } from "@/lib/types";
 import { uid } from "@/lib/utils";
 import { loadVaultFromCloud, saveVaultToCloud } from "@/lib/sync";
+import type { Friend } from "@/lib/types";
 
 type DeckTarget = "legend" | "main" | "sideboard";
 
@@ -16,6 +17,7 @@ type VaultState = {
   decks: Deck[];
   matches: MatchRecord[];
   buyList: BuyListEntry[];
+  friends: import("@/lib/types").Friend[];
   hasHydrated: boolean;
   setHasHydrated: (value: boolean) => void;
   adjustCollection: (cardId: string, delta: number) => void;
@@ -35,8 +37,11 @@ type VaultState = {
   removeBuyListEntry: (id: string) => void;
   adjustBuyListObtained: (id: string, delta: number) => void;
   clearObtainedBuyList: () => void;
-  importData: (payload: { collection?: Record<string, number>; decks?: Deck[]; matches?: MatchRecord[]; buyList?: BuyListEntry[] }) => void;
+  importData: (payload: { collection?: Record<string, number>; decks?: Deck[]; matches?: MatchRecord[]; buyList?: BuyListEntry[]; friends?: import("@/lib/types").Friend[] }) => void;
   resetAll: () => void;
+  // Friends
+  addFriend: (friend: import("@/lib/types").Friend) => void;
+  removeFriend: (uid: string) => void;
   // Cloud sync
   user: User | null;
   syncStatus: SyncStatus;
@@ -82,6 +87,7 @@ export const useVaultStore = create<VaultState>()(
       decks: [],
       matches: [],
       buyList: [],
+      friends: [],
       hasHydrated: false,
       setHasHydrated: (value) => set({ hasHydrated: value }),
       user: null,
@@ -104,6 +110,7 @@ export const useVaultStore = create<VaultState>()(
             decks: state.decks,
             matches: state.matches,
             buyList: state.buyList,
+            friends: state.friends,
           });
           set({ syncStatus: "synced", lastSyncedAt: new Date().toISOString() });
         } catch (error) {
@@ -125,6 +132,7 @@ export const useVaultStore = create<VaultState>()(
                 decks: cloud.decks,
                 matches: cloud.matches,
                 buyList: Array.isArray(cloud.buyList) ? cloud.buyList : [],
+                friends: Array.isArray(cloud.friends) ? cloud.friends : [],
               });
             } else {
               const local = get();
@@ -134,6 +142,7 @@ export const useVaultStore = create<VaultState>()(
                   decks: cloud.decks,
                   matches: cloud.matches,
                   buyList: Array.isArray(cloud.buyList) ? cloud.buyList : [],
+                  friends: Array.isArray(cloud.friends) ? cloud.friends : [],
                 });
               }
             }
@@ -339,12 +348,26 @@ export const useVaultStore = create<VaultState>()(
           decks: Array.isArray(payload.decks) ? payload.decks : state.decks,
           matches: Array.isArray(payload.matches) ? payload.matches : state.matches,
           buyList: Array.isArray(payload.buyList) ? payload.buyList : state.buyList,
+          friends: Array.isArray((payload as any).friends) ? (payload as any).friends : state.friends,
         }));
         scheduleCloudSync(get);
       },
 
       resetAll: () => {
-        set({ collection: {}, decks: [], matches: [], buyList: [] });
+        set({ collection: {}, decks: [], matches: [], buyList: [], friends: [] });
+        scheduleCloudSync(get);
+      },
+
+      addFriend: (friend) => {
+        set((state) => {
+          if (state.friends.some((f) => f.uid === friend.uid)) return state;
+          return { friends: [{ uid: friend.uid, addedAt: friend.addedAt }, ...state.friends] };
+        });
+        scheduleCloudSync(get);
+      },
+
+      removeFriend: (uid) => {
+        set((state) => ({ friends: state.friends.filter((f) => f.uid !== uid) }));
         scheduleCloudSync(get);
       },
     }),
@@ -357,6 +380,7 @@ export const useVaultStore = create<VaultState>()(
         decks: state.decks,
         matches: state.matches,
         buyList: state.buyList,
+        friends: state.friends,
         lastSyncedAt: state.lastSyncedAt,
       }),
       onRehydrateStorage: () => (state) => {

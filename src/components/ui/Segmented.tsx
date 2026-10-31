@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useSound } from "@/hooks/useSound";
 
 type Option<T extends string> = {
   value: T;
@@ -24,6 +25,8 @@ const TONES = {
 };
 
 export function Segmented<T extends string>({ options, value, onChange, className }: SegmentedProps<T>) {
+  const { playClick } = useSound();
+
   return (
     <div className={cn("grid gap-1 border border-line bg-black/30 p-1", className)} style={{ gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` }}>
       {options.map((option) => {
@@ -32,7 +35,10 @@ export function Segmented<T extends string>({ options, value, onChange, classNam
           <button
             key={option.value}
             type="button"
-            onClick={() => onChange(option.value)}
+            onClick={() => {
+              playClick();
+              onChange(option.value);
+            }}
             className={cn(
               "font-mono border px-2 py-2 text-[9px] tracking-[0.12em] uppercase transition-all",
               active ? TONES[option.tone ?? "default"] : "border-transparent text-muted hover:bg-white/5 hover:text-fog",

@@ -2,12 +2,14 @@
 
 import { ScanEye } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useSound } from "@/hooks/useSound";
 
 interface BootTransitionProps {
   onComplete: () => void;
 }
 
 export function BootTransition({ onComplete }: BootTransitionProps) {
+  const { playGlitch } = useSound();
   const [phase, setPhase] = useState<"booting" | "glitch" | "fade">("booting");
   const [progress, setProgress] = useState(0);
   const [lines, setLines] = useState<string[]>([]);
@@ -44,6 +46,7 @@ export function BootTransition({ onComplete }: BootTransitionProps) {
     }, 80);
 
     const glitchTimer = setTimeout(() => {
+      playGlitch();
       setPhase("glitch");
     }, 1400);
 

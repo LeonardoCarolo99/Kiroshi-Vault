@@ -292,14 +292,14 @@ export function DeckList({
       </section>
 
       <section className="hud-panel border-cp-cyan/40">
-        <div className="flex items-center justify-between border-b border-cp-cyan/60 bg-gradient-to-r from-cp-cyan/12 via-black/40 to-black/60 px-3 py-2">
+        <div className="flex items-center justify-between border-b border-cp-cyan/70 bg-gradient-to-r from-cp-cyan/15 via-black/40 to-black/60 px-3 py-2">
           <div className="flex items-baseline gap-2">
-            <p className="hud-label text-cp-cyan">Sideboard</p>
-            <span className="font-mono text-[8px] tracking-[0.1em] text-cp-cyan/70">Optional · exactly 7 or empty</span>
+            <p className="hud-label text-cp-cyan drop-shadow-[0_0_12px_rgba(0,229,255,0.4)]">Sideboard</p>
+            <span className="font-mono text-[8px] tracking-[0.1em] text-cp-cyan">Optional · exactly 7 or empty</span>
           </div>
           <p className="font-mono text-[10px] tracking-[0.1em]">
-            <span className="text-cp-cyan">{validation.sideboardCount}</span>
-            <span className="text-muted"> / 7</span>
+            <span className="text-cp-cyan drop-shadow-[0_0_10px_rgba(0,229,255,0.4)]">{validation.sideboardCount}</span>
+            <span className="text-cp-cyan/70"> / 7</span>
           </p>
         </div>
         {sideRows.length === 0 ? (

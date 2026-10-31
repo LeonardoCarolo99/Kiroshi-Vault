@@ -77,9 +77,10 @@ export function BuyListView() {
   const totalNeeded = items.reduce((sum, item) => sum + Math.max(0, item.quantity - item.obtained), 0);
 
   const quickResults = useMemo(() => {
-    if (!addOpen || query.trim().length < 2) return [];
+    if (!addOpen) return [];
     const q = query.trim().toLowerCase();
-    return cards.filter((card) => [card.name, card.subname, card.displayName, card.type].join(" ").toLowerCase().includes(q)).slice(0, 8);
+    if (q.length < 2) return cards.slice(0, 24);
+    return cards.filter((card) => [card.name, card.subname, card.displayName, card.type, card.rarity].join(" ").toLowerCase().includes(q)).slice(0, 36);
   }, [addOpen, query]);
 
   const addCard = (card: Card) => {
@@ -206,29 +207,47 @@ export function BuyListView() {
         </div>
       )}
 
-      <Modal open={addOpen} onClose={() => { setAddOpen(false); setQuery(""); }} title="Add to Buy List" >
-        <div className="space-y-3">
+      <Modal open={addOpen} onClose={() => { setAddOpen(false); setQuery(""); }} title="Add to Buy List" size="xl">
+        <div className="space-y-4">
           <div className="relative">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
-            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search by name, type..." className="hud-input h-10 pl-10" autoFocus />
+            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search by name, type, rarity..." className="hud-input h-10 pl-10" autoFocus />
+            {query ? <button type="button" onClick={() => setQuery("")} className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-muted hover:text-fog"><X className="h-4 w-4" /></button> : null}
           </div>
-          <div className="max-h-80 overflow-y-auto border border-line">
-            {query.trim().length < 2 ? <p className="p-4 text-center text-xs text-muted">Type at least 2 characters to search.</p> : quickResults.length === 0 ? <p className="p-4 text-center text-xs text-muted">No cards found.</p> : (
-              quickResults.map((card) => {
+          {quickResults.length === 0 ? (
+            <p className="p-6 text-center text-sm text-muted">No cards found.</p>
+          ) : (
+            <div className="grid max-h-[60vh] grid-cols-2 gap-3 overflow-y-auto pr-1 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {quickResults.map((card) => {
                 const color = card.color ? COLOR_HEX[card.color] : "#7f91a8";
+                const existing = buyList.find((item) => item.cardId === card.id && item.obtained < item.quantity);
                 return (
-                  <button key={card.id} type="button" onClick={() => addCard(card)} className="flex w-full items-center gap-3 border-b border-line px-3 py-2 text-left transition-colors last:border-b-0 hover:bg-white/[0.025]">
-                    <div className="relative h-12 w-9 shrink-0 overflow-hidden border border-line bg-black/40"><Image src={card.image} alt="" fill sizes="36px" className="object-cover" /></div>
-                    <div className="min-w-0 flex-1">
-                      <p className="font-display text-[12px] font-semibold uppercase tracking-[0.04em] text-fog">{card.name}</p>
-                      <p className="font-mono text-[8px] tracking-[0.08em] text-muted"><span style={{ color }}>{card.color ?? "—"}</span> · {card.type} · {card.rarity}</p>
+                  <button
+                    key={card.id}
+                    type="button"
+                    onClick={() => addCard(card)}
+                    className="group relative overflow-hidden border border-line bg-black/40 text-left transition-all hover:border-cp-yellow/60 hover:shadow-[0_0_0_1px_rgba(245,228,0,0.25)]"
+                    title={existing ? "Add another copy" : "Add to buy list"}
+                  >
+                    <div className="relative aspect-[3/4] w-full">
+                      <Image src={card.image} alt={card.displayName} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                      <span className="absolute left-2 top-2 h-5 w-1" style={{ background: color, boxShadow: `0 0 8px ${color}66` }} />
+                      {existing ? <span className="font-mono absolute right-2 top-2 border border-cp-yellow/60 bg-black/80 px-1 py-0.5 text-[8px] tracking-widest text-cp-yellow">IN LIST</span> : null}
+                      <div className="absolute inset-x-0 bottom-0 p-2">
+                        <p className="font-display truncate text-[11px] font-semibold uppercase tracking-[0.04em] text-fog">{card.name}</p>
+                        <p className="mt-0.5 font-mono text-[7px] tracking-[0.08em] text-muted"><span style={{ color }}>{card.color ?? "—"}</span> · {card.type} · {card.rarity}</p>
+                      </div>
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity group-hover:opacity-100">
+                        <span className="font-mono flex items-center gap-1 border border-cp-yellow/60 bg-black/80 px-2 py-1 text-[8px] tracking-[0.16em] text-cp-yellow uppercase"><Plus className="h-3 w-3" /> {existing ? "Add Copy" : "Add"}</span>
+                      </div>
                     </div>
-                    <Plus className="h-4 w-4 text-cp-yellow" />
                   </button>
                 );
-              })
-            )}
-          </div>
+              })}
+            </div>
+          )}
+          <p className="text-center font-mono text-[8px] tracking-[0.14em] text-muted/70 uppercase">Click a card to add to your buy list</p>
         </div>
       </Modal>
 

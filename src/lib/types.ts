@@ -49,6 +49,19 @@ export type Deck = {
   sideboard: Record<string, number>;
   createdAt: string;
   updatedAt: string;
+  public?: boolean;
+};
+
+export type UserProfile = {
+  uid: string;
+  displayName?: string;
+  email?: string;
+  photoURL?: string;
+};
+
+export type Friend = {
+  uid: string;
+  addedAt: string;
 };
 
 export type MatchResult = "win" | "loss" | "draw";

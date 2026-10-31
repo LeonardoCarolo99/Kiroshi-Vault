@@ -17,6 +17,8 @@ import {
   ShieldAlert,
   Upload,
   User,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 import { useVaultStore } from "@/lib/store";
 import { cardMeta, cards } from "@/lib/cards";
@@ -26,6 +28,7 @@ import { Modal } from "@/components/ui/Modal";
 import { formatDateTime } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import { signInWithGoogle, signInAnon, signOutUser } from "@/lib/auth";
+import { useSound } from "@/hooks/useSound";
 
 export function SettingsView() {
   const collection = useVaultStore((state) => state.collection);
@@ -38,6 +41,7 @@ export function SettingsView() {
   const lastSyncedAt = useVaultStore((state) => state.lastSyncedAt);
   const syncToCloud = useVaultStore((state) => state.syncToCloud);
   const syncFromCloud = useVaultStore((state) => state.syncFromCloud);
+  const { setEnabled: setSoundEnabled, playClick, playToggle, setVolume, getVolume } = useSound();
 
   const fileRef = useRef<HTMLInputElement>(null);
   const [resetOpen, setResetOpen] = useState(false);
@@ -47,6 +51,23 @@ export function SettingsView() {
   const [pasteOpen, setPasteOpen] = useState(false);
   const [pasteValue, setPasteValue] = useState("");
   const [authBusy, setAuthBusy] = useState(false);
+  const [soundsOn, setSoundsOn] = useState(() => {
+    if (typeof window === "undefined") return true;
+    try {
+      const saved = localStorage.getItem("kiroshi-sounds-enabled");
+      return saved !== "false";
+    } catch {
+      return true;
+    }
+  });
+  const [volume, setVolumeState] = useState(() => {
+    if (typeof window === "undefined") return 0.5;
+    try {
+      const vol = localStorage.getItem("kiroshi-sounds-volume");
+      if (vol !== null) return Math.max(0, Math.min(1, parseFloat(vol)));
+    } catch {}
+    return 0.5;
+  });
 
   const stats = collectionStats(collection);
 
@@ -137,6 +158,72 @@ export function SettingsView() {
       ) : null}
 
       <div className="grid gap-4 xl:grid-cols-2">
+        <section className="hud-panel p-5">
+          <div className="flex items-center gap-2">
+            {soundsOn ? <Volume2 className="h-4 w-4 text-cp-cyan" /> : <VolumeX className="h-4 w-4 text-muted" />}
+            <p className="hud-label text-cp-cyan">Audio</p>
+          </div>
+          <h2 className="font-display mt-1 text-xl font-bold uppercase tracking-[0.05em] text-fog">
+            Tech Sounds
+          </h2>
+          <p className="mt-2 text-xs leading-relaxed text-muted">
+            Cyberpunk UI sound effects for clicks, navigation, and interactions.
+          </p>
+          <div className="mt-4 space-y-3">
+            <div className="flex items-center justify-between border border-line bg-black/20 p-3">
+              <div>
+                <p className="text-[11px] text-fog">Interface Sounds</p>
+                <p className="font-mono text-[9px] text-muted">{soundsOn ? "Enabled" : "Disabled"}</p>
+              </div>
+              <button
+                type="button"
+                className={cn("btn-cyber", soundsOn ? "btn-cyber-cyan" : "btn-cyber-ghost")}
+                onClick={() => {
+                  const next = !soundsOn;
+                  setSoundsOn(next);
+                  setSoundEnabled(next);
+                  if (next) playToggle();
+                  else playClick();
+                }}
+              >
+                {soundsOn ? (
+                  <>
+                    <Volume2 className="h-4 w-4" />
+                    Enabled
+                  </>
+                ) : (
+                  <>
+                    <VolumeX className="h-4 w-4" />
+                    Disabled
+                  </>
+                )}
+              </button>
+            </div>
+            {soundsOn && (
+              <div className="border border-line bg-black/20 p-3">
+                <div className="mb-2 flex items-center justify-between">
+                  <p className="text-[11px] text-fog">Volume</p>
+                  <p className="font-mono text-[9px] text-cp-cyan">{Math.round(volume * 100)}%</p>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={volume}
+                  onChange={(e) => {
+                    const v = parseFloat(e.target.value);
+                    setVolumeState(v);
+                    setVolume(v);
+                    playClick();
+                  }}
+                  className="w-full accent-cp-cyan"
+                />
+              </div>
+            )}
+          </div>
+        </section>
+
         <section className="hud-panel p-5">
           <div className="flex items-center gap-2">
             <Cloud className="h-4 w-4 text-cp-cyan" />

@@ -20,6 +20,7 @@ import { useVaultStore } from "@/lib/store";
 import { cards } from "@/lib/cards";
 import { cn } from "@/lib/utils";
 import { BootTransition } from "@/components/BootTransition";
+import { useSound } from "@/hooks/useSound";
 
 const NAV = [
   { href: "/", label: "Command", icon: LayoutDashboard, code: "00" },
@@ -28,9 +29,17 @@ const NAV = [
   { href: "/matches", label: "Matches", icon: Swords, code: "03" },
   { href: "/hand-tester", label: "Hand Tester", icon: Hand, code: "04" },
   { href: "/buy-list", label: "Buy List", icon: ShoppingCart, code: "05" },
+  { href: "/friends", label: "Friends", icon: CircleDot, code: "06" },
 ];
 
-const MOBILE_NAV = NAV;
+const MOBILE_NAV = [
+  { href: "/", label: "Command", icon: LayoutDashboard },
+  { href: "/collection", label: "Collection", icon: Layers3 },
+  { href: "/decks", label: "Decks", icon: Boxes },
+  { href: "/matches", label: "Matches", icon: Swords },
+  { href: "/friends", label: "Friends", icon: CircleDot },
+  { href: "/settings", label: "Settings", icon: Settings },
+];
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -93,6 +102,7 @@ function BootScreen() {
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const { playNavigate, playBoot, playClick } = useSound();
   const hasHydrated = useVaultStore((state) => state.hasHydrated);
   const collection = useVaultStore((state) => state.collection);
   const decks = useVaultStore((state) => state.decks);
@@ -145,8 +155,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         }
       } catch {}
       setShowBootTransition(true);
+      playBoot();
     }
-  }, [hasHydrated, bootTransitionDone]);
+  }, [hasHydrated, bootTransitionDone, playBoot]);
 
   const ownedCards = useMemo(
     () => Object.values(collection).filter((count) => count > 0).length,
@@ -198,6 +209,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <Link
                   key={item.href}
                   href={item.href}
+                  onClick={() => {
+                    if (pathname !== item.href) playNavigate();
+                  }}
                   className={cn(
                     "group relative flex items-center gap-3 border border-transparent px-3 py-2.5 transition-all duration-200 ease-out",
                     active
@@ -228,12 +242,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <p className="hud-label px-3 pb-3">Archive</p>
           <Link
             href="/settings"
+            onClick={() => {
+              if (pathname !== "/settings") playNavigate();
+            }}
             className={cn(
               "flex items-center gap-3 border border-transparent px-3 py-2.5 text-muted transition-all duration-200 ease-out hover:border-line hover:bg-white/[0.03] hover:text-fog hover:translate-x-1",
               pathname === "/settings" && "border-cp-yellow/25 bg-cp-yellow/8 text-cp-yellow",
             )}
           >
-            <span className="font-mono w-5 text-[9px] tracking-widest opacity-50">06</span>
+            <span className="font-mono w-5 text-[9px] tracking-widest opacity-50">07</span>
             <Settings className="h-[17px] w-[17px]" strokeWidth={1.7} />
             <span className="font-display flex-1 text-[12px] font-semibold tracking-[0.14em] uppercase">
               Settings
@@ -284,7 +301,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <CircleDot className="h-2.5 w-2.5" />
             Local
           </span>
-          <Link href="/settings" className="icon-btn" aria-label="Settings">
+          <Link href="/settings" className="icon-btn" aria-label="Settings" onClick={() => { playClick(); }}>
             <Settings className="h-4 w-4" />
           </Link>
         </div>
@@ -304,6 +321,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={() => {
+                  if (pathname !== item.href) playNavigate();
+                }}
                 className={cn(
                   "flex flex-col items-center gap-1 py-2.5 transition-colors",
                   active ? "text-cp-yellow" : "text-muted",

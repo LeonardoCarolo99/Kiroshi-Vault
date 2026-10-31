@@ -2,6 +2,7 @@
 
 import { Minus, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useSound } from "@/hooks/useSound";
 
 type StepperProps = {
   value: number;
@@ -13,6 +14,8 @@ type StepperProps = {
 };
 
 export function Stepper({ value, onChange, min = 0, max = 999, compact, label }: StepperProps) {
+  const { playClick } = useSound();
+
   return (
     <div
       className={cn(
@@ -27,7 +30,10 @@ export function Stepper({ value, onChange, min = 0, max = 999, compact, label }:
           "flex items-center justify-center text-muted transition-colors hover:bg-white/5 hover:text-fog disabled:opacity-30",
           compact ? "h-7 w-7" : "h-9 w-9",
         )}
-        onClick={() => onChange(Math.max(min, value - 1))}
+        onClick={() => {
+          playClick();
+          onChange(Math.max(min, value - 1));
+        }}
         disabled={value <= min}
         aria-label="Decrease"
       >
@@ -48,7 +54,10 @@ export function Stepper({ value, onChange, min = 0, max = 999, compact, label }:
           "flex items-center justify-center text-muted transition-colors hover:bg-white/5 hover:text-fog disabled:opacity-30",
           compact ? "h-7 w-7" : "h-9 w-9",
         )}
-        onClick={() => onChange(Math.min(max, value + 1))}
+        onClick={() => {
+          playClick();
+          onChange(Math.min(max, value + 1));
+        }}
         disabled={value >= max}
         aria-label="Increase"
       >

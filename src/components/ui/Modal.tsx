@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useSound } from "@/hooks/useSound";
 
 type ModalProps = {
   open: boolean;
@@ -32,19 +33,25 @@ export function Modal({
   size = "md",
   className,
 }: ModalProps) {
+  const { playOpen, playClose } = useSound();
+
   useEffect(() => {
     if (!open) return;
+    playOpen();
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") {
+        playClose();
+        onClose();
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = previous;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [open, onClose]);
+  }, [open, onClose, playOpen, playClose]);
 
   if (!open) return null;
 
@@ -52,7 +59,10 @@ export function Modal({
     <div
       className="fixed inset-0 z-[120] flex items-end justify-center overflow-y-auto bg-black/80 p-0 backdrop-blur-sm sm:items-center sm:p-4"
       onMouseDown={(event) => {
-        if (event.target === event.currentTarget) onClose();
+        if (event.target === event.currentTarget) {
+          playClose();
+          onClose();
+        }
       }}
     >
       <section
@@ -74,7 +84,15 @@ export function Modal({
               </h2>
             ) : null}
           </div>
-          <button type="button" onClick={onClose} className="icon-btn shrink-0" aria-label="Close dialog">
+          <button
+            type="button"
+            onClick={() => {
+              playClose();
+              onClose();
+            }}
+            className="icon-btn shrink-0"
+            aria-label="Close dialog"
+          >
             <X className="h-4 w-4" />
           </button>
         </div>

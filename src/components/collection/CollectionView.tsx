@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { Eye, LayoutGrid, List, Layers3, SearchX, Sparkles } from "lucide-react";
+import { Eye, LayoutGrid, List, Layers3, SearchX, ShoppingCart, Sparkles } from "lucide-react";
 import type { Card, CollectionFilters, SortKey } from "@/lib/types";
 import { cards, filterCards, sortCards, COLOR_HEX, RARITY_COLOR } from "@/lib/cards";
 import { useVaultStore } from "@/lib/store";
@@ -32,6 +32,9 @@ export function CollectionView() {
   const collection = useVaultStore((state) => state.collection);
   const adjustCollection = useVaultStore((state) => state.adjustCollection);
   const setCollectionCount = useVaultStore((state) => state.setCollectionCount);
+  const buyList = useVaultStore((state) => state.buyList);
+  const addBuyListEntry = useVaultStore((state) => state.addBuyListEntry);
+  const adjustBuyListObtained = useVaultStore((state) => state.adjustBuyListObtained);
 
   const [filters, setFilters] = useState<CollectionFilters>(DEFAULT_FILTERS);
   const [sort, setSort] = useState<SortKey>("name-asc");
@@ -223,6 +226,22 @@ export function CollectionView() {
                     label={`Owned copies of ${card.displayName}`}
                   />
                 </div>
+                <button
+                  type="button"
+                  className="icon-btn shrink-0"
+                  onClick={() => {
+                    const existing = buyList.find((item) => item.cardId === card.id && item.obtained < item.quantity);
+                    if (existing) {
+                      adjustBuyListObtained(existing.id, 1);
+                    } else {
+                      addBuyListEntry({ cardId: card.id, quantity: 1, priority: "normal", notes: "" });
+                    }
+                  }}
+                  aria-label={`Add ${card.displayName} to buy list`}
+                  title="Add to buy list"
+                >
+                  <ShoppingCart className="h-4 w-4" />
+                </button>
                 <button
                   type="button"
                   className="icon-btn shrink-0"
