@@ -39,8 +39,23 @@ function englishPrinting(card) {
 
 function normalize(card) {
   const printing = englishPrinting(card);
-  const imageSource = printing?.image_url || card.image_url;
+  const imageSource = printing?.image_url || printing?.source_image_url || card.image_url || card.source_image_url;
   const slug = card.slug;
+  
+  const printings = (card.printings || [])
+    .filter((p) => p.language === "en" || !p.language)
+    .map((p) => ({
+      id: p.id,
+      collectorNumber: p.collector_number || "",
+      image: p.image_url || p.source_image_url || imageSource,
+      imageUrl: p.image_url || p.source_image_url,
+      set: p.set || card.set || printing?.set || { code: "unknown", name: "Unknown" },
+      rarity: p.rarity || card.rarity || "Unknown",
+      artist: p.artist || card.artist || "",
+      finish: p.finish || null,
+      language: p.language || "en",
+    }));
+  
   return {
     id: card.id,
     slug,
@@ -78,6 +93,8 @@ function normalize(card) {
     image: `/cards/${slug}.webp`,
     imageSource,
     printingCount: card.printings?.length || 1,
+    printings: printings.length > 0 ? printings : undefined,
+    prices: card.prices || card.market_prices || undefined,
   };
 }
 

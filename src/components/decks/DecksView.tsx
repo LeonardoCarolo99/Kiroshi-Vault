@@ -13,9 +13,10 @@ import {
   Swords,
   Trash2,
   ArrowUpRight,
+  Euro,
 } from "lucide-react";
 import { useVaultStore } from "@/lib/store";
-import { COLOR_HEX, deckValidationSummary } from "@/lib/cards";
+import { COLOR_HEX, deckValidationSummary, getCard } from "@/lib/cards";
 import { deckLegends } from "@/lib/stats";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Modal } from "@/components/ui/Modal";
@@ -40,12 +41,28 @@ export function DecksView() {
 
   const deckRows = useMemo(
     () =>
-      decks.map((deck) => ({
-        deck,
-        summary: deckValidationSummary(deck),
-        legends: deckLegends(deck),
-        matches: matches.filter((match) => match.deckId === deck.id),
-      })),
+      decks.map((deck) => {
+        let totalPrice = 0;
+        for (const id of deck.legendIds) {
+          const card = getCard(id);
+          if (card?.prices?.eur) totalPrice += card.prices.eur;
+        }
+        for (const [id, count] of Object.entries(deck.cards)) {
+          const card = getCard(id);
+          if (card?.prices?.eur) totalPrice += card.prices.eur * count;
+        }
+        for (const [id, count] of Object.entries(deck.sideboard)) {
+          const card = getCard(id);
+          if (card?.prices?.eur) totalPrice += card.prices.eur * count;
+        }
+        return {
+          deck,
+          summary: deckValidationSummary(deck),
+          legends: deckLegends(deck),
+          matches: matches.filter((match) => match.deckId === deck.id),
+          totalPrice,
+        };
+      }),
     [decks, matches],
   );
 
@@ -96,7 +113,7 @@ export function DecksView() {
         />
       ) : (
         <div className="grid gap-3 md:grid-cols-2 2xl:grid-cols-3">
-          {deckRows.map(({ deck, summary, legends, matches: deckMatches }) => {
+          {deckRows.map(({ deck, summary, legends, matches: deckMatches, totalPrice }) => {
             const wins = deckMatches.filter((match) => match.result === "win").length;
             return (
               <article key={deck.id} className="hud-panel hud-panel-hover flex flex-col">
@@ -145,7 +162,7 @@ export function DecksView() {
                     <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-muted">{deck.description}</p>
                   ) : null}
 
-                  <div className="mt-3 grid grid-cols-3 gap-2 border-t border-line pt-3">
+                  <div className="mt-3 grid grid-cols-4 gap-2 border-t border-line pt-3">
                     <div>
                       <p className="hud-label text-[8px]">Main</p>
                       <p className="font-display mt-0.5 text-sm text-fog">
@@ -165,6 +182,13 @@ export function DecksView() {
                       <p className="font-display mt-0.5 text-sm text-fog">
                         {wins}
                         <span className="text-[9px] text-muted">/{deckMatches.length}</span>
+                      </p>
+                    </div>
+                    <div>
+                      <p className="hud-label text-[8px]">Total</p>
+                      <p className="font-display mt-0.5 text-sm flex items-center gap-0.5 text-cp-green">
+                        <Euro className="h-3 w-3" />
+                        {totalPrice > 0 ? totalPrice.toFixed(2) : "—"}
                       </p>
                     </div>
                   </div>

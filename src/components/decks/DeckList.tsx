@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Minus, Plus, ShieldPlus, Trash2, UserRound } from "lucide-react";
+import { Minus, Plus, ShieldPlus, Trash2, UserRound, Euro } from "lucide-react";
 import type { Card, Deck, DeckValidation } from "@/lib/types";
 import { COLOR_HEX, getCard } from "@/lib/cards";
 import { cn } from "@/lib/utils";

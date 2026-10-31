@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { Eye, LayoutGrid, List, Layers3, SearchX, ShoppingCart, Sparkles } from "lucide-react";
+import { Euro, Eye, LayoutGrid, List, Layers3, SearchX, ShoppingCart, Sparkles } from "lucide-react";
 import type { Card, CollectionFilters, SortKey } from "@/lib/types";
 import { cards, filterCards, sortCards, COLOR_HEX, RARITY_COLOR } from "@/lib/cards";
 import { useVaultStore } from "@/lib/store";
@@ -215,6 +215,12 @@ export function CollectionView() {
                     {card.cost != null ? <span>· C{card.cost}</span> : null}
                     {card.power != null ? <span>· P{card.power}</span> : null}
                     {card.ram != null ? <span>· R{card.ram}</span> : null}
+                    {card.prices?.eur != null ? (
+                      <span className="flex items-center gap-0.5 text-cp-green">
+                        <Euro className="h-2.5 w-2.5" />
+                        {card.prices.eur.toFixed(2)}
+                      </span>
+                    ) : null}
                   </div>
                 </div>
                 <div className="hidden items-center gap-2 sm:flex">

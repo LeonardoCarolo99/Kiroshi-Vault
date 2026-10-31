@@ -57,7 +57,7 @@ export function UserDecksView({ uid }: { uid: string }) {
   }, [uid]);
 
   const publicDecks = useMemo(() => {
-    if (!snapshot) return [];
+    if (!snapshot || !snapshot.decks) return [];
     return snapshot.decks.filter((deck) => deck.public);
   }, [snapshot]);
 
@@ -86,7 +86,7 @@ export function UserDecksView({ uid }: { uid: string }) {
       <PageHeader
         eyebrow="Shared // Net"
         title="Public Decks"
-        description={`Viewing public loadouts from ${uid.slice(0, 12)}...`}
+        description="Viewing public loadouts"
         actions={
           <span className="badge badge-cyan">
             <Globe className="h-3 w-3" />

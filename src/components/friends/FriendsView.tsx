@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { UserPlus, Users, ExternalLink, Trash2, Copy, Check } from "lucide-react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import { useVaultStore } from "@/lib/store";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Modal } from "@/components/ui/Modal";
@@ -14,15 +16,19 @@ export function FriendsView() {
   const friends = useVaultStore((state) => state.friends);
   const addFriend = useVaultStore((state) => state.addFriend);
   const removeFriend = useVaultStore((state) => state.removeFriend);
+  const friendCode = useVaultStore((state) => state.friendCode);
+  const ensureFriendCode = useVaultStore((state) => state.ensureFriendCode);
 
   const [addOpen, setAddOpen] = useState(false);
-  const [uidInput, setUidInput] = useState("");
+  const [codeInput, setCodeInput] = useState("");
   const [copied, setCopied] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [adding, setAdding] = useState(false);
 
-  const copyUid = async () => {
-    if (!user?.uid) return;
+  const copyCode = async () => {
+    const code = friendCode || ensureFriendCode();
     try {
-      await navigator.clipboard.writeText(user.uid);
+      await navigator.clipboard.writeText(code);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1200);
     } catch {
@@ -30,12 +36,41 @@ export function FriendsView() {
     }
   };
 
-  const handleAdd = () => {
-    const uid = uidInput.trim();
-    if (!uid) return;
-    addFriend({ uid, addedAt: new Date().toISOString() });
-    setUidInput("");
-    setAddOpen(false);
+  const handleAdd = async () => {
+    const code = codeInput.trim().toUpperCase();
+    if (!code || !db || !user) return;
+    setAdding(true);
+    setError(null);
+    try {
+      // Try to find user by friendCode - scan approach not ideal, but for this app let's store mapping or search by checking common pattern
+      // Better: look up in a mapping collection or just try to find by querying users? Firestore doesn't support case-insensitive contains easily
+      // Alternative: store a collection 'friendCodes' with doc id = code -> { uid }
+      const codeRef = doc(db, "friendCodes", code);
+      const codeSnap = await getDoc(codeRef);
+      if (!codeSnap.exists()) {
+        setError("Friend code not found");
+        setAdding(false);
+        return;
+      }
+      const data = codeSnap.data() as { uid: string };
+      if (data.uid === user.uid) {
+        setError("You can't add yourself");
+        setAdding(false);
+        return;
+      }
+      if (friends.some((f) => f.uid === data.uid)) {
+        setError("Already friends");
+        setAdding(false);
+        return;
+      }
+      addFriend({ uid: data.uid, friendCode: code, addedAt: new Date().toISOString() });
+      setCodeInput("");
+      setAddOpen(false);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Failed to add friend");
+    } finally {
+      setAdding(false);
+    }
   };
 
   return (
@@ -43,13 +78,13 @@ export function FriendsView() {
       <PageHeader
         eyebrow="Network // 06"
         title="Friends"
-        description="Add friends and browse their public decklists."
+        description="Add friends with a 5-character code and browse their public decklists."
         actions={
           <>
-            {user?.uid ? (
-              <button type="button" className="btn-cyber btn-cyber-ghost" onClick={copyUid}>
+            {user ? (
+              <button type="button" className="btn-cyber btn-cyber-ghost" onClick={copyCode}>
                 {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                {copied ? "Copied" : "Copy My UID"}
+                {copied ? "Copied" : `Copy Code ${(friendCode || ensureFriendCode())}`}
               </button>
             ) : null}
             <button type="button" className="btn-cyber" onClick={() => setAddOpen(true)} disabled={!user}>
@@ -72,7 +107,7 @@ export function FriendsView() {
         <EmptyState
           icon={<Users className="h-6 w-6" />}
           title="No friends yet"
-          description="Share your UID with chooms or add theirs to see their public decks."
+          description="Share your friend code with chooms and add theirs to see their public decks."
           action={
             <button type="button" className="btn-cyber" onClick={() => setAddOpen(true)}>
               <UserPlus className="h-4 w-4" />
@@ -88,7 +123,7 @@ export function FriendsView() {
                 <div className="min-w-0">
                   <Link href={`/users/${friend.uid}`} className="block">
                     <h2 className="font-display truncate text-lg font-bold uppercase leading-tight tracking-[0.04em] text-fog transition-colors hover:text-cp-yellow">
-                      {friend.uid.slice(0, 12)}...
+                      {friend.friendCode || friend.uid.slice(0, 12)}
                     </h2>
                   </Link>
                   <p className="mt-0.5 truncate font-mono text-[9px] tracking-[0.1em] text-muted">
@@ -126,31 +161,33 @@ export function FriendsView() {
         size="md"
         footer={
           <div className="flex justify-end gap-2">
-            <button type="button" className="btn-cyber btn-cyber-ghost" onClick={() => setAddOpen(false)}>
+            <button type="button" className="btn-cyber btn-cyber-ghost" onClick={() => { setAddOpen(false); setError(null); setCodeInput(""); }}>
               Cancel
             </button>
-            <button type="button" className="btn-cyber" onClick={handleAdd} disabled={!uidInput.trim()}>
+            <button type="button" className="btn-cyber" onClick={handleAdd} disabled={!codeInput.trim() || adding}>
               <UserPlus className="h-4 w-4" />
-              Add
+              {adding ? "Adding..." : "Add"}
             </button>
           </div>
         }
       >
         <div className="space-y-4">
           <label className="block">
-            <span className="hud-label mb-1.5 block">Friend UID</span>
+            <span className="hud-label mb-1.5 block">Friend Code</span>
             <input
               autoFocus
-              value={uidInput}
-              onChange={(event) => setUidInput(event.target.value)}
+              value={codeInput}
+              onChange={(event) => { setCodeInput(event.target.value.toUpperCase()); setError(null); }}
               onKeyDown={(event) => {
                 if (event.key === "Enter") handleAdd();
               }}
-              placeholder="Paste their Firebase UID"
-              className="hud-input"
+              placeholder="F78K2"
+              maxLength={5}
+              className="hud-input font-mono tracking-[0.3em] uppercase"
             />
           </label>
-          <p className="text-xs text-muted">They need to be signed in and have some public decks visible.</p>
+          {error ? <p className="text-xs text-cp-red">{error}</p> : null}
+          <p className="text-xs text-muted">Enter your friend&apos;s 5-character code. They need to be signed in.</p>
         </div>
       </Modal>
     </div>

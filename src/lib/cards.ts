@@ -57,6 +57,17 @@ export function getCard(id: string | null | undefined): Card | undefined {
   return id ? cardsById.get(id) : undefined;
 }
 
+export function getCardmarketUrl(card: Card): string {
+  // Try to construct a CardMarket URL
+  // Common format: https://www.cardmarket.com/en/CyberpunkTCG/Products/Singles/[SetName]/[CardName]
+  const base = "https://www.cardmarket.com/en/CyberpunkTCG/Products/Singles";
+  // Use set name or code - CardMarket uses English set names usually
+  const setPath = encodeURIComponent(card.set.name.replace(/—/g, "-").replace(/\s+/g, "-"));
+  const cardName = card.subname ? `${card.name}-${card.subname}` : card.name;
+  const cardPath = encodeURIComponent(cardName.replace(/\s+/g, "-").replace(/[:']/g, ""));
+  return `${base}/${setPath}/${cardPath}`;
+}
+
 export function cardCopyKey(card: Card): string {
   return `${card.name}::${card.subname}`;
 }

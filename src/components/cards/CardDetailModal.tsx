@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { Minus, Plus, Star, Wallet } from "lucide-react";
+import { useState } from "react";
+import { ExternalLink, Minus, Plus, Star, Wallet } from "lucide-react";
 import type { Card } from "@/lib/types";
-import { COLOR_HEX, RARITY_COLOR } from "@/lib/cards";
+import { COLOR_HEX, RARITY_COLOR, getCardmarketUrl } from "@/lib/cards";
 import { Modal } from "@/components/ui/Modal";
 import { Stepper } from "@/components/ui/Stepper";
 import { RulesText } from "@/components/cards/RulesText";
@@ -36,9 +37,22 @@ function Stat({ label, value, tone }: { label: string; value: React.ReactNode; t
 
 export function CardDetailModal({ card, owned, onClose, onAdjust, deckContext }: CardDetailModalProps) {
   const { playClick } = useSound();
+  const [selectedPrintingIdx, setSelectedPrintingIdx] = useState(0);
+  
   if (!card) return null;
+  
+  const printings = card.printings && card.printings.length > 0 ? card.printings : null;
+  const activePrinting = printings ? printings[selectedPrintingIdx] : null;
+  const displayImage = activePrinting?.imageUrl || activePrinting?.image || card.image;
+  
   const color = card.color ? COLOR_HEX[card.color] : "#7f91a8";
-  const rarity = RARITY_COLOR[card.rarity] ?? "#7f91a8";
+  const rarity = activePrinting?.rarity || card.rarity;
+  const rarityColor = RARITY_COLOR[rarity] ?? "#7f91a8";
+  const artist = activePrinting?.artist || card.artist;
+  const printNumber = activePrinting?.collectorNumber || card.printNumber;
+  const setName = activePrinting?.set?.name || card.set.name;
+  const cardmarketUrl = card.cardmarketUrl || getCardmarketUrl(card);
+  const price = card.prices;
 
   return (
     <Modal open={Boolean(card)} onClose={onClose} size="xl" eyebrow="Card File" title={card.name}>
@@ -47,7 +61,7 @@ export function CardDetailModal({ card, owned, onClose, onAdjust, deckContext }:
           <div className="relative overflow-hidden border border-line bg-black/40 clip-notch">
             <div className="relative aspect-[5/7]">
               <Image
-                src={card.image}
+                src={displayImage}
                 alt={card.displayName}
                 fill
                 sizes="(max-width: 768px) 90vw, 320px"
@@ -60,6 +74,33 @@ export function CardDetailModal({ card, owned, onClose, onAdjust, deckContext }:
               style={{ background: color, boxShadow: `0 0 18px ${color}` }}
             />
           </div>
+          
+          {printings && printings.length > 1 ? (
+            <div className="mt-3 border border-line bg-black/25 p-3">
+              <p className="hud-label text-[8px] mb-2">Artwork / Version</p>
+              <div className="flex flex-wrap gap-2">
+                {printings.map((printing, idx) => (
+                  <button
+                    key={printing.id}
+                    type="button"
+                    onClick={() => {
+                      playClick();
+                      setSelectedPrintingIdx(idx);
+                    }}
+                    className={cn(
+                      "px-2 py-1 text-[9px] font-mono border transition-colors",
+                      selectedPrintingIdx === idx
+                        ? "border-cp-yellow/60 bg-cp-yellow/10 text-cp-yellow"
+                        : "border-line bg-black/40 text-muted hover:text-fog hover:border-line/80"
+                    )}
+                  >
+                    {printing.collectorNumber || `#${idx + 1}`}
+                    {printing.finish ? ` (${printing.finish})` : ""}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : null}
           <div className="mt-3 flex items-center justify-between gap-3 border border-line bg-black/25 p-3">
             <div>
               <p className="hud-label text-[8px]">Your Collection</p>
@@ -70,6 +111,49 @@ export function CardDetailModal({ card, owned, onClose, onAdjust, deckContext }:
             </div>
             <Stepper value={owned} onChange={(value) => onAdjust(card, value - owned)} max={99} />
           </div>
+          
+          {price && (price.eur || price.lowEur || price.avgEur || price.trendEur) ? (
+            <div className="mt-3 border border-cp-green/25 bg-cp-green/5 p-3">
+              <p className="hud-label text-[8px] text-cp-green">Market Price (EUR)</p>
+              <div className="mt-2 grid grid-cols-2 gap-2">
+                {price.eur != null && (
+                  <div>
+                    <p className="text-[8px] text-muted">Price</p>
+                    <p className="font-display text-lg text-fog">€{price.eur.toFixed(2)}</p>
+                  </div>
+                )}
+                {price.trendEur != null && (
+                  <div>
+                    <p className="text-[8px] text-muted">Trend</p>
+                    <p className="font-display text-lg text-fog">€{price.trendEur.toFixed(2)}</p>
+                  </div>
+                )}
+                {price.lowEur != null && (
+                  <div>
+                    <p className="text-[8px] text-muted">Low</p>
+                    <p className="font-mono text-xs text-fog">€{price.lowEur.toFixed(2)}</p>
+                  </div>
+                )}
+                {price.avgEur != null && (
+                  <div>
+                    <p className="text-[8px] text-muted">Avg</p>
+                    <p className="font-mono text-xs text-fog">€{price.avgEur.toFixed(2)}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : null}
+          
+          <a
+            href={cardmarketUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => playClick()}
+            className="mt-3 flex w-full items-center justify-center gap-2 border border-cp-cyan/40 bg-cp-cyan/10 px-3 py-2 text-[10px] font-mono tracking-[0.12em] text-cp-cyan transition-colors hover:bg-cp-cyan/20"
+          >
+            <ExternalLink className="h-3.5 w-3.5" />
+            VIEW ON CARDMARKET
+          </a>
           {deckContext ? (
             <div className="mt-3 border border-cp-yellow/25 bg-cp-yellow/5 p-3">
               <p className="hud-label text-[8px] text-cp-yellow">{deckContext.deckName}</p>
@@ -110,10 +194,10 @@ export function CardDetailModal({ card, owned, onClose, onAdjust, deckContext }:
               {card.color ?? "Colorless"}
             </span>
             <span className="badge badge-cyan">{card.type}</span>
-            <span className="badge" style={{ borderColor: `${rarity}66`, color: rarity }}>
-              {card.rarity}
+            <span className="badge" style={{ borderColor: `${rarityColor}66`, color: rarityColor }}>
+              {rarity}
             </span>
-            <span className="badge">{card.set.name}</span>
+            <span className="badge">{setName}</span>
           </div>
 
           <h3 className="font-display mt-4 text-2xl font-bold uppercase leading-tight tracking-[0.04em] text-fog">
@@ -177,9 +261,9 @@ export function CardDetailModal({ card, owned, onClose, onAdjust, deckContext }:
           </div>
 
           <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-3 font-mono text-[9px] tracking-[0.08em] text-muted">
-            <span>SET: {card.set.name}</span>
-            <span>PRINT: {card.printNumber || "—"}</span>
-            <span>ARTIST: {card.artist || "—"}</span>
+            <span>SET: {setName}</span>
+            <span>PRINT: {printNumber || "—"}</span>
+            <span>ARTIST: {artist || "—"}</span>
             <span className={cn(card.legality === "legal" ? "text-cp-green" : "text-cp-red")}>
               STANDARD: {card.legality.toUpperCase()}
             </span>

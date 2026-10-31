@@ -16,6 +16,7 @@ import {
   RotateCcw,
   ShieldAlert,
   Upload,
+  ClipboardCopy,
   User,
   Volume2,
   VolumeX,
@@ -41,6 +42,8 @@ export function SettingsView() {
   const lastSyncedAt = useVaultStore((state) => state.lastSyncedAt);
   const syncToCloud = useVaultStore((state) => state.syncToCloud);
   const syncFromCloud = useVaultStore((state) => state.syncFromCloud);
+  const friendCode = useVaultStore((state) => state.friendCode);
+  const ensureFriendCode = useVaultStore((state) => state.ensureFriendCode);
   const { setEnabled: setSoundEnabled, playClick, playToggle, setVolume, getVolume } = useSound();
 
   const fileRef = useRef<HTMLInputElement>(null);
@@ -257,6 +260,36 @@ export function SettingsView() {
                   {syncStatus === "error" && <CloudOff className="h-2.5 w-2.5" />}
                   {syncStatus}
                 </span>
+              </div>
+              <div className="flex items-center justify-between gap-2 border border-line bg-black/20 p-3">
+                <div>
+                  <p className="hud-label text-[8px]">Friend Code</p>
+                  <p className="font-display mt-1 text-lg tracking-[0.3em] text-cp-cyan">{friendCode || ensureFriendCode()}</p>
+                </div>
+                <button
+                  type="button"
+                  className="btn-cyber btn-cyber-ghost !min-h-8 !py-1.5 !text-[9px]"
+                  onClick={async () => {
+                    const code = friendCode || ensureFriendCode();
+                    try {
+                      await navigator.clipboard.writeText(code);
+                      setStatus({ tone: "ok", message: "Friend code copied." });
+                      // Publish mapping
+                      try {
+                        const { db } = await import("@/lib/firebase");
+                        if (db && user?.uid) {
+                          const { doc, setDoc } = await import("firebase/firestore");
+                          await setDoc(doc(db, "friendCodes", code), { uid: user.uid });
+                        }
+                      } catch {}
+                    } catch {
+                      setStatus({ tone: "error", message: "Failed to copy friend code." });
+                    }
+                  }}
+                >
+                  <ClipboardCopy className="h-3.5 w-3.5" />
+                  Copy
+                </button>
               </div>
               {lastSyncedAt ? (
                 <p className="font-mono text-[9px] text-muted">

@@ -4,7 +4,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { User } from "firebase/auth";
 import type { BuyListEntry, BuyListPriority, Deck, MatchRecord } from "@/lib/types";
-import { uid } from "@/lib/utils";
+import { generateFriendCode, uid } from "@/lib/utils";
 import { loadVaultFromCloud, saveVaultToCloud } from "@/lib/sync";
 import type { Friend } from "@/lib/types";
 
@@ -18,6 +18,7 @@ type VaultState = {
   matches: MatchRecord[];
   buyList: BuyListEntry[];
   friends: import("@/lib/types").Friend[];
+  friendCode: string | null;
   hasHydrated: boolean;
   setHasHydrated: (value: boolean) => void;
   adjustCollection: (cardId: string, delta: number) => void;
@@ -37,9 +38,10 @@ type VaultState = {
   removeBuyListEntry: (id: string) => void;
   adjustBuyListObtained: (id: string, delta: number) => void;
   clearObtainedBuyList: () => void;
-  importData: (payload: { collection?: Record<string, number>; decks?: Deck[]; matches?: MatchRecord[]; buyList?: BuyListEntry[]; friends?: import("@/lib/types").Friend[] }) => void;
+  importData: (payload: { collection?: Record<string, number>; decks?: Deck[]; matches?: MatchRecord[]; buyList?: BuyListEntry[]; friends?: import("@/lib/types").Friend[]; friendCode?: string | null }) => void;
   resetAll: () => void;
   // Friends
+  ensureFriendCode: () => string;
   addFriend: (friend: import("@/lib/types").Friend) => void;
   removeFriend: (uid: string) => void;
   // Cloud sync
@@ -88,6 +90,7 @@ export const useVaultStore = create<VaultState>()(
       matches: [],
       buyList: [],
       friends: [],
+      friendCode: null,
       hasHydrated: false,
       setHasHydrated: (value) => set({ hasHydrated: value }),
       user: null,
@@ -97,6 +100,21 @@ export const useVaultStore = create<VaultState>()(
         set({ user });
         if (user) {
           void get().syncFromCloud(false);
+          void (async () => {
+            try {
+              const state = get();
+              let code = state.friendCode;
+              if (!code) {
+                code = state.ensureFriendCode();
+              }
+              const { db } = await import("@/lib/firebase");
+              if (!db || !code) return;
+              const { doc, setDoc } = await import("firebase/firestore");
+              await setDoc(doc(db, "friendCodes", code), { uid: user.uid });
+            } catch (e) {
+              console.error(e);
+            }
+          })();
         }
       },
 
@@ -111,6 +129,7 @@ export const useVaultStore = create<VaultState>()(
             matches: state.matches,
             buyList: state.buyList,
             friends: state.friends,
+            friendCode: state.friendCode,
           });
           set({ syncStatus: "synced", lastSyncedAt: new Date().toISOString() });
         } catch (error) {
@@ -133,6 +152,7 @@ export const useVaultStore = create<VaultState>()(
                 matches: cloud.matches,
                 buyList: Array.isArray(cloud.buyList) ? cloud.buyList : [],
                 friends: Array.isArray(cloud.friends) ? cloud.friends : [],
+                friendCode: typeof cloud.friendCode === "string" ? cloud.friendCode : (get().friendCode || generateFriendCode()),
               });
             } else {
               const local = get();
@@ -143,7 +163,14 @@ export const useVaultStore = create<VaultState>()(
                   matches: cloud.matches,
                   buyList: Array.isArray(cloud.buyList) ? cloud.buyList : [],
                   friends: Array.isArray(cloud.friends) ? cloud.friends : [],
+                  friendCode: typeof cloud.friendCode === "string" ? cloud.friendCode : (local.friendCode || generateFriendCode()),
                 });
+              } else if (!local.friendCode && typeof cloud.friendCode === "string") {
+                set({ friendCode: cloud.friendCode });
+              } else if (!local.friendCode) {
+                const code = generateFriendCode();
+                set({ friendCode: code });
+                void get().syncToCloud();
               }
             }
           }
@@ -349,19 +376,29 @@ export const useVaultStore = create<VaultState>()(
           matches: Array.isArray(payload.matches) ? payload.matches : state.matches,
           buyList: Array.isArray(payload.buyList) ? payload.buyList : state.buyList,
           friends: Array.isArray((payload as any).friends) ? (payload as any).friends : state.friends,
+          friendCode: (payload as any).friendCode || state.friendCode,
         }));
         scheduleCloudSync(get);
       },
 
       resetAll: () => {
-        set({ collection: {}, decks: [], matches: [], buyList: [], friends: [] });
+        set({ collection: {}, decks: [], matches: [], buyList: [], friends: [], friendCode: null });
         scheduleCloudSync(get);
+      },
+
+      ensureFriendCode: () => {
+        const state = get();
+        if (state.friendCode) return state.friendCode;
+        const code = generateFriendCode();
+        set({ friendCode: code });
+        scheduleCloudSync(get);
+        return code;
       },
 
       addFriend: (friend) => {
         set((state) => {
           if (state.friends.some((f) => f.uid === friend.uid)) return state;
-          return { friends: [{ uid: friend.uid, addedAt: friend.addedAt }, ...state.friends] };
+          return { friends: [{ uid: friend.uid, friendCode: (friend as any).friendCode, addedAt: friend.addedAt }, ...state.friends] };
         });
         scheduleCloudSync(get);
       },
@@ -381,6 +418,7 @@ export const useVaultStore = create<VaultState>()(
         matches: state.matches,
         buyList: state.buyList,
         friends: state.friends,
+        friendCode: state.friendCode,
         lastSyncedAt: state.lastSyncedAt,
       }),
       onRehydrateStorage: () => (state) => {

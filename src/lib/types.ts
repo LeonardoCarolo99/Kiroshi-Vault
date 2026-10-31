@@ -2,6 +2,26 @@ export type CardColor = "Red" | "Blue" | "Green" | "Yellow";
 
 export type CardType = "Legend" | "Unit" | "Gear" | "Program";
 
+export type CardPrinting = {
+  id: string;
+  collectorNumber: string;
+  image: string;
+  imageUrl?: string;
+  set: { code: string; name: string };
+  rarity: string;
+  artist: string;
+  finish?: string | null;
+  language?: string;
+};
+
+export type CardPrice = {
+  eur?: number | null;
+  trendEur?: number | null;
+  lowEur?: number | null;
+  avgEur?: number | null;
+  updatedAt?: string;
+};
+
 export type Card = {
   id: string;
   slug: string;
@@ -27,6 +47,9 @@ export type Card = {
   legality: string;
   image: string;
   printingCount: number;
+  printings?: CardPrinting[];
+  prices?: CardPrice;
+  cardmarketUrl?: string;
 };
 
 export type CardMeta = {
@@ -61,6 +84,7 @@ export type UserProfile = {
 
 export type Friend = {
   uid: string;
+  friendCode?: string;
   addedAt: string;
 };
 
@@ -135,4 +159,12 @@ export type BuyListEntry = {
   obtained: number;
   createdAt: string;
   updatedAt: string;
+};
+
+export type VaultSnapshot = {
+  collection?: Record<string, number>;
+  decks?: Deck[];
+  matches?: unknown[];
+  buyList?: BuyListEntry[];
+  friends?: string[];
 };

@@ -57,7 +57,7 @@ export function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-[120] flex items-end justify-center overflow-y-auto bg-black/80 p-0 backdrop-blur-sm sm:items-center sm:p-4"
+      className="fixed inset-0 z-[120] flex items-end justify-center overflow-y-auto bg-black/80 p-0 pb-[calc(4rem+env(safe-area-inset-bottom,0px))] backdrop-blur-sm sm:items-center sm:p-4 sm:pb-4"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) {
           playClose();
@@ -74,6 +74,9 @@ export function Modal({
           SIZES[size],
           className,
         )}
+        style={{
+          maxHeight: "calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 5rem)",
+        }}
       >
         <div className="flex items-start justify-between gap-4 border-b border-line px-5 py-4 sm:px-6">
           <div>
@@ -96,8 +99,8 @@ export function Modal({
             <X className="h-4 w-4" />
           </button>
         </div>
-        <div className="max-h-[calc(100vh-9rem)] overflow-y-auto px-5 py-5 sm:px-6">{children}</div>
-        {footer ? <div className="border-t border-line px-5 py-4 sm:px-6">{footer}</div> : null}
+        <div className="max-h-[calc(100dvh-14rem-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px))] overflow-y-auto px-5 py-5 sm:max-h-[calc(100vh-16rem)] sm:px-6">{children}</div>
+        {footer ? <div className="border-t border-line px-5 py-4 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] sm:px-6 sm:pb-4">{footer}</div> : null}
       </section>
     </div>
   );

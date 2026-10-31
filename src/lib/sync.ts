@@ -10,6 +10,7 @@ export type VaultSnapshot = {
   matches: MatchRecord[];
   buyList?: BuyListEntry[];
   friends?: import("@/lib/types").Friend[];
+  friendCode?: string | null;
   updatedAt?: unknown;
 };
 
@@ -29,6 +30,7 @@ export async function loadVaultFromCloud(uid: string): Promise<VaultSnapshot | n
     matches: Array.isArray(data.matches) ? data.matches : [],
     buyList: Array.isArray(data.buyList) ? data.buyList : [],
     friends: Array.isArray(data.friends) ? data.friends : [],
+    friendCode: typeof data.friendCode === "string" ? data.friendCode : null,
     updatedAt: data.updatedAt,
   };
 }
@@ -41,6 +43,7 @@ export async function saveVaultToCloud(
     matches: MatchRecord[];
     buyList?: BuyListEntry[];
     friends?: import("@/lib/types").Friend[];
+    friendCode?: string | null;
   },
 ): Promise<void> {
   if (!db) throw new Error("Firestore not initialized");
@@ -52,6 +55,7 @@ export async function saveVaultToCloud(
       matches: snapshot.matches,
       buyList: snapshot.buyList ?? [],
       friends: snapshot.friends ?? [],
+      friendCode: snapshot.friendCode ?? null,
       updatedAt: serverTimestamp(),
     },
     { merge: true },

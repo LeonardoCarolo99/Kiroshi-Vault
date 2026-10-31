@@ -18,10 +18,11 @@ import {
   BarChart3,
   Globe,
   Lock,
+  Euro,
 } from "lucide-react";
 import type { Card } from "@/lib/types";
 import { useVaultStore } from "@/lib/store";
-import { COLOR_HEX, deckValidationSummary, validateDeck } from "@/lib/cards";
+import { COLOR_HEX, deckValidationSummary, validateDeck, getCard } from "@/lib/cards";
 import { decklistText, cardmarketText } from "@/lib/deckExport";
 import type { DeckExportFormat } from "@/lib/deckExport";
 import { deckLegends } from "@/lib/stats";
@@ -62,6 +63,24 @@ export function DeckBuilder({ deckId }: { deckId: string }) {
   const validation = useMemo(() => (deck ? validateDeck(deck) : null), [deck]);
   const summary = useMemo(() => (deck ? deckValidationSummary(deck) : null), [deck]);
   const legends = useMemo(() => (deck ? deckLegends(deck) : []), [deck]);
+
+  const deckPrice = useMemo(() => {
+    if (!deck) return 0;
+    let total = 0;
+    for (const id of deck.legendIds) {
+      const card = getCard(id);
+      if (card?.prices?.eur) total += card.prices.eur;
+    }
+    for (const [id, count] of Object.entries(deck.cards)) {
+      const card = getCard(id);
+      if (card?.prices?.eur) total += card.prices.eur * count;
+    }
+    for (const [id, count] of Object.entries(deck.sideboard)) {
+      const card = getCard(id);
+      if (card?.prices?.eur) total += card.prices.eur * count;
+    }
+    return total;
+  }, [deck]);
 
   const exportText = useMemo(() => {
     if (!deck) return "";
@@ -159,6 +178,10 @@ export function DeckBuilder({ deckId }: { deckId: string }) {
           Deck Archive
         </Link>
         <div className="flex flex-wrap items-center gap-2">
+          <span className="badge badge-green">
+            <Euro className="h-3 w-3" />
+            {deckPrice > 0 ? `€${deckPrice.toFixed(2)}` : "€0.00"}
+          </span>
           <span className={cn("badge", summary.legal ? "badge-green" : "badge-red")}>
             {summary.legal ? <ShieldCheck className="h-3 w-3" /> : <ShieldAlert className="h-3 w-3" />}
             {summary.legal ? "Legal" : `${summary.issueCount} issue${summary.issueCount === 1 ? "" : "s"}`}
