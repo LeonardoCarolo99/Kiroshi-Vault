@@ -13,6 +13,7 @@ import {
   Layers3,
   ScanEye,
   Settings,
+  ShoppingCart,
   Swords,
 } from "lucide-react";
 import { useVaultStore } from "@/lib/store";
@@ -26,6 +27,7 @@ const NAV = [
   { href: "/decks", label: "Decks", icon: Boxes, code: "02" },
   { href: "/matches", label: "Matches", icon: Swords, code: "03" },
   { href: "/hand-tester", label: "Hand Tester", icon: Hand, code: "04" },
+  { href: "/buy-list", label: "Buy List", icon: ShoppingCart, code: "05" },
 ];
 
 const MOBILE_NAV = NAV;
@@ -231,7 +233,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               pathname === "/settings" && "border-cp-yellow/25 bg-cp-yellow/8 text-cp-yellow",
             )}
           >
-            <span className="font-mono w-5 text-[9px] tracking-widest opacity-50">05</span>
+            <span className="font-mono w-5 text-[9px] tracking-widest opacity-50">06</span>
             <Settings className="h-[17px] w-[17px]" strokeWidth={1.7} />
             <span className="font-display flex-1 text-[12px] font-semibold tracking-[0.14em] uppercase">
               Settings
@@ -294,7 +296,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* Mobile nav */}
       <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ink/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl lg:hidden animate-slide-in-up">
-        <div className="grid grid-cols-5">
+        <div className="grid grid-cols-6">
           {MOBILE_NAV.map((item) => {
             const active = isActive(pathname, item.href);
             const Icon = item.icon;

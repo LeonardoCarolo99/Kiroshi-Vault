@@ -2,12 +2,13 @@
 
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import type { Deck, MatchRecord } from "@/lib/types";
+import type { BuyListEntry, Deck, MatchRecord } from "@/lib/types";
 
 export type VaultSnapshot = {
   collection: Record<string, number>;
   decks: Deck[];
   matches: MatchRecord[];
+  buyList?: BuyListEntry[];
   updatedAt?: unknown;
 };
 
@@ -25,6 +26,7 @@ export async function loadVaultFromCloud(uid: string): Promise<VaultSnapshot | n
     collection: data.collection ?? {},
     decks: Array.isArray(data.decks) ? data.decks : [],
     matches: Array.isArray(data.matches) ? data.matches : [],
+    buyList: Array.isArray(data.buyList) ? data.buyList : [],
     updatedAt: data.updatedAt,
   };
 }
@@ -35,6 +37,7 @@ export async function saveVaultToCloud(
     collection: Record<string, number>;
     decks: Deck[];
     matches: MatchRecord[];
+    buyList?: BuyListEntry[];
   },
 ): Promise<void> {
   if (!db) throw new Error("Firestore not initialized");
@@ -44,6 +47,7 @@ export async function saveVaultToCloud(
       collection: snapshot.collection,
       decks: snapshot.decks,
       matches: snapshot.matches,
+      buyList: snapshot.buyList ?? [],
       updatedAt: serverTimestamp(),
     },
     { merge: true },

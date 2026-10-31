@@ -20,6 +20,7 @@ function DeckCardTile({
   onAdjust,
   onInspect,
   tone = "yellow",
+  isSideboard = false,
 }: {
   card: Card;
   count: number;
@@ -27,83 +28,70 @@ function DeckCardTile({
   onAdjust: (delta: number) => void;
   onInspect: () => void;
   tone?: "yellow" | "cyan";
+  isSideboard?: boolean;
 }) {
   const color = card.color ? COLOR_HEX[card.color] : "#7f91a8";
   return (
-    <div className="group relative overflow-hidden border border-line bg-black/40 transition-all hover:border-line-bright hover:shadow-[0_0_0_1px_rgba(245,228,0,0.15)]">
-      <button
-        type="button"
-        onClick={onInspect}
-        className="relative block aspect-[5/7] w-full"
-        aria-label={`Inspect ${card.displayName}`}
-      >
-        <Image
-          src={card.image}
-          alt={card.displayName}
-          fill
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 220px"
-          className="object-cover object-top"
-          priority={false}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 p-1.5">
-          <p className="truncate text-[9px] font-semibold leading-tight text-fog">
-            {card.name}
-            {card.subname ? <span className="text-muted">: {card.subname}</span> : null}
-          </p>
-          <p className="mt-0.5 flex items-center gap-1 font-mono text-[7px] tracking-[0.08em] text-muted">
-            <span style={{ color }}>{card.color ?? "—"}</span>
-            <span>·</span>
-            <span>{card.type}</span>
-            {card.cost != null ? (
-              <>
-                <span>·</span>
-                <span>C{card.cost}</span>
-              </>
-            ) : null}
-            {card.ram != null ? (
-              <>
-                <span>·</span>
-                <span>R{card.ram}</span>
-              </>
-            ) : null}
-          </p>
-        </div>
-      </button>
-      <span className="absolute inset-x-0 top-0 h-0.5" style={{ background: color }} />
-      <div className="absolute left-1 top-1 flex items-center border border-line bg-black/90 shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
+    <div
+      className={cn(
+        "group relative overflow-hidden border bg-black/40 transition-all",
+        isSideboard
+          ? "border-cp-cyan/30 shadow-[inset_0_0_0_1px_rgba(55,186,255,0.12)] hover:border-cp-cyan/60 hover:shadow-[0_0_0_1px_rgba(55,186,255,0.25)]"
+          : "border-line hover:border-line-bright hover:shadow-[0_0_0_1px_rgba(245,228,0,0.18)]",
+      )}
+    >
+      <div className="relative aspect-[5/7] w-full">
         <button
           type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            onAdjust(-1);
-          }}
-          className="flex h-6 w-6 items-center justify-center text-muted transition-colors hover:bg-white/5 hover:text-cp-red"
+          onClick={onInspect}
+          className="absolute inset-0 z-[1]"
+          aria-label={`Inspect ${card.displayName}`}
+        >
+          <Image
+            src={card.image}
+            alt={card.displayName}
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 220px"
+            className="object-cover object-top"
+            priority={false}
+          />
+        </button>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/95 via-black/25 to-transparent" />
+        <button
+          type="button"
+          onClick={() => onAdjust(-1)}
+          className="absolute inset-y-0 left-0 z-[2] flex w-[40%] items-center justify-start pl-2 opacity-0 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-x-0 -translate-x-1"
           aria-label={`Remove one ${card.displayName}`}
         >
-          <Minus className="h-3 w-3" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent" />
+          <Minus className="relative z-[1] h-5 w-5 text-cp-red drop-shadow-[0_0_14px_rgba(255,51,95,0.8)]" />
         </button>
-        <span
-          className={cn(
-            "font-mono flex h-6 min-w-6 items-center justify-center border-x border-line px-1 text-[10px] tabular-nums",
-            tone === "cyan" ? "text-cp-cyan" : "text-cp-yellow",
-          )}
-        >
-          {count}
-        </span>
         <button
           type="button"
-          onClick={(e) => {
-            e.stopPropagation();
+          onClick={() => {
+            if (!canIncrease) return;
             onAdjust(1);
           }}
           disabled={!canIncrease}
-          className="flex h-6 w-6 items-center justify-center text-muted transition-colors hover:bg-white/5 hover:text-cp-cyan disabled:opacity-25"
+          className="absolute inset-y-0 right-0 z-[2] flex w-[40%] items-center justify-end pr-2 opacity-0 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-x-0 translate-x-1 disabled:pointer-events-none disabled:opacity-0"
           aria-label={`Add one ${card.displayName}`}
         >
-          <Plus className="h-3 w-3" />
+          <div className="absolute inset-0 bg-gradient-to-l from-black via-black/85 to-transparent" />
+          <Plus className="relative z-[1] h-5 w-5 text-cp-green drop-shadow-[0_0_14px_rgba(53,224,139,0.8)]" />
         </button>
+        <div
+          className={cn(
+            "absolute right-1.5 top-1.5 z-[3] flex h-9 min-w-9 items-center justify-center border px-2 font-display text-xl font-bold tabular-nums shadow-[0_6px_40px_rgba(0,0,0,0.9)]",
+            tone === "cyan"
+              ? "border-cp-cyan/80 bg-black/95 text-cp-cyan"
+              : "border-cp-yellow/80 bg-black/95 text-cp-yellow",
+          )}
+        >
+          {count}
+        </div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] p-1" />
       </div>
+      <span className="absolute inset-x-0 top-0 h-0.5" style={{ background: color }} />
     </div>
   );
 }
@@ -275,10 +263,10 @@ export function DeckList({
           <div>
             {groups.map(([type, list]) => (
               <div key={type}>
-                <div className="flex items-center justify-between bg-white/[0.015] px-3 py-1">
-                  <span className="font-mono text-[8px] tracking-[0.18em] text-muted uppercase">{type}</span>
-                  <span className="font-mono text-[8px] text-muted">
-                    {list.reduce((sum, entry) => sum + entry.count, 0)}
+                <div className="flex items-center justify-between border-y border-cp-yellow/40 bg-gradient-to-r from-cp-yellow/10 via-black/40 to-black/60 px-3 py-1.5">
+                  <span className="font-mono text-[9px] tracking-[0.28em] text-cp-yellow uppercase">{type}</span>
+                  <span className="font-mono text-[9px] tabular-nums text-cp-yellow">
+                    x{list.reduce((sum, entry) => sum + entry.count, 0)}
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-2 p-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 2xl:grid-cols-4">
@@ -303,14 +291,17 @@ export function DeckList({
         )}
       </section>
 
-      <section className="hud-panel">
-        <SectionHeader
-          label="Sideboard"
-          value={String(validation.sideboardCount)}
-          target="/ 7"
-          tone={validation.sideboardCount === 0 || validation.sideboardCount === 7 ? "green" : "yellow"}
-          hint="Optional · exactly 7 or empty"
-        />
+      <section className="hud-panel border-cp-cyan/40">
+        <div className="flex items-center justify-between border-b border-cp-cyan/60 bg-gradient-to-r from-cp-cyan/12 via-black/40 to-black/60 px-3 py-2">
+          <div className="flex items-baseline gap-2">
+            <p className="hud-label text-cp-cyan">Sideboard</p>
+            <span className="font-mono text-[8px] tracking-[0.1em] text-cp-cyan/70">Optional · exactly 7 or empty</span>
+          </div>
+          <p className="font-mono text-[10px] tracking-[0.1em]">
+            <span className="text-cp-cyan">{validation.sideboardCount}</span>
+            <span className="text-muted"> / 7</span>
+          </p>
+        </div>
         {sideRows.length === 0 ? (
           <div className="px-4 py-6 text-center">
             <p className="text-xs text-muted">
@@ -319,17 +310,18 @@ export function DeckList({
             </p>
           </div>
         ) : (
-          <div>
+          <div className="grid grid-cols-2 gap-2 p-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 2xl:grid-cols-4">
             {sideRows.map(({ card, count }) => {
               const key = `${card.name}::${card.subname}`;
               const canIncrease = (validation.copies[key] ?? 0) < 3 && validation.sideboardCount < 7;
               return (
-                <DeckRow
+                <DeckCardTile
                   key={card.id}
                   card={card}
                   count={count}
                   canIncrease={canIncrease}
                   tone="cyan"
+                  isSideboard
                   onAdjust={(delta) => onAdjust(card, "sideboard", delta)}
                   onInspect={() => onInspect(card)}
                 />

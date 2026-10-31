@@ -3,7 +3,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { User } from "firebase/auth";
-import type { Deck, MatchRecord } from "@/lib/types";
+import type { BuyListEntry, BuyListPriority, Deck, MatchRecord } from "@/lib/types";
 import { uid } from "@/lib/utils";
 import { loadVaultFromCloud, saveVaultToCloud } from "@/lib/sync";
 
@@ -15,6 +15,7 @@ type VaultState = {
   collection: Record<string, number>;
   decks: Deck[];
   matches: MatchRecord[];
+  buyList: BuyListEntry[];
   hasHydrated: boolean;
   setHasHydrated: (value: boolean) => void;
   adjustCollection: (cardId: string, delta: number) => void;
@@ -28,7 +29,13 @@ type VaultState = {
   addMatch: (match: Omit<MatchRecord, "id" | "createdAt">) => string;
   updateMatch: (id: string, patch: Partial<Omit<MatchRecord, "id" | "createdAt">>) => void;
   deleteMatch: (id: string) => void;
-  importData: (payload: { collection?: Record<string, number>; decks?: Deck[]; matches?: MatchRecord[] }) => void;
+  // Buy List
+  addBuyListEntry: (entry: { cardId: string; quantity?: number; priority?: BuyListPriority; notes?: string }) => string;
+  updateBuyListEntry: (id: string, patch: Partial<Omit<BuyListEntry, "id" | "createdAt">>) => void;
+  removeBuyListEntry: (id: string) => void;
+  adjustBuyListObtained: (id: string, delta: number) => void;
+  clearObtainedBuyList: () => void;
+  importData: (payload: { collection?: Record<string, number>; decks?: Deck[]; matches?: MatchRecord[]; buyList?: BuyListEntry[] }) => void;
   resetAll: () => void;
   // Cloud sync
   user: User | null;
@@ -74,6 +81,7 @@ export const useVaultStore = create<VaultState>()(
       collection: {},
       decks: [],
       matches: [],
+      buyList: [],
       hasHydrated: false,
       setHasHydrated: (value) => set({ hasHydrated: value }),
       user: null,
@@ -95,6 +103,7 @@ export const useVaultStore = create<VaultState>()(
             collection: state.collection,
             decks: state.decks,
             matches: state.matches,
+            buyList: state.buyList,
           });
           set({ syncStatus: "synced", lastSyncedAt: new Date().toISOString() });
         } catch (error) {
@@ -115,14 +124,16 @@ export const useVaultStore = create<VaultState>()(
                 collection: cleanCollection(cloud.collection),
                 decks: cloud.decks,
                 matches: cloud.matches,
+                buyList: Array.isArray(cloud.buyList) ? cloud.buyList : [],
               });
             } else {
               const local = get();
-              if (local.decks.length === 0 && local.matches.length === 0 && Object.keys(local.collection).length === 0) {
+              if (local.decks.length === 0 && local.matches.length === 0 && Object.keys(local.collection).length === 0 && local.buyList.length === 0) {
                 set({
                   collection: cleanCollection(cloud.collection),
                   decks: cloud.decks,
                   matches: cloud.matches,
+                  buyList: Array.isArray(cloud.buyList) ? cloud.buyList : [],
                 });
               }
             }
@@ -272,17 +283,68 @@ export const useVaultStore = create<VaultState>()(
         scheduleCloudSync(get);
       },
 
+      addBuyListEntry: (entry) => {
+        const id = uid("buy");
+        const timestamp = now();
+        const record: BuyListEntry = {
+          id,
+          cardId: entry.cardId,
+          quantity: Math.max(1, Math.floor(entry.quantity ?? 1)),
+          priority: entry.priority ?? "normal",
+          notes: entry.notes ?? "",
+          obtained: 0,
+          createdAt: timestamp,
+          updatedAt: timestamp,
+        };
+        set((state) => ({ buyList: [record, ...state.buyList] }));
+        scheduleCloudSync(get);
+        return id;
+      },
+
+      updateBuyListEntry: (id, patch) => {
+        set((state) => ({
+          buyList: state.buyList.map((item) =>
+            item.id === id ? { ...item, ...patch, updatedAt: now() } : item,
+          ),
+        }));
+        scheduleCloudSync(get);
+      },
+
+      removeBuyListEntry: (id) => {
+        set((state) => ({ buyList: state.buyList.filter((item) => item.id !== id) }));
+        scheduleCloudSync(get);
+      },
+
+      adjustBuyListObtained: (id, delta) => {
+        set((state) => ({
+          buyList: state.buyList.map((item) => {
+            if (item.id !== id) return item;
+            const next = Math.max(0, Math.min(item.quantity, (item.obtained ?? 0) + delta));
+            return { ...item, obtained: next, updatedAt: now() };
+          }),
+        }));
+        scheduleCloudSync(get);
+      },
+
+      clearObtainedBuyList: () => {
+        set((state) => ({
+          buyList: state.buyList.filter((item) => (item.obtained ?? 0) < item.quantity),
+        }));
+        scheduleCloudSync(get);
+      },
+
       importData: (payload) => {
         set((state) => ({
           collection: payload.collection ? cleanCollection(payload.collection) : state.collection,
           decks: Array.isArray(payload.decks) ? payload.decks : state.decks,
           matches: Array.isArray(payload.matches) ? payload.matches : state.matches,
+          buyList: Array.isArray(payload.buyList) ? payload.buyList : state.buyList,
         }));
         scheduleCloudSync(get);
       },
 
       resetAll: () => {
-        set({ collection: {}, decks: [], matches: [] });
+        set({ collection: {}, decks: [], matches: [], buyList: [] });
         scheduleCloudSync(get);
       },
     }),
@@ -294,6 +356,7 @@ export const useVaultStore = create<VaultState>()(
         collection: state.collection,
         decks: state.decks,
         matches: state.matches,
+        buyList: state.buyList,
         lastSyncedAt: state.lastSyncedAt,
       }),
       onRehydrateStorage: () => (state) => {
