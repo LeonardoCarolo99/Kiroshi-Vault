@@ -276,6 +276,9 @@ export function SettingsView() {
               <p className="text-[10px] text-muted">
                 Google sign-in recommended for easy access across devices. Anonymous works but is harder to recover.
               </p>
+              <p className="text-[9px] text-cp-yellow/70">
+                If signing in from another device, add its host to Firebase Auth → Authorized domains.
+              </p>
             </div>
           )}
         </section>
