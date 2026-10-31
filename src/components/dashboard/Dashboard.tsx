@@ -72,7 +72,7 @@ export function Dashboard() {
   const recentDecks = decks.slice(0, 3);
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 animate-fade">
       {/* Hero */}
       <section className="hud-panel relative overflow-hidden p-5 sm:p-7">
         <div className="pointer-events-none absolute inset-0 bg-hud-lines opacity-20" />
@@ -122,7 +122,7 @@ export function Dashboard() {
       </section>
 
       {/* Stat tiles */}
-      <section className="grid grid-cols-2 gap-3 xl:grid-cols-4">
+      <section className="stagger grid grid-cols-2 gap-3 xl:grid-cols-4">
         <StatTile
           label="Unique Owned"
           value={`${stats.ownedUnique}`}
@@ -166,7 +166,7 @@ export function Dashboard() {
       </section>
 
       <div className="grid gap-5 xl:grid-cols-[1.6fr_1fr]">
-        <div className="space-y-5">
+        <div className="stagger space-y-5">
           {/* Collection progress */}
           <section className="hud-panel p-5">
             <div className="flex items-center justify-between gap-3">
@@ -304,7 +304,7 @@ export function Dashboard() {
           </section>
         </div>
 
-        <div className="space-y-5">
+        <div className="stagger space-y-5">
           {/* Decks */}
           <section className="hud-panel p-5">
             <div className="flex items-center justify-between gap-3">

@@ -56,7 +56,7 @@ export function CollectionView() {
   const handleAdjust = (card: Card, delta: number) => adjustCollection(card.id, delta);
 
   return (
-    <div>
+    <div className="animate-fade">
       <PageHeader
         eyebrow="Archive // 01"
         title="Collection"
@@ -150,7 +150,7 @@ export function CollectionView() {
 
       {visible.length === 0 ? (
         <EmptyState
-          className="mt-4"
+          className="mt-4 animate-rise"
           icon={<SearchX className="h-6 w-6" />}
           title="No matches"
           description="No cards in the archive match this filter set. Clear a few filters and scan again."
@@ -161,7 +161,7 @@ export function CollectionView() {
           }
         />
       ) : view === "grid" ? (
-        <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+        <div className="stagger mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {visible.map((card) => (
             <CardTile
               key={card.id}
@@ -173,7 +173,7 @@ export function CollectionView() {
           ))}
         </div>
       ) : (
-        <div className="mt-3 divide-y divide-line border border-line bg-black/20">
+        <div className="stagger mt-3 divide-y divide-line border border-line bg-black/20">
           {visible.map((card) => {
             const owned = collection[card.id] ?? 0;
             const color = card.color ? COLOR_HEX[card.color] : "#7f91a8";

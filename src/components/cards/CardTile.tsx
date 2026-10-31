@@ -45,7 +45,7 @@ export function CardTile({
             alt={card.displayName}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10" />
           <div className="card-scan" />
@@ -68,7 +68,7 @@ export function CardTile({
             </span>
           ) : null}
 
-          <div className="absolute inset-x-0 bottom-0 translate-y-2 px-2 pb-2 opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+          <div className="absolute inset-x-0 bottom-0 translate-y-2 px-2 pb-2 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100">
             <span className="font-mono flex items-center justify-center gap-1 border border-white/15 bg-black/70 py-1 text-[8px] tracking-[0.18em] text-fog backdrop-blur-sm">
               <Eye className="h-3 w-3" /> INSPECT
             </span>

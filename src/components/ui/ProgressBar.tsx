@@ -23,8 +23,8 @@ export function ProgressBar({ value, max = 100, color = "#f5e400", className, sh
       ) : null}
       <div className="h-1.5 w-full overflow-hidden bg-white/6">
         <div
-          className="h-full transition-all duration-500"
-          style={{ width: `${pct}%`, background: color, boxShadow: `0 0 12px ${color}55` }}
+          className="h-full transition-all duration-1000 ease-out"
+          style={{ width: `${pct}%`, background: color, boxShadow: `0 0 16px ${color}66` }}
         />
       </div>
     </div>

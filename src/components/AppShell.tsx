@@ -58,7 +58,7 @@ function BootScreen() {
   useEffect(() => {
     const timer = setTimeout(() => {
       try {
-        useVaultStore.getState().setHasHydrated(true);
+        (useVaultStore.getState() as any).setHasHydrated(true);
       } catch (e) {
         console.error(e);
       }
@@ -101,7 +101,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const forceHydrate = () => {
       try {
-        useVaultStore.getState().setHasHydrated(true);
+        (useVaultStore.getState() as any).setHasHydrated(true);
       } catch (e) {
         console.error(e);
       }
@@ -170,9 +170,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <Logo />
         </div>
 
-        <nav className="flex-1 px-3 py-5">
+        <nav className="flex-1 px-3 py-5 animate-slide-left">
           <p className="hud-label px-3 pb-3">System Menu</p>
-          <div className="space-y-1">
+          <div className="stagger space-y-1">
             {NAV.map((item) => {
               const active = isActive(pathname, item.href);
               const Icon = item.icon;
@@ -181,10 +181,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "group relative flex items-center gap-3 border border-transparent px-3 py-2.5 transition-all",
+                    "group relative flex items-center gap-3 border border-transparent px-3 py-2.5 transition-all duration-200 ease-out",
                     active
                       ? "border-cp-yellow/25 bg-cp-yellow/8 text-cp-yellow"
-                      : "text-muted hover:border-line hover:bg-white/[0.025] hover:text-fog",
+                      : "text-muted hover:border-line hover:bg-white/[0.03] hover:text-fog hover:translate-x-1",
                   )}
                 >
                   {active && (
@@ -211,7 +211,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <Link
             href="/settings"
             className={cn(
-              "flex items-center gap-3 border border-transparent px-3 py-2.5 text-muted transition-all hover:border-line hover:bg-white/[0.025] hover:text-fog",
+              "flex items-center gap-3 border border-transparent px-3 py-2.5 text-muted transition-all duration-200 ease-out hover:border-line hover:bg-white/[0.03] hover:text-fog hover:translate-x-1",
               pathname === "/settings" && "border-cp-yellow/25 bg-cp-yellow/8 text-cp-yellow",
             )}
           >
@@ -277,7 +277,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </main>
 
       {/* Mobile nav */}
-      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ink/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl lg:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ink/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl lg:hidden animate-slide-in-up">
         <div className="grid grid-cols-5">
           {MOBILE_NAV.map((item) => {
             const active = isActive(pathname, item.href);
