@@ -58,12 +58,12 @@ export function UserDecksView({ uid }: { uid: string }) {
 
   const publicDecks = useMemo(() => {
     if (!snapshot || !snapshot.decks) return [];
-    return snapshot.decks.filter((deck) => deck.public);
+    return snapshot.decks.filter((deck: Deck) => deck.public);
   }, [snapshot]);
 
   const deckRows = useMemo(
     () =>
-      publicDecks.map((deck) => ({
+      publicDecks.map((deck: Deck) => ({
         deck,
         summary: deckValidationSummary(deck),
         legends: deckLegends(deck),
@@ -107,7 +107,7 @@ export function UserDecksView({ uid }: { uid: string }) {
         />
       ) : (
         <div className="grid gap-3 md:grid-cols-2 2xl:grid-cols-3">
-          {deckRows.map(({ deck, summary, legends }) => (
+          {deckRows.map(({ deck, summary, legends }: { deck: Deck; summary: any; legends: any[] }) => (
             <article key={deck.id} className="hud-panel hud-panel-hover flex flex-col">
               <div className="flex items-start justify-between gap-3 border-b border-line px-4 py-3">
                 <div className="min-w-0">
@@ -129,7 +129,7 @@ export function UserDecksView({ uid }: { uid: string }) {
                   {legends.length === 0 ? (
                     <p className="font-mono text-[10px] tracking-[0.1em] text-cp-red">NO LEGENDS</p>
                   ) : (
-                    legends.map((legend) => (
+                    legends.map((legend: any) => (
                       <div key={legend.id} className="relative">
                         <div className="relative h-16 w-11 overflow-hidden border border-line bg-black/40">
                           <Image src={legend.image} alt={legend.displayName} fill sizes="44px" className="object-cover" />
