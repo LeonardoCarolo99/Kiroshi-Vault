@@ -40,6 +40,9 @@ export const metadata: Metadata = {
     title: "Kiroshi Vault",
     statusBarStyle: "black-translucent",
   },
+  other: {
+    "mobile-web-app-capable": "yes",
+  },
   formatDetection: { telephone: false },
 };
 
@@ -47,6 +50,10 @@ export const viewport: Viewport = {
   themeColor: "#04060a",
   colorScheme: "dark",
   viewportFit: "cover",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
