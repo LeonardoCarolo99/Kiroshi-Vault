@@ -110,3 +110,16 @@ export type DeckValidation = {
   colorCounts: Record<string, number>;
   costCurve: Record<string, number>;
 };
+
+export type BuyListPriority = "low" | "normal" | "high" | "urgent";
+
+export type BuyListEntry = {
+  id: string;
+  cardId: string;
+  quantity: number;
+  priority: BuyListPriority;
+  notes: string;
+  obtained: number;
+  createdAt: string;
+  updatedAt: string;
+};

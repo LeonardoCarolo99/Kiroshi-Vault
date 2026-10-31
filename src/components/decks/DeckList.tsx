@@ -188,7 +188,7 @@ export function DeckList({
     <div className="space-y-4">
       <section className="hud-panel">
         <SectionHeader label="Legends" value={`${legends.length}/3`} target="selected" hint="Unique names" />
-        <div className="grid grid-cols-3 gap-2 p-3">
+        <div className="grid grid-cols-1 gap-2 p-3 sm:grid-cols-3">
           {[0, 1, 2].map((index) => {
             const legend = legends[index];
             if (!legend) {
@@ -206,18 +206,25 @@ export function DeckList({
             }
             const color = legend.color ? COLOR_HEX[legend.color] : "#7f91a8";
             return (
-              <div key={legend.id} className="group relative overflow-hidden border border-line bg-black/40">
+              <div key={legend.id} className="group relative overflow-hidden border border-line bg-black/40 transition-all hover:border-line-bright hover:shadow-[0_0_0_1px_rgba(245,228,0,0.18)]">
                 <button
                   type="button"
                   onClick={() => onInspect(legend)}
                   className="relative block aspect-[5/7] w-full"
                   aria-label={`Inspect ${legend.displayName}`}
                 >
-                  <Image src={legend.image} alt={legend.displayName} fill sizes="140px" className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-1.5">
-                    <p className="truncate text-[9px] font-semibold leading-tight text-fog">{legend.name}</p>
-                    <p className="font-mono truncate text-[7px] tracking-[0.06em] text-muted">
+                  <Image
+                    src={legend.image}
+                    alt={legend.displayName}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 260px"
+                    className="object-cover object-top"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-2">
+                    <p className="truncate text-[11px] font-semibold leading-tight text-fog">{legend.name}</p>
+                    <p className="font-mono mt-0.5 truncate text-[7px] tracking-[0.08em] text-muted">
                       {legend.color} · RAM {legend.ram ?? "—"}
                     </p>
                   </div>
@@ -226,10 +233,10 @@ export function DeckList({
                 <button
                   type="button"
                   onClick={() => onRemoveLegend(legend)}
-                  className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center border border-cp-red/40 bg-black/80 text-cp-red opacity-0 transition-opacity hover:bg-cp-red hover:text-void group-hover:opacity-100"
+                  className="absolute right-1 top-1 flex h-6 w-6 items-center justify-center border border-cp-red/40 bg-black/85 text-cp-red opacity-0 transition-opacity hover:bg-cp-red hover:text-void group-hover:opacity-100"
                   aria-label={`Remove ${legend.displayName}`}
                 >
-                  <Trash2 className="h-2.5 w-2.5" />
+                  <Trash2 className="h-3 w-3" />
                 </button>
               </div>
             );
@@ -274,20 +281,22 @@ export function DeckList({
                     {list.reduce((sum, entry) => sum + entry.count, 0)}
                   </span>
                 </div>
-                {list.map(({ card, count }) => {
-                  const key = `${card.name}::${card.subname}`;
-                  const canIncrease = (validation.copies[key] ?? 0) < 3 && validation.mainCount < 50;
-                  return (
-                    <DeckRow
-                      key={card.id}
-                      card={card}
-                      count={count}
-                      canIncrease={canIncrease}
-                      onAdjust={(delta) => onAdjust(card, "main", delta)}
-                      onInspect={() => onInspect(card)}
-                    />
-                  );
-                })}
+                <div className="grid grid-cols-2 gap-2 p-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 2xl:grid-cols-4">
+                  {list.map(({ card, count }) => {
+                    const key = `${card.name}::${card.subname}`;
+                    const canIncrease = (validation.copies[key] ?? 0) < 3 && validation.mainCount < 50;
+                    return (
+                      <DeckCardTile
+                        key={card.id}
+                        card={card}
+                        count={count}
+                        canIncrease={canIncrease}
+                        onAdjust={(delta) => onAdjust(card, "main", delta)}
+                        onInspect={() => onInspect(card)}
+                      />
+                    );
+                  })}
+                </div>
               </div>
             ))}
           </div>
