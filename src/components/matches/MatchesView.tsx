@@ -341,6 +341,7 @@ export function MatchesView() {
         }}
         initial={editing}
         decks={decks}
+        matches={matches}
         onSubmit={submit}
       />
 

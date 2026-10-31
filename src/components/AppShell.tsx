@@ -96,7 +96,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const decks = useVaultStore((state) => state.decks);
   const matches = useVaultStore((state) => state.matches);
   const [showBootTransition, setShowBootTransition] = useState(false);
-  const [bootTransitionDone, setBootTransitionDone] = useState(false);
+  const [bootTransitionDone, setBootTransitionDone] = useState(() => {
+    if (typeof window === "undefined") return false;
+    try {
+      return sessionStorage.getItem("kiroshi-boot-done") === "true";
+    } catch {
+      return false;
+    }
+  });
 
   useEffect(() => {
     const forceHydrate = () => {
@@ -129,6 +136,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (hasHydrated && !bootTransitionDone) {
+      try {
+        if (sessionStorage.getItem("kiroshi-boot-done") === "true") {
+          setBootTransitionDone(true);
+          return;
+        }
+      } catch {}
       setShowBootTransition(true);
     }
   }, [hasHydrated, bootTransitionDone]);
@@ -152,6 +165,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <BootScreen />
         <BootTransition
           onComplete={() => {
+            try {
+              sessionStorage.setItem("kiroshi-boot-done", "true");
+            } catch {}
             setBootTransitionDone(true);
             setShowBootTransition(false);
           }}

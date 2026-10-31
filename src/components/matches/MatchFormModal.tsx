@@ -1,15 +1,38 @@
 "use client";
 
-import { useState } from "react";
-import { Save, Swords } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Save, Swords, UserRound } from "lucide-react";
 import type { Deck, MatchRecord, MatchResult } from "@/lib/types";
 import { Modal } from "@/components/ui/Modal";
 import { Segmented } from "@/components/ui/Segmented";
 import { todayInputValue } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 export type MatchFormValues = Omit<MatchRecord, "id" | "createdAt">;
 
 const FORMATS = ["Standard", "Sealed", "Draft", "Casual", "Other"];
+
+function mostFrequent(values: string[]) {
+  if (values.length === 0) return "";
+  const counts = new Map<string, number>();
+  for (const value of values) {
+    const key = value.toLowerCase();
+    counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
+  let best = values[0];
+  let bestKey = best.toLowerCase();
+  let bestCount = counts.get(bestKey) ?? 1;
+  for (const value of values.slice(1)) {
+    const key = value.toLowerCase();
+    const count = counts.get(key) ?? 1;
+    if (count > bestCount || (count === bestCount && value.length < best.length)) {
+      best = value;
+      bestKey = key;
+      bestCount = count;
+    }
+  }
+  return best;
+}
 
 function blankForm(deckId: string): MatchFormValues {
   return {
@@ -46,11 +69,13 @@ function fromRecord(record: MatchRecord): MatchFormValues {
 function MatchForm({
   initial,
   decks,
+  matches,
   onSubmit,
   onClose,
 }: {
   initial: MatchRecord | null;
   decks: Deck[];
+  matches: MatchRecord[];
   onSubmit: (values: MatchFormValues) => void;
   onClose: () => void;
 }) {
@@ -59,6 +84,33 @@ function MatchForm({
   );
 
   const set = (patch: Partial<MatchFormValues>) => setForm((current) => ({ ...current, ...patch }));
+
+  const frequentOpponents = useMemo(() => {
+    const map = new Map<string, { name: string; opponentDeck: string; count: number; lastSeen: string }>();
+    for (const match of matches) {
+      const name = match.opponentName.trim();
+      if (!name) continue;
+      const key = name.toLowerCase();
+      const existing = map.get(key);
+      if (existing) {
+        existing.count += 1;
+        if (match.date > existing.lastSeen) existing.lastSeen = match.date;
+        if (!existing.opponentDeck && match.opponentDeck.trim()) {
+          existing.opponentDeck = match.opponentDeck.trim();
+        }
+      } else {
+        map.set(key, {
+          name,
+          opponentDeck: match.opponentDeck.trim(),
+          count: 1,
+          lastSeen: match.date,
+        });
+      }
+    }
+    return Array.from(map.values())
+      .sort((a, b) => (b.count !== a.count ? b.count - a.count : b.lastSeen.localeCompare(a.lastSeen)))
+      .slice(0, 6);
+  }, [matches]);
 
   const submit = () => {
     onSubmit({
@@ -118,6 +170,45 @@ function MatchForm({
           ))}
         </select>
       </label>
+
+      {frequentOpponents.length > 0 ? (
+        <div>
+          <span className="hud-label mb-1.5 flex items-center gap-1.5">
+            <UserRound className="h-3 w-3" />
+            Frequent Opponents
+          </span>
+          <div className="flex flex-wrap gap-1.5">
+            {frequentOpponents.map((opponent) => (
+              <button
+                key={opponent.name.toLowerCase()}
+                type="button"
+                onClick={() =>
+                  set({
+                    opponentName: opponent.name,
+                    opponentDeck: opponent.opponentDeck || form.opponentDeck,
+                  })
+                }
+                className={cn(
+                  "group flex items-center gap-2 border border-line px-2 py-1 text-left transition-colors hover:border-cp-yellow/60 hover:bg-cp-yellow/5",
+                  form.opponentName.trim().toLowerCase() === opponent.name.toLowerCase()
+                    ? "border-cp-yellow/70 bg-cp-yellow/10"
+                    : "bg-black/25",
+                )}
+              >
+                <span className="text-[11px] text-fog">{opponent.name}</span>
+                {opponent.count > 1 ? (
+                  <span className="font-mono text-[8px] tracking-[0.08em] text-muted">{opponent.count}x</span>
+                ) : null}
+                {opponent.opponentDeck ? (
+                  <span className="font-mono hidden max-w-[140px] truncate text-[8px] tracking-[0.06em] text-muted sm:block">
+                    {opponent.opponentDeck}
+                  </span>
+                ) : null}
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : null}
 
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="block">
@@ -248,12 +339,14 @@ export function MatchFormModal({
   onClose,
   initial,
   decks,
+  matches,
   onSubmit,
 }: {
   open: boolean;
   onClose: () => void;
   initial: MatchRecord | null;
   decks: Deck[];
+  matches: MatchRecord[];
   onSubmit: (values: MatchFormValues) => void;
 }) {
   return (
@@ -264,7 +357,7 @@ export function MatchFormModal({
       title={initial ? "Edit Match" : "Log a Match"}
       size="lg"
     >
-      <MatchForm initial={initial} decks={decks} onSubmit={onSubmit} onClose={onClose} />
+      <MatchForm initial={initial} decks={decks} matches={matches} onSubmit={onSubmit} onClose={onClose} />
     </Modal>
   );
 }

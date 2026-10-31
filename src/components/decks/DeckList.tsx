@@ -13,7 +13,7 @@ function typeRank(type: string): number {
   return index === -1 ? TYPE_ORDER.length : index;
 }
 
-function DeckRow({
+function DeckCardTile({
   card,
   count,
   canIncrease,
@@ -30,50 +30,62 @@ function DeckRow({
 }) {
   const color = card.color ? COLOR_HEX[card.color] : "#7f91a8";
   return (
-    <div className="group flex items-center gap-2 border-b border-line/60 px-2.5 py-1.5 last:border-b-0 hover:bg-white/[0.02]">
+    <div className="group relative overflow-hidden border border-line bg-black/40 transition-all hover:border-line-bright hover:shadow-[0_0_0_1px_rgba(245,228,0,0.15)]">
       <button
         type="button"
         onClick={onInspect}
-        className="relative h-11 w-8 shrink-0 overflow-hidden border border-line bg-black/40"
+        className="relative block aspect-[5/7] w-full"
         aria-label={`Inspect ${card.displayName}`}
       >
-        <Image src={card.image} alt="" fill sizes="32px" className="object-cover" />
+        <Image
+          src={card.image}
+          alt={card.displayName}
+          fill
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 220px"
+          className="object-cover object-top"
+          priority={false}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 p-1.5">
+          <p className="truncate text-[9px] font-semibold leading-tight text-fog">
+            {card.name}
+            {card.subname ? <span className="text-muted">: {card.subname}</span> : null}
+          </p>
+          <p className="mt-0.5 flex items-center gap-1 font-mono text-[7px] tracking-[0.08em] text-muted">
+            <span style={{ color }}>{card.color ?? "—"}</span>
+            <span>·</span>
+            <span>{card.type}</span>
+            {card.cost != null ? (
+              <>
+                <span>·</span>
+                <span>C{card.cost}</span>
+              </>
+            ) : null}
+            {card.ram != null ? (
+              <>
+                <span>·</span>
+                <span>R{card.ram}</span>
+              </>
+            ) : null}
+          </p>
+        </div>
       </button>
-      <button type="button" onClick={onInspect} className="min-w-0 flex-1 text-left">
-        <p className="truncate text-[12px] font-medium leading-tight text-fog">
-          {card.name}
-          {card.subname ? <span className="text-muted">: {card.subname}</span> : null}
-        </p>
-        <p className="mt-0.5 flex items-center gap-1.5 font-mono text-[8px] tracking-[0.08em] text-muted">
-          <span style={{ color }}>{card.color ?? "—"}</span>
-          <span>·</span>
-          <span>{card.type}</span>
-          {card.cost != null ? (
-            <>
-              <span>·</span>
-              <span>C{card.cost}</span>
-            </>
-          ) : null}
-          {card.ram != null ? (
-            <>
-              <span>·</span>
-              <span>R{card.ram}</span>
-            </>
-          ) : null}
-        </p>
-      </button>
-      <div className="flex shrink-0 items-center border border-line bg-black/35">
+      <span className="absolute inset-x-0 top-0 h-0.5" style={{ background: color }} />
+      <div className="absolute left-1 top-1 flex items-center border border-line bg-black/90 shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
         <button
           type="button"
-          onClick={() => onAdjust(-1)}
-          className="flex h-6 w-6 items-center justify-center text-muted hover:bg-white/5 hover:text-cp-red"
+          onClick={(e) => {
+            e.stopPropagation();
+            onAdjust(-1);
+          }}
+          className="flex h-6 w-6 items-center justify-center text-muted transition-colors hover:bg-white/5 hover:text-cp-red"
           aria-label={`Remove one ${card.displayName}`}
         >
           <Minus className="h-3 w-3" />
         </button>
         <span
           className={cn(
-            "font-mono flex h-6 w-6 items-center justify-center border-x border-line text-[10px] tabular-nums",
+            "font-mono flex h-6 min-w-6 items-center justify-center border-x border-line px-1 text-[10px] tabular-nums",
             tone === "cyan" ? "text-cp-cyan" : "text-cp-yellow",
           )}
         >
@@ -81,9 +93,12 @@ function DeckRow({
         </span>
         <button
           type="button"
-          onClick={() => onAdjust(1)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onAdjust(1);
+          }}
           disabled={!canIncrease}
-          className="flex h-6 w-6 items-center justify-center text-muted hover:bg-white/5 hover:text-cp-cyan disabled:opacity-25"
+          className="flex h-6 w-6 items-center justify-center text-muted transition-colors hover:bg-white/5 hover:text-cp-cyan disabled:opacity-25"
           aria-label={`Add one ${card.displayName}`}
         >
           <Plus className="h-3 w-3" />
