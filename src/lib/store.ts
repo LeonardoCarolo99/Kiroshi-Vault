@@ -3,10 +3,9 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { User } from "firebase/auth";
-import type { BuyListEntry, BuyListPriority, Deck, MatchRecord } from "@/lib/types";
+import type { BuyListEntry, BuyListPriority, BuyList, Deck, MatchRecord, Friend, Tournament, TournamentPairing } from "@/lib/types";
 import { generateFriendCode, uid } from "@/lib/utils";
 import { loadVaultFromCloud, saveVaultToCloud } from "@/lib/sync";
-import type { Friend } from "@/lib/types";
 
 type DeckTarget = "legend" | "main" | "sideboard";
 
@@ -16,10 +15,17 @@ type VaultState = {
   collection: Record<string, number>;
   decks: Deck[];
   matches: MatchRecord[];
+  tournaments: Tournament[];
+  buyLists: BuyList[];
   buyList: BuyListEntry[];
-  friends: import("@/lib/types").Friend[];
+  friends: Friend[];
   friendCode: string | null;
+  avatarId: string | null;
+  meleeAccount: import("@/lib/types").MeleeAccount | null;
   hasHydrated: boolean;
+  setAvatarId?: (avatarId: string | null) => void;
+  linkMeleeAccount: (melee: import("@/lib/types").MeleeAccount | null) => void;
+  addTestFriend?: () => void;
   setHasHydrated: (value: boolean) => void;
   adjustCollection: (cardId: string, delta: number) => void;
   setCollectionCount: (cardId: string, count: number) => void;
@@ -32,13 +38,22 @@ type VaultState = {
   addMatch: (match: Omit<MatchRecord, "id" | "createdAt">) => string;
   updateMatch: (id: string, patch: Partial<Omit<MatchRecord, "id" | "createdAt">>) => void;
   deleteMatch: (id: string) => void;
-  // Buy List
-  addBuyListEntry: (entry: { cardId: string; quantity?: number; priority?: BuyListPriority; notes?: string }) => string;
+  // Tournaments
+  addTournament: (tournament: Omit<Tournament, "id" | "createdAt" | "updatedAt">) => string;
+  updateTournament: (id: string, patch: Partial<Omit<Tournament, "id" | "createdAt" | "updatedAt">>) => void;
+  deleteTournament: (id: string) => void;
+  upsertTournamentPairing: (tournamentId: string, pairing: TournamentPairing) => void;
+  recordTournamentMatch: (tournamentId: string, pairingId: string, match: Omit<MatchRecord, "id" | "createdAt" | "tournamentId" | "pairingId">) => string | null;
+  // Buy Lists
+  createBuyList: (name?: string, description?: string) => string;
+  updateBuyList: (id: string, patch: Partial<Omit<BuyList, "id" | "createdAt">>) => void;
+  deleteBuyList: (id: string) => void;
+  addBuyListEntry: (entry: { cardId: string; quantity?: number; priority?: BuyListPriority; notes?: string; listId?: string }) => string;
   updateBuyListEntry: (id: string, patch: Partial<Omit<BuyListEntry, "id" | "createdAt">>) => void;
   removeBuyListEntry: (id: string) => void;
   adjustBuyListObtained: (id: string, delta: number) => void;
-  clearObtainedBuyList: () => void;
-  importData: (payload: { collection?: Record<string, number>; decks?: Deck[]; matches?: MatchRecord[]; buyList?: BuyListEntry[]; friends?: import("@/lib/types").Friend[]; friendCode?: string | null }) => void;
+  clearObtainedBuyList: (listId?: string) => void;
+  importData: (payload: { collection?: Record<string, number>; decks?: Deck[]; matches?: MatchRecord[]; tournaments?: Tournament[]; buyList?: BuyListEntry[]; buyLists?: BuyList[]; friends?: import("@/lib/types").Friend[]; friendCode?: string | null }) => void;
   resetAll: () => void;
   // Friends
   ensureFriendCode: () => string;
@@ -88,9 +103,13 @@ export const useVaultStore = create<VaultState>()(
       collection: {},
       decks: [],
       matches: [],
+      tournaments: [],
+      buyLists: [],
       buyList: [],
       friends: [],
       friendCode: null,
+      avatarId: null,
+      meleeAccount: null,
       hasHydrated: false,
       setHasHydrated: (value) => set({ hasHydrated: value }),
       user: null,
@@ -127,10 +146,13 @@ export const useVaultStore = create<VaultState>()(
             collection: state.collection,
             decks: state.decks,
             matches: state.matches,
+            tournaments: (state as any).tournaments,
+            buyLists: (state as any).buyLists,
             buyList: state.buyList,
             friends: state.friends,
             friendCode: state.friendCode,
-          });
+            meleeAccount: (state as any).meleeAccount,
+          } as any);
           set({ syncStatus: "synced", lastSyncedAt: new Date().toISOString() });
         } catch (error) {
           console.error("Failed to sync to cloud", error);
@@ -150,17 +172,21 @@ export const useVaultStore = create<VaultState>()(
                 collection: cleanCollection(cloud.collection),
                 decks: cloud.decks,
                 matches: cloud.matches,
+                tournaments: Array.isArray((cloud as any).tournaments) ? (cloud as any).tournaments : [],
+                buyLists: Array.isArray((cloud as any).buyLists) ? (cloud as any).buyLists : [],
                 buyList: Array.isArray(cloud.buyList) ? cloud.buyList : [],
                 friends: Array.isArray(cloud.friends) ? cloud.friends : [],
                 friendCode: typeof cloud.friendCode === "string" ? cloud.friendCode : (get().friendCode || generateFriendCode()),
               });
             } else {
               const local = get();
-              if (local.decks.length === 0 && local.matches.length === 0 && Object.keys(local.collection).length === 0 && local.buyList.length === 0) {
+              if (local.decks.length === 0 && local.matches.length === 0 && Object.keys(local.collection).length === 0 && local.buyList.length === 0 && ((local as any).tournaments?.length ?? 0) === 0 && ((local as any).buyLists?.length ?? 0) === 0) {
                 set({
                   collection: cleanCollection(cloud.collection),
                   decks: cloud.decks,
                   matches: cloud.matches,
+                  tournaments: Array.isArray((cloud as any).tournaments) ? (cloud as any).tournaments : [],
+                  buyLists: Array.isArray((cloud as any).buyLists) ? (cloud as any).buyLists : [],
                   buyList: Array.isArray(cloud.buyList) ? cloud.buyList : [],
                   friends: Array.isArray(cloud.friends) ? cloud.friends : [],
                   friendCode: typeof cloud.friendCode === "string" ? cloud.friendCode : (local.friendCode || generateFriendCode()),
@@ -319,9 +345,134 @@ export const useVaultStore = create<VaultState>()(
         scheduleCloudSync(get);
       },
 
+      addTournament: (tournament) => {
+        const id = uid("tourney");
+        const timestamp = now();
+        const record: Tournament = {
+          ...tournament,
+          id,
+          createdAt: timestamp,
+          updatedAt: timestamp,
+          pairings: tournament.pairings ?? [],
+        };
+        set((state) => ({ tournaments: [record, ...((state as any).tournaments ?? [])] }));
+        scheduleCloudSync(get);
+        return id;
+      },
+
+      updateTournament: (id, patch) => {
+        set((state) => ({
+          tournaments: ((state as any).tournaments ?? []).map((tournament: Tournament) =>
+            tournament.id === id ? { ...tournament, ...patch, updatedAt: now() } : tournament,
+          ),
+        }));
+        scheduleCloudSync(get);
+      },
+
+      deleteTournament: (id) => {
+        set((state) => ({
+          tournaments: ((state as any).tournaments ?? []).filter((tournament: Tournament) => tournament.id !== id),
+          matches: state.matches.filter((match) => (match as MatchRecord).tournamentId !== id),
+        }));
+        scheduleCloudSync(get);
+      },
+
+      upsertTournamentPairing: (tournamentId, pairing) => {
+        set((state) => ({
+          tournaments: ((state as any).tournaments ?? []).map((tournament: Tournament) => {
+            if (tournament.id !== tournamentId) return tournament;
+            const existing = (tournament.pairings ?? []).findIndex((p) => p.pairingId === pairing.pairingId);
+            const pairings = [...(tournament.pairings ?? [])];
+            if (existing >= 0) {
+              pairings[existing] = { ...pairings[existing], ...pairing };
+            } else {
+              pairings.push(pairing);
+            }
+            return { ...tournament, pairings, updatedAt: now() };
+          }),
+        }));
+        scheduleCloudSync(get);
+      },
+
+      recordTournamentMatch: (tournamentId, pairingId, match) => {
+        const state = get();
+        const tournament = ((state as any).tournaments ?? []).find((t: Tournament) => t.id === tournamentId);
+        if (!tournament) return null;
+        const id = uid("match");
+        const record: MatchRecord = {
+          ...(match as any),
+          id,
+          createdAt: now(),
+          type: "tournament",
+          tournamentId,
+          pairingId,
+          tournamentName: tournament.name,
+          round: match.round ?? tournament.pairings?.find((p: TournamentPairing) => p.pairingId === pairingId)?.round,
+          tableNumber: match.tableNumber ?? tournament.pairings?.find((p: TournamentPairing) => p.pairingId === pairingId)?.tableNumber,
+        } as MatchRecord;
+        set((s) => ({ matches: [record, ...s.matches] }));
+        set((s) => ({
+          tournaments: ((s as any).tournaments ?? []).map((t: Tournament) => {
+            if (t.id !== tournamentId) return t;
+            const pairings = (t.pairings ?? []).map((p: TournamentPairing) =>
+              p.pairingId === pairingId ? { ...p, result: record.result, gamesWon: record.gamesWon, gamesLost: record.gamesLost, matchId: id } : p,
+            );
+            const allMatches = s.matches;
+            const tMatches = allMatches.filter((m) => (m as MatchRecord).tournamentId === tournamentId);
+            const wins = tMatches.filter((m) => m.result === "win").length;
+            const losses = tMatches.filter((m) => m.result === "loss").length;
+            const draws = tMatches.filter((m) => m.result === "draw").length;
+            return { ...t, pairings, playerRecord: { wins, losses, draws, gamesWon: tMatches.reduce((sum, m) => sum + (m.gamesWon || 0), 0), gamesLost: tMatches.reduce((sum, m) => sum + (m.gamesLost || 0), 0) }, updatedAt: now() };
+          }),
+        }));
+        scheduleCloudSync(get);
+        return id;
+      },
+
+      createBuyList: (name = "My Buy List", description = "") => {
+        const id = uid("buylist");
+        const timestamp = now();
+        const list: BuyList = {
+          id,
+          name,
+          description,
+          createdAt: timestamp,
+          updatedAt: timestamp,
+        };
+        set((state) => ({ buyLists: [list, ...(state as any).buyLists ?? []] }));
+        scheduleCloudSync(get);
+        return id;
+      },
+
+      updateBuyList: (id, patch) => {
+        set((state) => ({
+          buyLists: ((state as any).buyLists ?? []).map((list: BuyList) =>
+            list.id === id ? { ...list, ...patch, updatedAt: now() } : list,
+          ),
+        }));
+        scheduleCloudSync(get);
+      },
+
+      deleteBuyList: (id) => {
+        set((state) => ({
+          buyLists: ((state as any).buyLists ?? []).filter((list: BuyList) => list.id !== id),
+          buyList: state.buyList.filter((item) => (item as any).listId !== id),
+        }));
+        scheduleCloudSync(get);
+      },
+
       addBuyListEntry: (entry) => {
         const id = uid("buy");
         const timestamp = now();
+        const state = get() as any;
+        let listId = entry.listId;
+        if (!listId) {
+          if (Array.isArray(state.buyLists) && state.buyLists.length > 0) {
+            listId = state.buyLists[0].id;
+          } else {
+            listId = state.createBuyList?.("My Buy List") || undefined;
+          }
+        }
         const record: BuyListEntry = {
           id,
           cardId: entry.cardId,
@@ -329,9 +480,10 @@ export const useVaultStore = create<VaultState>()(
           priority: entry.priority ?? "normal",
           notes: entry.notes ?? "",
           obtained: 0,
+          listId,
           createdAt: timestamp,
           updatedAt: timestamp,
-        };
+        } as BuyListEntry;
         set((state) => ({ buyList: [record, ...state.buyList] }));
         scheduleCloudSync(get);
         return id;
@@ -362,9 +514,15 @@ export const useVaultStore = create<VaultState>()(
         scheduleCloudSync(get);
       },
 
-      clearObtainedBuyList: () => {
+      clearObtainedBuyList: (listId) => {
         set((state) => ({
-          buyList: state.buyList.filter((item) => (item.obtained ?? 0) < item.quantity),
+          buyList: state.buyList.filter((item) => {
+            if ((item.obtained ?? 0) >= item.quantity) {
+              if (listId && (item as any).listId && (item as any).listId !== listId) return true;
+              return false;
+            }
+            return true;
+          }),
         }));
         scheduleCloudSync(get);
       },
@@ -374,6 +532,8 @@ export const useVaultStore = create<VaultState>()(
           collection: payload.collection ? cleanCollection(payload.collection) : state.collection,
           decks: Array.isArray(payload.decks) ? payload.decks : state.decks,
           matches: Array.isArray(payload.matches) ? payload.matches : state.matches,
+          tournaments: Array.isArray((payload as any).tournaments) ? (payload as any).tournaments : ((state as any).tournaments ?? []),
+          buyLists: Array.isArray((payload as any).buyLists) ? (payload as any).buyLists : ((state as any).buyLists ?? []),
           buyList: Array.isArray(payload.buyList) ? payload.buyList : state.buyList,
           friends: Array.isArray((payload as any).friends) ? (payload as any).friends : state.friends,
           friendCode: (payload as any).friendCode || state.friendCode,
@@ -382,7 +542,7 @@ export const useVaultStore = create<VaultState>()(
       },
 
       resetAll: () => {
-        set({ collection: {}, decks: [], matches: [], buyList: [], friends: [], friendCode: null });
+        set({ collection: {}, decks: [], matches: [], tournaments: [], buyLists: [], buyList: [], friends: [], friendCode: null, avatarId: null, meleeAccount: null } as any);
         scheduleCloudSync(get);
       },
 
@@ -407,6 +567,26 @@ export const useVaultStore = create<VaultState>()(
         set((state) => ({ friends: state.friends.filter((f) => f.uid !== uid) }));
         scheduleCloudSync(get);
       },
+      addTestFriend: () => {
+        const testFriend = {
+          uid: "test-dummy-friend-12345",
+          friendCode: "TEST1",
+          addedAt: new Date().toISOString(),
+        };
+        set((state) => {
+          if (state.friends.some((f: any) => f.uid === testFriend.uid)) return state;
+          return { friends: [testFriend, ...state.friends] };
+        });
+        scheduleCloudSync(get);
+      },
+      setAvatarId: (avatarId: string | null) => {
+        set({ avatarId });
+        scheduleCloudSync(get);
+      },
+      linkMeleeAccount: (melee: any) => {
+        set({ meleeAccount: melee ? { ...(melee as any), linkedAt: (melee as any).linkedAt || now(), lastSyncedAt: now() } : null });
+        scheduleCloudSync(get);
+      },
     }),
     {
       name: "kiroshi-vault-v1",
@@ -416,9 +596,13 @@ export const useVaultStore = create<VaultState>()(
         collection: state.collection,
         decks: state.decks,
         matches: state.matches,
+        tournaments: (state as any).tournaments,
+        buyLists: (state as any).buyLists,
         buyList: state.buyList,
         friends: state.friends,
         friendCode: state.friendCode,
+        avatarId: state.avatarId,
+        meleeAccount: (state as any).meleeAccount,
         lastSyncedAt: state.lastSyncedAt,
       }),
       onRehydrateStorage: () => (state) => {

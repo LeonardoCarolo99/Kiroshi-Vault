@@ -34,14 +34,14 @@ export function CardTile({
   const rarity = RARITY_COLOR[card.rarity] ?? "#7f91a8";
 
   return (
-    <article className="card-shell group flex flex-col">
+    <article className="card-shell group flex flex-col transition-transform duration-300 ease-out hover:-translate-y-1.5">
       <button
         type="button"
         onClick={() => {
           playSelect();
           onOpen(card);
         }}
-        className="relative block w-full text-left"
+        className="relative block w-full text-left scanline-hover overflow-hidden"
         aria-label={`Inspect ${card.displayName}`}
       >
         <div className={cn("card-image-wrap", owned === 0 && mode === "collection" && "card-owned-zero")}>
@@ -50,25 +50,37 @@ export function CardTile({
             alt={card.displayName}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.07]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10" />
           <div className="card-scan" />
 
           <span
             className="absolute left-2 top-2 h-6 w-1"
             style={{ background: color, boxShadow: `0 0 10px ${color}88` }}
           />
-          <span className="badge absolute left-3 top-2 border-white/10 bg-black/60 text-[8px] text-fog backdrop-blur-sm">
+          <span
+            className={cn(
+              "absolute right-2 top-2 px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[0.16em] border shadow-[0_0_12px_rgba(0,0,0,0.7)] backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-0",
+              card.type === "Unit" && "border-cp-cyan bg-cp-cyan text-black",
+              card.type === "Gear" && "border-orange-400 bg-orange-400 text-black",
+              card.type === "Program" && "border-violet-400 bg-violet-400 text-black",
+              card.type === "Event" && "border-pink-400 bg-pink-400 text-black",
+              card.type === "Action" && "border-amber-300 bg-amber-300 text-black",
+              card.type === "Resource" && "border-lime-400 bg-lime-400 text-black",
+              card.type === "Upgrade" && "border-sky-400 bg-sky-400 text-black",
+              !["Unit", "Gear", "Program", "Event", "Action", "Resource", "Upgrade"].includes(card.type) &&
+                "border-fog/60 bg-fog text-black"
+            )}
+          >
             {card.type}
           </span>
           {owned > 0 && mode === "collection" ? (
-            <span className="font-mono absolute right-2 top-2 border border-cp-yellow/60 bg-black/75 px-1.5 py-0.5 text-[9px] tracking-widest text-cp-yellow backdrop-blur-sm">
+            <span className="font-mono absolute right-2 top-9 border border-cp-yellow/60 bg-black/75 px-1.5 py-0.5 text-[9px] tracking-widest text-cp-yellow backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-0">
               ×{owned}
             </span>
           ) : null}
           {mode === "deck" && deckCount > 0 ? (
-            <span className="font-mono absolute right-2 top-2 border border-cp-yellow/60 bg-black/75 px-1.5 py-0.5 text-[9px] tracking-widest text-cp-yellow backdrop-blur-sm">
+            <span className="font-mono absolute right-2 top-9 border border-cp-yellow/60 bg-black/75 px-1.5 py-0.5 text-[9px] tracking-widest text-cp-yellow backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-0">
               ×{deckCount}
             </span>
           ) : null}
@@ -90,32 +102,27 @@ export function CardTile({
           }}
           className="min-w-0 text-left"
         >
-          <h3 className="font-display truncate text-[12px] font-semibold uppercase leading-tight tracking-[0.04em] text-fog transition-colors group-hover:text-cp-yellow">
+          <h3 className="font-display truncate text-[13px] font-semibold uppercase leading-tight tracking-[0.05em] text-fog transition-colors group-hover:text-cp-yellow">
             {card.name}
           </h3>
           {card.subname ? (
-            <p className="mt-0.5 truncate text-[10px] leading-tight text-muted">{card.subname}</p>
+            <p className="mt-0.5 truncate text-[11px] leading-tight text-muted">{card.subname}</p>
           ) : (
-            <p className="mt-0.5 truncate text-[10px] leading-tight text-muted">
+            <p className="mt-0.5 truncate text-[11px] leading-tight text-muted">
               {card.classifications.slice(0, 2).join(" · ") || "Night City"}
             </p>
           )}
         </button>
 
         <div className="flex items-center justify-between gap-2">
-          <span className="font-mono text-[9px] tracking-[0.08em]" style={{ color: rarity }}>
+          <span className="font-mono text-[10px] tracking-[0.1em]" style={{ color: rarity }}>
             {card.rarity.toUpperCase()}
           </span>
-          <div className="flex items-center gap-1.5 font-mono text-[9px] text-muted">
-            {card.cost != null ? <span>C{card.cost}</span> : null}
-            {card.power != null ? <span>P{card.power}</span> : null}
-            {card.ram != null ? <span>R{card.ram}</span> : null}
-          </div>
         </div>
 
         {mode === "collection" && onAdjust ? (
-          <div className="mt-auto flex items-center justify-between border-t border-line/70 pt-2">
-            <span className="hud-label text-[8px]">Owned</span>
+          <div className="mt-auto flex items-center justify-between gap-2 border-t border-line/70 pt-2">
+            <span className="hud-label text-[9px] shrink-0">Owned</span>
             <Stepper
               value={owned}
               onChange={(value) => onAdjust(card, value - owned)}
@@ -127,7 +134,7 @@ export function CardTile({
 
         {mode === "deck" && onAdd ? (
           <div className="mt-auto flex items-center justify-between border-t border-line/70 pt-2">
-            <span className="font-mono text-[9px] text-muted">
+            <span className="font-mono text-[10px] text-muted">
               {owned > 0 ? `${owned} owned` : "not owned"}
             </span>
             <button

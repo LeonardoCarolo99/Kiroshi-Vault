@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Save, Swords, UserRound } from "lucide-react";
+import { Save, Swords, Trophy, UserRound } from "lucide-react";
 import type { Deck, MatchRecord, MatchResult } from "@/lib/types";
 import { Modal } from "@/components/ui/Modal";
 import { Segmented } from "@/components/ui/Segmented";
@@ -47,6 +47,7 @@ function blankForm(deckId: string): MatchFormValues {
     playDraw: "unknown",
     store: "",
     notes: "",
+    type: "casual",
   };
 }
 
@@ -63,6 +64,14 @@ function fromRecord(record: MatchRecord): MatchFormValues {
     playDraw: record.playDraw,
     store: record.store,
     notes: record.notes,
+    type: record.type || (record.tournamentId ? "tournament" : "casual"),
+    tournamentId: record.tournamentId,
+    tournamentName: record.tournamentName,
+    round: record.round,
+    tableNumber: record.tableNumber,
+    pairingId: record.pairingId,
+    eventId: record.eventId,
+    venue: record.venue,
   };
 }
 
@@ -121,6 +130,7 @@ function MatchForm({
       notes: form.notes.trim(),
       gamesWon: Math.max(0, Math.floor(form.gamesWon)),
       gamesLost: Math.max(0, Math.floor(form.gamesLost)),
+      type: form.type || ((form as any).tournamentId ? "tournament" : "casual"),
     });
     onClose();
   };
@@ -129,7 +139,7 @@ function MatchForm({
 
   return (
     <div className="space-y-4">
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid gap-3 sm:grid-cols-3">
         <label className="block">
           <span className="hud-label mb-1.5 block">Date</span>
           <input
@@ -153,7 +163,50 @@ function MatchForm({
             ))}
           </select>
         </label>
+        <label className="block">
+          <span className="hud-label mb-1.5 block">Match Type</span>
+          <select
+            value={(form as any).type || ((form as any).tournamentId ? "tournament" : "casual")}
+            onChange={(event) => set({ type: event.target.value as any })}
+            className="hud-select"
+          >
+            <option value="casual">Normal</option>
+            <option value="tournament">Tournament</option>
+          </select>
+        </label>
       </div>
+
+      {((form as any).type === "tournament" || (form as any).tournamentId) ? (
+        <div className="grid gap-3 sm:grid-cols-4">
+          <label className="block sm:col-span-2">
+            <span className="hud-label mb-1.5 block">Tournament Name</span>
+            <input
+              value={(form as any).tournamentName || ""}
+              onChange={(event) => set({ tournamentName: event.target.value } as any)}
+              placeholder="Event name"
+              className="hud-input"
+            />
+          </label>
+          <label className="block">
+            <span className="hud-label mb-1.5 block">Round</span>
+            <input
+              value={(form as any).round || ""}
+              onChange={(event) => set({ round: event.target.value } as any)}
+              placeholder="1"
+              className="hud-input"
+            />
+          </label>
+          <label className="block">
+            <span className="hud-label mb-1.5 block">Table</span>
+            <input
+              value={(form as any).tableNumber || ""}
+              onChange={(event) => set({ tableNumber: event.target.value } as any)}
+              placeholder="Table #"
+              className="hud-input"
+            />
+          </label>
+        </div>
+      ) : null}
 
       <label className="block">
         <span className="hud-label mb-1.5 block">Your Deck</span>
@@ -317,8 +370,14 @@ function MatchForm({
       </label>
 
       <div className="flex items-center justify-between gap-3 border-t border-line pt-4">
-        <p className="font-mono hidden text-[8px] tracking-[0.12em] text-muted sm:block">
+        <p className="font-mono hidden items-center gap-2 text-[8px] tracking-[0.12em] text-muted sm:flex">
           {form.date} · {form.result.toUpperCase()} · {form.gamesWon}–{form.gamesLost}
+          {((form as any).type === "tournament" || (form as any).tournamentId) ? (
+            <span className="flex items-center gap-1 text-cp-yellow">
+              <Trophy className="h-2.5 w-2.5" />
+              TOURNAMENT
+            </span>
+          ) : null}
         </p>
         <div className="flex gap-2">
           <button type="button" className="btn-cyber btn-cyber-ghost" onClick={onClose}>

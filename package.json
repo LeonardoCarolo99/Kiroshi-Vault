@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync:cards": "node scripts/sync-cards.mjs",
+    "sync:prices": "node scripts/sync-prices.mjs",
+    "sync:cardmarket": "node scripts/sync-cardmarket.mjs",
+    "sync:all": "npm run sync:cards && npm run sync:prices && npm run sync:cardmarket"
   },
   "dependencies": {
     "clsx": "^2.1.1",

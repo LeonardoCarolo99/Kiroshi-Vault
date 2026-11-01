@@ -2,34 +2,35 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import {
   Boxes,
   ChevronRight,
   CircleDot,
   Database,
-  Hand,
+  Euro,
   LayoutDashboard,
   Layers3,
   ScanEye,
   Settings,
   ShoppingCart,
   Swords,
+  Trophy,
 } from "lucide-react";
 import { useVaultStore } from "@/lib/store";
 import { cards } from "@/lib/cards";
 import { cn } from "@/lib/utils";
-import { BootTransition } from "@/components/BootTransition";
 import { useSound } from "@/hooks/useSound";
 
 const NAV = [
   { href: "/", label: "Command", icon: LayoutDashboard, code: "00" },
   { href: "/collection", label: "Collection", icon: Layers3, code: "01" },
-  { href: "/decks", label: "Decks", icon: Boxes, code: "02" },
-  { href: "/matches", label: "Matches", icon: Swords, code: "03" },
-  { href: "/hand-tester", label: "Hand Tester", icon: Hand, code: "04" },
-  { href: "/buy-list", label: "Buy List", icon: ShoppingCart, code: "05" },
-  { href: "/friends", label: "Friends", icon: CircleDot, code: "06" },
+  { href: "/market", label: "Market", icon: Euro, code: "02" },
+  { href: "/decks", label: "Decks", icon: Boxes, code: "03" },
+  { href: "/matches", label: "Matches", icon: Swords, code: "04" },
+  { href: "/tournaments", label: "Tournaments", icon: Trophy, code: "05" },
+  { href: "/buy-list", label: "Buy List", icon: ShoppingCart, code: "06" },
+  { href: "/friends", label: "Friends", icon: CircleDot, code: "07" },
 ];
 
 const MOBILE_NAV = [
@@ -37,8 +38,8 @@ const MOBILE_NAV = [
   { href: "/collection", label: "Collection", icon: Layers3 },
   { href: "/decks", label: "Decks", icon: Boxes },
   { href: "/matches", label: "Matches", icon: Swords },
+  { href: "/tournaments", label: "Events", icon: Trophy },
   { href: "/friends", label: "Friends", icon: CircleDot },
-  { href: "/settings", label: "Settings", icon: Settings },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -102,20 +103,11 @@ function BootScreen() {
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { playNavigate, playBoot, playClick } = useSound();
+  const { playNavigate, playClick } = useSound();
   const hasHydrated = useVaultStore((state) => state.hasHydrated);
   const collection = useVaultStore((state) => state.collection);
   const decks = useVaultStore((state) => state.decks);
   const matches = useVaultStore((state) => state.matches);
-  const [showBootTransition, setShowBootTransition] = useState(false);
-  const [bootTransitionDone, setBootTransitionDone] = useState(() => {
-    if (typeof window === "undefined") return false;
-    try {
-      return sessionStorage.getItem("kiroshi-boot-done") === "true";
-    } catch {
-      return false;
-    }
-  });
 
   useEffect(() => {
     const forceHydrate = () => {
@@ -146,18 +138,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     return () => timers.forEach((t) => clearTimeout(t));
   }, []);
 
-  useEffect(() => {
-    if (hasHydrated && !bootTransitionDone) {
-      try {
-        if (sessionStorage.getItem("kiroshi-boot-done") === "true") {
-          setBootTransitionDone(true);
-          return;
-        }
-      } catch {}
-      setShowBootTransition(true);
-      playBoot();
-    }
-  }, [hasHydrated, bootTransitionDone, playBoot]);
+
 
   const ownedCards = useMemo(
     () => Object.values(collection).filter((count) => count > 0).length,
@@ -172,34 +153,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     return <BootScreen />;
   }
 
-  if (showBootTransition && !bootTransitionDone) {
-    return (
-      <>
-        <BootScreen />
-        <BootTransition
-          onComplete={() => {
-            try {
-              sessionStorage.setItem("kiroshi-boot-done", "true");
-            } catch {}
-            setBootTransitionDone(true);
-            setShowBootTransition(false);
-          }}
-        />
-      </>
-    );
-  }
-
   return (
     <div className="relative min-h-screen">
       <div className="pointer-events-none fixed inset-y-0 left-0 z-0 hidden w-px bg-line/70 lg:block" />
 
       {/* Desktop rail */}
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-[264px] flex-col border-r border-line bg-ink/90 backdrop-blur-xl lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-[264px] flex-col border-r border-line bg-ink/90 backdrop-blur-xl lg:flex animate-slide-left">
         <div className="flex h-[84px] items-center border-b border-line px-6">
           <Logo />
         </div>
 
-        <nav className="flex-1 px-3 py-5 animate-slide-left">
+        <nav className="flex-1 px-3 py-5">
           <p className="hud-label px-3 pb-3">System Menu</p>
           <div className="stagger space-y-1">
             {NAV.map((item) => {
@@ -213,14 +177,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     if (pathname !== item.href) playNavigate();
                   }}
                   className={cn(
-                    "group relative flex items-center gap-3 border border-transparent px-3 py-2.5 transition-all duration-200 ease-out",
+                    "group relative flex items-center gap-3 border border-transparent px-3 py-2.5 transition-all duration-200 ease-out hover:translate-x-1",
                     active
                       ? "border-cp-yellow/25 bg-cp-yellow/8 text-cp-yellow"
-                      : "text-muted hover:border-line hover:bg-white/[0.03] hover:text-fog hover:translate-x-1",
+                      : "text-muted hover:border-line hover:bg-white/[0.03] hover:text-fog",
                   )}
                 >
                   {active && (
-                    <span className="absolute -left-px top-1/2 h-6 w-px -translate-y-1/2 bg-cp-yellow shadow-[0_0_12px_rgba(245,228,0,0.9)]" />
+                    <span className="absolute -left-px top-1/2 h-6 w-px -translate-y-1/2 bg-cp-yellow shadow-[0_0_12px_rgba(245,228,0,0.9)] animate-glow-pulse" />
                   )}
                   <span className="font-mono w-5 text-[9px] tracking-widest opacity-50">{item.code}</span>
                   <Icon className="h-[17px] w-[17px]" strokeWidth={1.7} />
@@ -250,7 +214,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               pathname === "/settings" && "border-cp-yellow/25 bg-cp-yellow/8 text-cp-yellow",
             )}
           >
-            <span className="font-mono w-5 text-[9px] tracking-widest opacity-50">07</span>
+            <span className="font-mono w-5 text-[9px] tracking-widest opacity-50">09</span>
             <Settings className="h-[17px] w-[17px]" strokeWidth={1.7} />
             <span className="font-display flex-1 text-[12px] font-semibold tracking-[0.14em] uppercase">
               Settings
@@ -308,7 +272,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </header>
 
       <main className="relative z-10 min-h-screen pb-24 lg:pb-0 lg:pl-[264px]">
-        <div className="mx-auto w-full max-w-[1600px] px-4 py-5 sm:px-6 lg:px-8 lg:py-8">{children}</div>
+        <div className="mx-auto w-full max-w-[1600px] px-4 py-5 sm:px-6 lg:px-8 lg:py-8 animate-fade">{children}</div>
       </main>
 
       {/* Mobile nav */}
@@ -330,7 +294,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 )}
               >
                 <Icon className="h-[18px] w-[18px]" strokeWidth={active ? 2 : 1.6} />
-                <span className="font-mono text-[8px] tracking-[0.1em] uppercase">{item.label}</span>
+                <span className="font-mono text-[7px] tracking-[0.08em] uppercase">{item.label}</span>
                 <span className={cn("h-px w-5", active ? "bg-cp-yellow" : "bg-transparent")} />
               </Link>
             );

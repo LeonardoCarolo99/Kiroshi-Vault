@@ -20,6 +20,9 @@ export type CardPrice = {
   lowEur?: number | null;
   avgEur?: number | null;
   updatedAt?: string;
+  soldCount?: number | null;
+  salesCount?: number | null;
+  sold?: number | null;
 };
 
 export type Card = {
@@ -75,12 +78,31 @@ export type Deck = {
   public?: boolean;
 };
 
+export type MeleeAccount = {
+  profileId?: string;
+  username?: string;
+  profileUrl?: string;
+  linkedAt?: string;
+  lastSyncedAt?: string;
+};
+
 export type UserProfile = {
   uid: string;
   displayName?: string;
   email?: string;
   photoURL?: string;
+  avatarId?: string;
+  meleeAccount?: MeleeAccount | null;
 };
+
+export const AVATAR_OPTIONS = [
+  { id: "avatar-01", label: "Ripperdoc" },
+  { id: "avatar-02", label: "Solo" },
+  { id: "avatar-03", label: "Netrunner" },
+  { id: "avatar-04", label: "Techie" },
+  { id: "avatar-05", label: "Nomad" },
+  { id: "avatar-06", label: "Corpo" },
+] as const;
 
 export type Friend = {
   uid: string;
@@ -90,8 +112,11 @@ export type Friend = {
 
 export type MatchResult = "win" | "loss" | "draw";
 
+export type MatchType = "casual" | "tournament";
+
 export type MatchRecord = {
   id: string;
+  type?: MatchType;
   date: string;
   format: string;
   deckId: string;
@@ -104,6 +129,46 @@ export type MatchRecord = {
   store: string;
   notes: string;
   createdAt: string;
+  tournamentId?: string;
+  tournamentName?: string;
+  round?: number | string;
+  tableNumber?: number | string;
+  pairingId?: string;
+  eventId?: string;
+  venue?: string;
+};
+
+export type TournamentStatus = "upcoming" | "ongoing" | "completed";
+
+export type TournamentPairing = {
+  pairingId: string;
+  round: number | string;
+  opponentName: string;
+  opponentDeck?: string;
+  tableNumber?: number | string;
+  result?: MatchResult | "not-reported";
+  gamesWon?: number;
+  gamesLost?: number;
+  matchId?: string;
+};
+
+export type Tournament = {
+  id: string;
+  name: string;
+  status: TournamentStatus;
+  format: string;
+  startDate?: string;
+  endDate?: string;
+  url?: string;
+  location?: string;
+  store?: string;
+  deckId?: string;
+  pairings: TournamentPairing[];
+  playerRecord?: { wins: number; losses: number; draws: number; gamesWon?: number; gamesLost?: number };
+  createdAt: string;
+  updatedAt: string;
+  meleeTournamentId?: string;
+  meleeUrl?: string;
 };
 
 export type CollectionFilters = {
@@ -152,6 +217,7 @@ export type BuyListPriority = "low" | "normal" | "high" | "urgent";
 
 export type BuyListEntry = {
   id: string;
+  listId?: string;
   cardId: string;
   quantity: number;
   priority: BuyListPriority;
@@ -161,10 +227,42 @@ export type BuyListEntry = {
   updatedAt: string;
 };
 
+export type BuyList = {
+  id: string;
+  name: string;
+  description?: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ChatMessage = {
+  id: string;
+  conversationId: string;
+  senderId: string;
+  text: string;
+  createdAt: string;
+  readBy?: string[];
+};
+
+export type ChatConversation = {
+  id: string;
+  participants: string[];
+  participantDetails?: Record<string, { friendCode?: string; displayName?: string }>;
+  lastMessage?: {
+    text: string;
+    senderId: string;
+    createdAt: string;
+  };
+  updatedAt: string;
+  createdAt: string;
+};
+
 export type VaultSnapshot = {
   collection?: Record<string, number>;
   decks?: Deck[];
   matches?: unknown[];
   buyList?: BuyListEntry[];
-  friends?: string[];
+  buyLists?: BuyList[];
+  friends?: Friend[];
+  friendCode?: string | null;
 };

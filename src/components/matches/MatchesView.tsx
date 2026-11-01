@@ -11,11 +11,12 @@ import {
   Swords,
   Trash2,
   TrendingUp,
+  Trophy,
   X,
 } from "lucide-react";
 import type { MatchRecord, MatchResult } from "@/lib/types";
 import { useVaultStore } from "@/lib/store";
-import { matchStats } from "@/lib/stats";
+import { matchStatsSplit } from "@/lib/stats";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Modal } from "@/components/ui/Modal";
@@ -59,8 +60,10 @@ export function MatchesView() {
   const [query, setQuery] = useState("");
   const [resultFilter, setResultFilter] = useState<"all" | MatchResult>("all");
   const [deckFilter, setDeckFilter] = useState("all");
+  const [typeFilter, setTypeFilter] = useState<"all" | "normal" | "tournament">("all");
 
-  const stats = useMemo(() => matchStats(matches, decks), [matches, decks]);
+  const splitStats = useMemo(() => matchStatsSplit(matches, decks), [matches, decks]);
+  const stats = splitStats.all;
 
   const sorted = useMemo(
     () =>
@@ -75,14 +78,16 @@ export function MatchesView() {
     return sorted.filter((match) => {
       if (resultFilter !== "all" && match.result !== resultFilter) return false;
       if (deckFilter !== "all" && match.deckId !== deckFilter) return false;
+      if (typeFilter === "tournament" && match.type !== "tournament" && !match.tournamentId) return false;
+      if (typeFilter === "normal" && (match.type === "tournament" || match.tournamentId)) return false;
       if (!q) return true;
       const deck = decks.find((entry) => entry.id === match.deckId);
-      return [match.opponentName, match.opponentDeck, match.store, match.notes, match.format, deck?.name ?? ""]
+      return [match.opponentName, match.opponentDeck, match.store, match.notes, match.format, deck?.name ?? "", (match as any).tournamentName ?? ""]
         .join(" ")
         .toLowerCase()
         .includes(q);
     });
-  }, [sorted, query, resultFilter, deckFilter, decks]);
+  }, [sorted, query, resultFilter, deckFilter, typeFilter, decks]);
 
   const target = matches.find((match) => match.id === deleteTarget);
 
@@ -116,80 +121,100 @@ export function MatchesView() {
         }
       />
 
-      <section className="mb-4 grid grid-cols-2 gap-3 xl:grid-cols-4">
-        <StatCard label="Matches" value={String(stats.total)} detail={`${stats.playCount} on play · ${stats.drawCount} on draw`} />
-        <StatCard label="Win Rate" value={stats.total ? `${stats.winRate}%` : "—"} detail={`${stats.wins}W · ${stats.losses}L · ${stats.draws}D`} tone="green" />
+      <section className="mb-4 grid grid-cols-2 gap-3 xl:grid-cols-6">
+        <StatCard label="All Matches" value={String(splitStats.all.total)} detail={`${splitStats.all.wins}W · ${splitStats.all.losses}L · ${splitStats.all.draws}D`} />
+        <StatCard label="Normal" value={String(splitStats.normal.total)} detail={`${splitStats.normal.wins}W · ${splitStats.normal.losses}L`} tone="cyan" />
+        <StatCard label="Tournaments" value={String(splitStats.tournament.total)} detail={`${splitStats.tournament.wins}W · ${splitStats.tournament.losses}L`} tone="yellow" />
+        <StatCard label="Win Rate" value={splitStats.all.total ? `${splitStats.all.winRate}%` : "—"} detail="Overall" tone="green" />
         <StatCard
           label="Current Streak"
-          value={stats.currentStreak ? String(stats.currentStreak.count) : "—"}
-          detail={stats.currentStreak ? `${stats.currentStreak.type} in a row` : "No streak"}
-          tone={stats.currentStreak?.type === "loss" ? "red" : "yellow"}
+          value={splitStats.all.currentStreak ? String(splitStats.all.currentStreak.count) : "—"}
+          detail={splitStats.all.currentStreak ? `${splitStats.all.currentStreak.type} in a row` : "No streak"}
+          tone={splitStats.all.currentStreak?.type === "loss" ? "red" : "yellow"}
         />
         <StatCard
           label="Best Deck"
-          value={stats.byDeck[0] ? `${stats.byDeck[0].winRate}%` : "—"}
-          detail={stats.byDeck[0]?.name ?? "No data yet"}
+          value={splitStats.all.byDeck[0] ? `${splitStats.all.byDeck[0].winRate}%` : "—"}
+          detail={splitStats.all.byDeck[0]?.name ?? "No data yet"}
           tone="cyan"
         />
       </section>
 
-      <div className="mb-4 flex flex-col gap-2 sm:flex-row">
-        <div className="relative flex-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
-          <input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search opponent, deck, store, notes..."
-            className="hud-input h-10 pl-10 pr-9"
-            aria-label="Search matches"
-          />
-          {query ? (
-            <button
-              type="button"
-              onClick={() => setQuery("")}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-muted hover:text-fog"
-              aria-label="Clear search"
-            >
-              <X className="h-4 w-4" />
-            </button>
-          ) : null}
+      <div className="mb-4 flex flex-col gap-2">
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <div className="relative flex-1">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search opponent, deck, store, notes, tournament..."
+              className="hud-input h-10 pl-10 pr-9"
+              aria-label="Search matches"
+            />
+            {query ? (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-muted hover:text-fog"
+                aria-label="Clear search"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            ) : null}
+          </div>
+          <div className="flex gap-1 border border-line bg-black/30 p-1">
+            {(["all", "win", "loss", "draw"] as const).map((value) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setResultFilter(value)}
+                className={cn(
+                  "font-mono px-2.5 py-1.5 text-[9px] tracking-[0.1em] uppercase transition-colors",
+                  resultFilter === value
+                    ? value === "win"
+                      ? "bg-cp-green/20 text-cp-green"
+                      : value === "loss"
+                        ? "bg-cp-red/20 text-cp-red"
+                        : value === "draw"
+                          ? "bg-cp-yellow/20 text-cp-yellow"
+                          : "bg-white/10 text-fog"
+                    : "text-muted hover:text-fog",
+                )}
+              >
+                {value}
+              </button>
+            ))}
+          </div>
+          <select
+            value={deckFilter}
+            onChange={(event) => setDeckFilter(event.target.value)}
+            className="hud-select h-10 w-full sm:w-48"
+            aria-label="Filter by deck"
+          >
+            <option value="all">All decks</option>
+            {decks.map((deck) => (
+              <option key={deck.id} value={deck.id}>
+                {deck.name}
+              </option>
+            ))}
+          </select>
         </div>
-        <div className="flex gap-1 border border-line bg-black/30 p-1">
-          {(["all", "win", "loss", "draw"] as const).map((value) => (
+        <div className="flex flex-wrap gap-1 border border-line bg-black/30 p-1">
+          {(["all", "normal", "tournament"] as const).map((value) => (
             <button
               key={value}
               type="button"
-              onClick={() => setResultFilter(value)}
+              onClick={() => setTypeFilter(value)}
               className={cn(
-                "font-mono px-2.5 py-1.5 text-[9px] tracking-[0.1em] uppercase transition-colors",
-                resultFilter === value
-                  ? value === "win"
-                    ? "bg-cp-green/20 text-cp-green"
-                    : value === "loss"
-                      ? "bg-cp-red/20 text-cp-red"
-                      : value === "draw"
-                        ? "bg-cp-yellow/20 text-cp-yellow"
-                        : "bg-white/10 text-fog"
-                  : "text-muted hover:text-fog",
+                "font-mono flex items-center gap-1.5 px-2.5 py-1.5 text-[9px] tracking-[0.1em] uppercase transition-colors",
+                typeFilter === value ? "bg-white/10 text-fog" : "text-muted hover:text-fog",
               )}
             >
-              {value}
+              {value === "tournament" ? <Trophy className="h-3 w-3" /> : value === "normal" ? <Swords className="h-3 w-3" /> : null}
+              {value === "all" ? "All Types" : value}
             </button>
           ))}
         </div>
-        <select
-          value={deckFilter}
-          onChange={(event) => setDeckFilter(event.target.value)}
-          className="hud-select h-10 w-full sm:w-48"
-          aria-label="Filter by deck"
-        >
-          <option value="all">All decks</option>
-          {decks.map((deck) => (
-            <option key={deck.id} value={deck.id}>
-              {deck.name}
-            </option>
-          ))}
-        </select>
       </div>
 
       {matches.length === 0 ? (
@@ -217,6 +242,7 @@ export function MatchesView() {
                 setQuery("");
                 setResultFilter("all");
                 setDeckFilter("all");
+                setTypeFilter("all");
               }}
             >
               Reset filters
@@ -260,6 +286,14 @@ export function MatchesView() {
                   <div className="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[9px] tracking-[0.06em] text-muted">
                     <span className="text-cp-yellow">{deck?.name ?? "No deck"}</span>
                     <span>{match.format}</span>
+                    {match.type === "tournament" || match.tournamentId ? (
+                      <span className="flex items-center gap-1 text-cp-yellow">
+                        <Trophy className="h-2.5 w-2.5" />
+                        {(match as any).tournamentName || "Tournament"}
+                        {match.round ? ` R${match.round}` : ""}
+                        {match.tableNumber ? ` T${match.tableNumber}` : ""}
+                      </span>
+                    ) : null}
                     <span>
                       {match.gamesWon}–{match.gamesLost}
                     </span>
@@ -303,14 +337,14 @@ export function MatchesView() {
         </div>
       )}
 
-      {stats.byDeck.length > 0 ? (
+      {splitStats.all.byDeck.length > 0 ? (
         <section className="hud-panel mt-5 p-5">
           <div className="flex items-center gap-2">
             <TrendingUp className="h-4 w-4 text-cp-yellow" />
-            <p className="hud-label text-cp-yellow">Performance by Deck</p>
+            <p className="hud-label text-cp-yellow">Performance by Deck (All)</p>
           </div>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
-            {stats.byDeck.map((entry) => (
+            {splitStats.all.byDeck.map((entry) => (
               <div key={entry.deckId} className="border border-line bg-black/20 p-3">
                 <div className="flex items-center justify-between gap-2">
                   <p className="truncate text-[12px] font-medium text-fog">{entry.name}</p>

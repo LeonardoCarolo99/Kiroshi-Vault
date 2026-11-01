@@ -32,7 +32,18 @@
     },
     "legality": "legal",
     "image": "/cards/don-t-fear-the-reaper.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 37.01,
+      "trendEur": 50,
+      "lowEur": 12.36,
+      "avgEur": 36.66,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 3838,
+      "salesCount": 3838,
+      "sold": 3838
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/don-t-fear-the-reaper"
   },
   {
     "id": "e48c9d39-ef27-4b8f-8690-d75c3a4807b0",
@@ -66,7 +77,18 @@
     },
     "legality": "legal",
     "image": "/cards/6th-street-recruits.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 13.32,
+      "trendEur": 1.03,
+      "lowEur": 35.66,
+      "avgEur": 14.53,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 1908,
+      "salesCount": 1908,
+      "sold": 1908
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/6th-street-recruits"
   },
   {
     "id": "eff41c12-b872-4101-9779-00e691532893",
@@ -104,7 +126,18 @@
     },
     "legality": "legal",
     "image": "/cards/adam-smasher-ender-of-legends.webp",
-    "printingCount": 11
+    "printingCount": 11,
+    "prices": {
+      "eur": 28.57,
+      "trendEur": 16.74,
+      "lowEur": 14.6,
+      "avgEur": 2.51,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 1091,
+      "salesCount": 1091,
+      "sold": 1091
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/adam-smasher-ender-of-legends"
   },
   {
     "id": "a2ad9c2f-bfb7-473b-9408-91af142d269d",
@@ -140,7 +173,18 @@
     },
     "legality": "legal",
     "image": "/cards/adam-smasher-metal-over-meat.webp",
-    "printingCount": 10
+    "printingCount": 10,
+    "prices": {
+      "eur": 24.26,
+      "trendEur": 55.35,
+      "lowEur": 33.17,
+      "avgEur": 20.26,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 3309,
+      "salesCount": 3309,
+      "sold": 3309
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/adam-smasher-metal-over-meat"
   },
   {
     "id": "6a5a1e34-fdd3-42de-b6bd-4b2553d6df39",
@@ -177,7 +221,18 @@
     },
     "legality": "legal",
     "image": "/cards/adrenaline-converter.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 7.48,
+      "trendEur": 38.48,
+      "lowEur": 38.36,
+      "avgEur": 22.01,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 2520,
+      "salesCount": 2520,
+      "sold": 2520
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/adrenaline-converter"
   },
   {
     "id": "d039e4b3-9b83-40da-8d8f-b1dfb1f172f1",
@@ -213,7 +268,18 @@
     },
     "legality": "legal",
     "image": "/cards/afterparty-at-lizzie-s.webp",
-    "printingCount": 9
+    "printingCount": 9,
+    "prices": {
+      "eur": 24.13,
+      "trendEur": 46.98,
+      "lowEur": 40.01,
+      "avgEur": 27.02,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 575,
+      "salesCount": 575,
+      "sold": 575
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/afterparty-at-lizzie-s"
   },
   {
     "id": "1f969c27-dddb-4971-9ab5-bd728c3e3e52",
@@ -248,7 +314,18 @@
     },
     "legality": "legal",
     "image": "/cards/all-is-lost.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 50.03,
+      "trendEur": 33.43,
+      "lowEur": 16.07,
+      "avgEur": 26.73,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 3468,
+      "salesCount": 3468,
+      "sold": 3468
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/all-is-lost"
   },
   {
     "id": "858e95f5-2efb-460e-b890-e8a5140e11c9",
@@ -282,7 +359,18 @@
     },
     "legality": "legal",
     "image": "/cards/alt-cunningham-mother-of-daemons.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 31.84,
+      "trendEur": 28.46,
+      "lowEur": 27.73,
+      "avgEur": 45.83,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 224,
+      "salesCount": 224,
+      "sold": 224
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/alt-cunningham-mother-of-daemons"
   },
   {
     "id": "12475e77-0e16-420e-a935-65eb74290de8",
@@ -319,7 +407,18 @@
     },
     "legality": "legal",
     "image": "/cards/alt-cunningham-soulkiller-architect.webp",
-    "printingCount": 10
+    "printingCount": 10,
+    "prices": {
+      "eur": 28.93,
+      "trendEur": 12.86,
+      "lowEur": 12.45,
+      "avgEur": 48.46,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 2339,
+      "salesCount": 2339,
+      "sold": 2339
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/alt-cunningham-soulkiller-architect"
   },
   {
     "id": "e8aa7757-e5e3-4137-8970-4fa546b9bed9",
@@ -353,7 +452,18 @@
     },
     "legality": "legal",
     "image": "/cards/animals-wrecker.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 4.61,
+      "trendEur": 1.01,
+      "lowEur": 18.68,
+      "avgEur": 43.87,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 4971,
+      "salesCount": 4971,
+      "sold": 4971
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/animals-wrecker"
   },
   {
     "id": "59ddecca-1501-492a-b8b1-d4b38d4486c9",
@@ -388,7 +498,18 @@
     },
     "legality": "legal",
     "image": "/cards/appetite-for-destruction.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 10.59,
+      "trendEur": 44.41,
+      "lowEur": 21.54,
+      "avgEur": 37.56,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 1934,
+      "salesCount": 1934,
+      "sold": 1934
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/appetite-for-destruction"
   },
   {
     "id": "5233bacc-f39f-4383-8e25-57ef634735ca",
@@ -425,7 +546,18 @@
     },
     "legality": "legal",
     "image": "/cards/arasaka-emergency-radioport.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 38.37,
+      "trendEur": 23.33,
+      "lowEur": 37.38,
+      "avgEur": 36.69,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 3982,
+      "salesCount": 3982,
+      "sold": 3982
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/arasaka-emergency-radioport"
   },
   {
     "id": "ce45cb9d-430a-4ccf-bb4b-acf0b76120e0",
@@ -461,7 +593,18 @@
     },
     "legality": "legal",
     "image": "/cards/augmented-negotiators.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 14.37,
+      "trendEur": 44.55,
+      "lowEur": 13.47,
+      "avgEur": 42.93,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 663,
+      "salesCount": 663,
+      "sold": 663
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/augmented-negotiators"
   },
   {
     "id": "3eb0f8bf-afb9-42a7-a4fa-710e2eb5c89c",
@@ -496,7 +639,18 @@
     },
     "legality": "legal",
     "image": "/cards/bonnie-and-clyde.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 8.23,
+      "trendEur": 45.04,
+      "lowEur": 23.88,
+      "avgEur": 17.63,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 20,
+      "salesCount": 20,
+      "sold": 20
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/bonnie-and-clyde"
   },
   {
     "id": "84561b4c-67f0-4b2e-80ac-6b9c0a2396e3",
@@ -531,7 +685,18 @@
     },
     "legality": "legal",
     "image": "/cards/bootleg-black-sapphire-show.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 39.85,
+      "trendEur": 42.59,
+      "lowEur": 39.25,
+      "avgEur": 44.1,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 3783,
+      "salesCount": 3783,
+      "sold": 3783
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/bootleg-black-sapphire-show"
   },
   {
     "id": "0273f402-94fb-4b59-90ec-a1057c2d1284",
@@ -568,7 +733,18 @@
     },
     "legality": "legal",
     "image": "/cards/caliber-totentanz-s-top-dog.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 24.6,
+      "trendEur": 9.63,
+      "lowEur": 31.22,
+      "avgEur": 6.24,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 2859,
+      "salesCount": 2859,
+      "sold": 2859
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/caliber-totentanz-s-top-dog"
   },
   {
     "id": "81fb66ee-b054-4f78-b0c9-7d2c9ff53435",
@@ -604,7 +780,18 @@
     },
     "legality": "legal",
     "image": "/cards/carnage-at-the-colosseum.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 11.98,
+      "trendEur": 43.25,
+      "lowEur": 13.43,
+      "avgEur": 12.63,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 2159,
+      "salesCount": 2159,
+      "sold": 2159
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/carnage-at-the-colosseum"
   },
   {
     "id": "3c4cf61f-c469-4ad6-a209-67e715f9d45b",
@@ -641,7 +828,18 @@
     },
     "legality": "legal",
     "image": "/cards/chrome-fang.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 5.43,
+      "trendEur": 44.55,
+      "lowEur": 23.24,
+      "avgEur": 43.8,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 2971,
+      "salesCount": 2971,
+      "sold": 2971
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/chrome-fang"
   },
   {
     "id": "19f34c9b-a24a-43be-bd9f-62c37435e994",
@@ -676,7 +874,18 @@
     },
     "legality": "legal",
     "image": "/cards/chrome-reverie.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 41.66,
+      "trendEur": 33.75,
+      "lowEur": 15.33,
+      "avgEur": 47.86,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 4829,
+      "salesCount": 4829,
+      "sold": 4829
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/chrome-reverie"
   },
   {
     "id": "71652e73-984a-4630-be47-af947f87d5c1",
@@ -711,7 +920,18 @@
     },
     "legality": "legal",
     "image": "/cards/corpo-security.webp",
-    "printingCount": 11
+    "printingCount": 11,
+    "prices": {
+      "eur": 27.06,
+      "trendEur": 39.04,
+      "lowEur": 35.38,
+      "avgEur": 25.61,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 2950,
+      "salesCount": 2950,
+      "sold": 2950
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/corpo-security"
   },
   {
     "id": "71fb410b-b56e-42b2-a793-4c49e935b9f1",
@@ -746,7 +966,18 @@
     },
     "legality": "legal",
     "image": "/cards/corporate-surveillance.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 22.58,
+      "trendEur": 30.19,
+      "lowEur": 5.65,
+      "avgEur": 18.24,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 1897,
+      "salesCount": 1897,
+      "sold": 1897
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/corporate-surveillance"
   },
   {
     "id": "87e001dd-8604-4523-af6e-d768118ccf98",
@@ -782,7 +1013,18 @@
     },
     "legality": "legal",
     "image": "/cards/cyberpsychosis.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 32.17,
+      "trendEur": 9.57,
+      "lowEur": 36.23,
+      "avgEur": 10.02,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 3643,
+      "salesCount": 3643,
+      "sold": 3643
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/cyberpsychosis"
   },
   {
     "id": "1d8f611c-dd08-48d1-82eb-451d56dcf651",
@@ -818,7 +1060,18 @@
     },
     "legality": "legal",
     "image": "/cards/deadman-transmitter.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 42.06,
+      "trendEur": 19.93,
+      "lowEur": 10.29,
+      "avgEur": 37.43,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 3222,
+      "salesCount": 3222,
+      "sold": 3222
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/deadman-transmitter"
   },
   {
     "id": "a1e60653-5e28-49ee-9798-d16520b553c3",
@@ -851,7 +1104,18 @@
     },
     "legality": "legal",
     "image": "/cards/delamain-cab.webp",
-    "printingCount": 11
+    "printingCount": 11,
+    "prices": {
+      "eur": 34.15,
+      "trendEur": 16.28,
+      "lowEur": 2.56,
+      "avgEur": 6.59,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 171,
+      "salesCount": 171,
+      "sold": 171
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/delamain-cab"
   },
   {
     "id": "3bb1f191-927e-45b3-86ca-cb30baabfe0d",
@@ -886,7 +1150,18 @@
     },
     "legality": "legal",
     "image": "/cards/delamain-rideshare-ai.webp",
-    "printingCount": 4
+    "printingCount": 4,
+    "prices": {
+      "eur": 31.35,
+      "trendEur": 45.35,
+      "lowEur": 13.52,
+      "avgEur": 25.6,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 4790,
+      "salesCount": 4790,
+      "sold": 4790
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/delamain-rideshare-ai"
   },
   {
     "id": "2697ed9d-72fc-4658-9c94-977668911a67",
@@ -922,7 +1197,18 @@
     },
     "legality": "legal",
     "image": "/cards/detonate.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 28.14,
+      "trendEur": 10.5,
+      "lowEur": 28.62,
+      "avgEur": 29.1,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 4681,
+      "salesCount": 4681,
+      "sold": 4681
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/detonate"
   },
   {
     "id": "91df478a-91d5-4d42-a624-4c20ec61121c",
@@ -959,7 +1245,18 @@
     },
     "legality": "legal",
     "image": "/cards/dexter-deshawn-off-the-grid.webp",
-    "printingCount": 13
+    "printingCount": 13,
+    "prices": {
+      "eur": 38.19,
+      "trendEur": 17.98,
+      "lowEur": 3.16,
+      "avgEur": 15.1,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 4907,
+      "salesCount": 4907,
+      "sold": 4907
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/dexter-deshawn-off-the-grid"
   },
   {
     "id": "f61b944a-32e3-4085-894b-7bd498325156",
@@ -996,7 +1293,18 @@
     },
     "legality": "legal",
     "image": "/cards/dexter-deshawn-one-last-chance.webp",
-    "printingCount": 4
+    "printingCount": 4,
+    "prices": {
+      "eur": 21.77,
+      "trendEur": 43.79,
+      "lowEur": 1.22,
+      "avgEur": 26.21,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 3262,
+      "salesCount": 3262,
+      "sold": 3262
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/The-Heist-Retail-Starter-Deck/dexter-deshawn-one-last-chance"
   },
   {
     "id": "3b3f941d-aa58-4337-99dc-4af3fd3ccd47",
@@ -1035,7 +1343,18 @@
     },
     "legality": "legal",
     "image": "/cards/dum-dum-maelstrom-triggerman.webp",
-    "printingCount": 10
+    "printingCount": 10,
+    "prices": {
+      "eur": 6.12,
+      "trendEur": 43.97,
+      "lowEur": 11.12,
+      "avgEur": 13.71,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 3139,
+      "salesCount": 3139,
+      "sold": 3139
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/dum-dum-maelstrom-triggerman"
   },
   {
     "id": "df06b6e2-1675-48a3-bfe2-d0bc4c5f35eb",
@@ -1072,7 +1391,18 @@
     },
     "legality": "legal",
     "image": "/cards/dying-night-v-s-pistol.webp",
-    "printingCount": 11
+    "printingCount": 11,
+    "prices": {
+      "eur": 11.58,
+      "trendEur": 50.45,
+      "lowEur": 33.06,
+      "avgEur": 18.39,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 34,
+      "salesCount": 34,
+      "sold": 34
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/dying-night-v-s-pistol"
   },
   {
     "id": "c688ca08-b3b7-441d-b161-78b9a63a8a9e",
@@ -1108,7 +1438,18 @@
     },
     "legality": "legal",
     "image": "/cards/el-sombrero-n-la-venganza-lenta.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 50.65,
+      "trendEur": 28.42,
+      "lowEur": 39.15,
+      "avgEur": 33.8,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 3698,
+      "salesCount": 3698,
+      "sold": 3698
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/el-sombrero-n-la-venganza-lenta"
   },
   {
     "id": "917e6515-ed23-4a1d-baaa-474d879bdabc",
@@ -1143,7 +1484,18 @@
     },
     "legality": "legal",
     "image": "/cards/emergency-atlus.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 43.91,
+      "trendEur": 37.44,
+      "lowEur": 20.81,
+      "avgEur": 22.28,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 4130,
+      "salesCount": 4130,
+      "sold": 4130
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/emergency-atlus"
   },
   {
     "id": "55807eb7-8a8e-44a9-97a2-c8ac993e7b43",
@@ -1179,7 +1531,18 @@
     },
     "legality": "legal",
     "image": "/cards/evelyn-parker-beautiful-enigma.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 46.28,
+      "trendEur": 39.88,
+      "lowEur": 2.3,
+      "avgEur": 11.5,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 3102,
+      "salesCount": 3102,
+      "sold": 3102
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/evelyn-parker-beautiful-enigma"
   },
   {
     "id": "a3cc3d15-8e6a-4684-b2ca-c843b4a854e2",
@@ -1214,7 +1577,18 @@
     },
     "legality": "legal",
     "image": "/cards/evelyn-parker-scheming-siren.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 36.04,
+      "trendEur": 15.03,
+      "lowEur": 5.99,
+      "avgEur": 2.72,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 889,
+      "salesCount": 889,
+      "sold": 889
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/evelyn-parker-scheming-siren"
   },
   {
     "id": "4a8dfe3f-980d-4370-ac10-6bd989042cdf",
@@ -1251,7 +1625,18 @@
     },
     "legality": "legal",
     "image": "/cards/field-operator.webp",
-    "printingCount": 8
+    "printingCount": 8,
+    "prices": {
+      "eur": 49.18,
+      "trendEur": 19.66,
+      "lowEur": 15.76,
+      "avgEur": 14.5,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 2668,
+      "salesCount": 2668,
+      "sold": 2668
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/field-operator"
   },
   {
     "id": "0cd37c43-e722-48eb-91ef-4c1bd1645215",
@@ -1288,7 +1673,18 @@
     },
     "legality": "legal",
     "image": "/cards/floor-it.webp",
-    "printingCount": 11
+    "printingCount": 11,
+    "prices": {
+      "eur": 26.45,
+      "trendEur": 12.14,
+      "lowEur": 28.51,
+      "avgEur": 37.28,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 399,
+      "salesCount": 399,
+      "sold": 399
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/floor-it"
   },
   {
     "id": "c5d2fed1-1470-4ac5-9f84-bf66705901ce",
@@ -1323,7 +1719,18 @@
     },
     "legality": "legal",
     "image": "/cards/fool-on-the-hill.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 49.37,
+      "trendEur": 20.22,
+      "lowEur": 18.64,
+      "avgEur": 20.99,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 4586,
+      "salesCount": 4586,
+      "sold": 4586
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/fool-on-the-hill"
   },
   {
     "id": "1f71ec32-3c11-466b-bcdd-a8a3009ea8ac",
@@ -1359,7 +1766,18 @@
     },
     "legality": "legal",
     "image": "/cards/gilded-mato-n.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 13.54,
+      "trendEur": 19.58,
+      "lowEur": 3.07,
+      "avgEur": 47.08,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 1863,
+      "salesCount": 1863,
+      "sold": 1863
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/gilded-mato-n"
   },
   {
     "id": "6dd172b1-2341-473f-8837-a9efe6a75701",
@@ -1394,7 +1812,18 @@
     },
     "legality": "legal",
     "image": "/cards/gorilla-arms.webp",
-    "printingCount": 5
+    "printingCount": 5,
+    "prices": {
+      "eur": 45.8,
+      "trendEur": 39.43,
+      "lowEur": 39.64,
+      "avgEur": 5.81,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 1387,
+      "salesCount": 1387,
+      "sold": 1387
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/gorilla-arms"
   },
   {
     "id": "72358c7d-9f29-4ef6-a682-f5bfc72c7714",
@@ -1432,7 +1861,18 @@
     },
     "legality": "legal",
     "image": "/cards/goro-takemura-hands-unclean.webp",
-    "printingCount": 8
+    "printingCount": 8,
+    "prices": {
+      "eur": 47.28,
+      "trendEur": 51.48,
+      "lowEur": 36.18,
+      "avgEur": 47.69,
+      "updatedAt": "2026-11-01T01:04:20.177Z",
+      "soldCount": 3738,
+      "salesCount": 3738,
+      "sold": 3738
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Embracing-Power-Retail-Starter-Deck/goro-takemura-hands-unclean"
   },
   {
     "id": "08e6a687-56b7-4ac1-982f-8a8d6d0c0bc5",
@@ -1468,7 +1908,18 @@
     },
     "legality": "legal",
     "image": "/cards/goro-takemura-losing-his-way.webp",
-    "printingCount": 4
+    "printingCount": 4,
+    "prices": {
+      "eur": 33.43,
+      "trendEur": 58.24,
+      "lowEur": 45.37,
+      "avgEur": 21.68,
+      "updatedAt": "2026-11-01T01:16:40.954Z",
+      "soldCount": 3888,
+      "salesCount": 3888,
+      "sold": 3888
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Embracing-Power-Retail-Starter-Deck/goro-takemura-losing-his-way"
   },
   {
     "id": "424c9c0f-cc01-40ec-8404-75957985c7f8",
@@ -1507,7 +1958,18 @@
     },
     "legality": "legal",
     "image": "/cards/goro-takemura-vengeful-bodyguard.webp",
-    "printingCount": 10
+    "printingCount": 10,
+    "prices": {
+      "eur": 25.85,
+      "trendEur": 48.84,
+      "lowEur": 54.35,
+      "avgEur": 30.19,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 565,
+      "salesCount": 565,
+      "sold": 565
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/goro-takemura-vengeful-bodyguard"
   },
   {
     "id": "27c01b18-2a9c-4d66-ad21-b75869fba666",
@@ -1543,7 +2005,18 @@
     },
     "legality": "legal",
     "image": "/cards/gunpoint-diplomacy.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 23.66,
+      "trendEur": 57.49,
+      "lowEur": 11.65,
+      "avgEur": 36.76,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1094,
+      "salesCount": 1094,
+      "sold": 1094
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/gunpoint-diplomacy"
   },
   {
     "id": "d2a9bcb0-a5e1-4413-8140-8b808258a753",
@@ -1579,7 +2052,18 @@
     },
     "legality": "legal",
     "image": "/cards/hacked-corpo.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 14.52,
+      "trendEur": 60.69,
+      "lowEur": 26.55,
+      "avgEur": 74.96,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3150,
+      "salesCount": 3150,
+      "sold": 3150
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/hacked-corpo"
   },
   {
     "id": "380b5e52-2651-4cde-8222-1db2ae6469e2",
@@ -1617,7 +2101,18 @@
     },
     "legality": "legal",
     "image": "/cards/hanako-arasaka-daughter-of-the-emperor.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 21.24,
+      "trendEur": 74.3,
+      "lowEur": 15.08,
+      "avgEur": 24.86,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4615,
+      "salesCount": 4615,
+      "sold": 4615
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/hanako-arasaka-daughter-of-the-emperor"
   },
   {
     "id": "2902da45-ec28-4971-a731-ea1eda4c6ba1",
@@ -1654,7 +2149,18 @@
     },
     "legality": "legal",
     "image": "/cards/hanako-arasaka-in-a-gilded-cage.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 28.59,
+      "trendEur": 66.14,
+      "lowEur": 48.2,
+      "avgEur": 53.25,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 791,
+      "salesCount": 791,
+      "sold": 791
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/hanako-arasaka-in-a-gilded-cage"
   },
   {
     "id": "2a9deb43-bf9a-41db-9a05-bb0d357bb08e",
@@ -1689,7 +2195,18 @@
     },
     "legality": "legal",
     "image": "/cards/heywood-ripperdoc.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 39.83,
+      "trendEur": 12.96,
+      "lowEur": 30.52,
+      "avgEur": 26.88,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2832,
+      "salesCount": 2832,
+      "sold": 2832
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/heywood-ripperdoc"
   },
   {
     "id": "a708461f-1f91-4789-bb0d-96e3de5fcf44",
@@ -1725,7 +2242,18 @@
     },
     "legality": "legal",
     "image": "/cards/industrial-assembly.webp",
-    "printingCount": 9
+    "printingCount": 9,
+    "prices": {
+      "eur": 49.26,
+      "trendEur": 82.48,
+      "lowEur": 18.61,
+      "avgEur": 21.75,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4491,
+      "salesCount": 4491,
+      "sold": 4491
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/industrial-assembly"
   },
   {
     "id": "b0453570-7ed8-4031-9562-cb73d7a979e5",
@@ -1759,7 +2287,18 @@
     },
     "legality": "legal",
     "image": "/cards/jacked-in-voodoo-boy.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 36.71,
+      "trendEur": 65.5,
+      "lowEur": 55.69,
+      "avgEur": 32.93,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3615,
+      "salesCount": 3615,
+      "sold": 3615
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/jacked-in-voodoo-boy"
   },
   {
     "id": "04a82ebf-eba1-4888-a95d-f01b9bbd0167",
@@ -1795,7 +2334,18 @@
     },
     "legality": "legal",
     "image": "/cards/jackie-welles-mama-s-favorite.webp",
-    "printingCount": 8
+    "printingCount": 8,
+    "prices": {
+      "eur": 48.44,
+      "trendEur": 28.41,
+      "lowEur": 7.23,
+      "avgEur": 5.5,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2700,
+      "salesCount": 2700,
+      "sold": 2700
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/jackie-welles-mama-s-favorite"
   },
   {
     "id": "40502c1f-78a2-426a-a706-c60ebd4b31e3",
@@ -1830,7 +2380,18 @@
     },
     "legality": "legal",
     "image": "/cards/jackie-welles-pour-one-out-for-me.webp",
-    "printingCount": 8
+    "printingCount": 8,
+    "prices": {
+      "eur": 25.17,
+      "trendEur": 83.75,
+      "lowEur": 45.21,
+      "avgEur": 54.39,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4366,
+      "salesCount": 4366,
+      "sold": 4366
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/The-Heist-Retail-Starter-Deck/jackie-welles-pour-one-out-for-me"
   },
   {
     "id": "b665e103-456b-4c51-9551-95b0bc87212a",
@@ -1867,7 +2428,18 @@
     },
     "legality": "legal",
     "image": "/cards/jackie-welles-ride-or-die-choom.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 47.65,
+      "trendEur": 3.37,
+      "lowEur": 21.91,
+      "avgEur": 34.15,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3255,
+      "salesCount": 3255,
+      "sold": 3255
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/jackie-welles-ride-or-die-choom"
   },
   {
     "id": "e8b0432c-4d2d-4464-9a00-f3626917a7f0",
@@ -1902,7 +2474,18 @@
     },
     "legality": "legal",
     "image": "/cards/japantown-jonin.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 65.26,
+      "trendEur": 87.96,
+      "lowEur": 36.1,
+      "avgEur": 2.92,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3769,
+      "salesCount": 3769,
+      "sold": 3769
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/japantown-jonin"
   },
   {
     "id": "9a4002b0-0f0b-4c9a-a198-691d058b6dcc",
@@ -1937,7 +2520,18 @@
     },
     "legality": "legal",
     "image": "/cards/johnny-silverhand-never-stop-fighting.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 47.04,
+      "trendEur": 82.14,
+      "lowEur": 56.77,
+      "avgEur": 46.85,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3096,
+      "salesCount": 3096,
+      "sold": 3096
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/johnny-silverhand-never-stop-fighting"
   },
   {
     "id": "56947a14-0b1e-4c3d-89e0-17839bcf4280",
@@ -1975,7 +2569,18 @@
     },
     "legality": "legal",
     "image": "/cards/johnny-silverhand-rocking-renegade.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 37.45,
+      "trendEur": 38.82,
+      "lowEur": 15.35,
+      "avgEur": 35.06,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1807,
+      "salesCount": 1807,
+      "sold": 1807
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/johnny-silverhand-rocking-renegade"
   },
   {
     "id": "4560f3d0-5f63-466b-93b7-fc9d822a556e",
@@ -2013,7 +2618,18 @@
     },
     "legality": "legal",
     "image": "/cards/judy-a-lvarez-braindance-maestro.webp",
-    "printingCount": 12
+    "printingCount": 12,
+    "prices": {
+      "eur": 74.26,
+      "trendEur": 36.36,
+      "lowEur": 17.82,
+      "avgEur": 2.79,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1999,
+      "salesCount": 1999,
+      "sold": 1999
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/judy-a-lvarez-braindance-maestro"
   },
   {
     "id": "cb7f8d05-87cc-4606-ad71-a9283f2f4b20",
@@ -2050,7 +2666,18 @@
     },
     "legality": "legal",
     "image": "/cards/judy-a-lvarez-nothing-to-doubt.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 79.07,
+      "trendEur": 62.53,
+      "lowEur": 34.18,
+      "avgEur": 67.05,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3611,
+      "salesCount": 3611,
+      "sold": 3611
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/judy-a-lvarez-nothing-to-doubt"
   },
   {
     "id": "5a441989-2997-40a2-a72e-08ca1442a7f3",
@@ -2086,7 +2713,18 @@
     },
     "legality": "legal",
     "image": "/cards/kerry-eurodyne-axe-attitude-audience.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 69.06,
+      "trendEur": 47.12,
+      "lowEur": 4.53,
+      "avgEur": 49.33,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3676,
+      "salesCount": 3676,
+      "sold": 3676
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/kerry-eurodyne-axe-attitude-audience"
   },
   {
     "id": "5c4d4058-9185-4305-9e8f-7eca41cf6674",
@@ -2122,7 +2760,18 @@
     },
     "legality": "legal",
     "image": "/cards/kerry-eurodyne-the-last-rockerboy.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 63.87,
+      "trendEur": 61.7,
+      "lowEur": 23.61,
+      "avgEur": 46.95,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 231,
+      "salesCount": 231,
+      "sold": 231
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/kerry-eurodyne-the-last-rockerboy"
   },
   {
     "id": "654f2289-5d75-4f8b-bd35-702031fbb214",
@@ -2158,7 +2807,18 @@
     },
     "legality": "legal",
     "image": "/cards/kiroshi-optics.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 74.58,
+      "trendEur": 58.27,
+      "lowEur": 53.39,
+      "avgEur": 51.99,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2867,
+      "salesCount": 2867,
+      "sold": 2867
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/kiroshi-optics"
   },
   {
     "id": "1b516742-cdf3-4597-8ba1-be787240ab3b",
@@ -2194,7 +2854,18 @@
     },
     "legality": "legal",
     "image": "/cards/la-llorona-ghost-of-the-past.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 56.18,
+      "trendEur": 15.53,
+      "lowEur": 1.72,
+      "avgEur": 17.02,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 597,
+      "salesCount": 597,
+      "sold": 597
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/la-llorona-ghost-of-the-past"
   },
   {
     "id": "c29aefc5-c8dd-4188-95d9-e46c5ee289eb",
@@ -2229,7 +2900,18 @@
     },
     "legality": "legal",
     "image": "/cards/les-e-le-mens.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 5.55,
+      "trendEur": 34.75,
+      "lowEur": 46.58,
+      "avgEur": 13.16,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2909,
+      "salesCount": 2909,
+      "sold": 2909
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/les-e-le-mens"
   },
   {
     "id": "793d9650-0a59-4c89-9d85-05a9d6873d2e",
@@ -2264,7 +2946,18 @@
     },
     "legality": "legal",
     "image": "/cards/live-with-the-aftermath.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 80,
+      "trendEur": 55.35,
+      "lowEur": 27.15,
+      "avgEur": 23.07,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3969,
+      "salesCount": 3969,
+      "sold": 3969
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/live-with-the-aftermath"
   },
   {
     "id": "6b078eff-4cef-4beb-a299-ed388a72ce45",
@@ -2300,7 +2993,18 @@
     },
     "legality": "legal",
     "image": "/cards/lizzy-wizzy-delicate-weapon.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 16.77,
+      "trendEur": 25.47,
+      "lowEur": 58.5,
+      "avgEur": 52.55,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 343,
+      "salesCount": 343,
+      "sold": 343
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/lizzy-wizzy-delicate-weapon"
   },
   {
     "id": "f57094f7-0720-4ba5-9a71-aafbc714d65a",
@@ -2334,7 +3038,18 @@
     },
     "legality": "legal",
     "image": "/cards/maelstrom-goons.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 65.42,
+      "trendEur": 78.28,
+      "lowEur": 3.69,
+      "avgEur": 35.5,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 136,
+      "salesCount": 136,
+      "sold": 136
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/maelstrom-goons"
   },
   {
     "id": "35c1fda3-60f9-4779-b690-30b283d52297",
@@ -2368,7 +3083,18 @@
     },
     "legality": "legal",
     "image": "/cards/maelstrom-zealots.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 78.9,
+      "trendEur": 73.34,
+      "lowEur": 40.4,
+      "avgEur": 29.17,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4483,
+      "salesCount": 4483,
+      "sold": 4483
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/maelstrom-zealots"
   },
   {
     "id": "5380dea3-4d21-445b-af02-487b45d40395",
@@ -2405,7 +3131,18 @@
     },
     "legality": "legal",
     "image": "/cards/maman-brigitte-spirit-of-death.webp",
-    "printingCount": 9
+    "printingCount": 9,
+    "prices": {
+      "eur": 1.81,
+      "trendEur": 57.74,
+      "lowEur": 16,
+      "avgEur": 27.37,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4120,
+      "salesCount": 4120,
+      "sold": 4120
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/maman-brigitte-spirit-of-death"
   },
   {
     "id": "6720e7fd-d1e8-4c8a-9ff2-f51f62241902",
@@ -2441,7 +3178,18 @@
     },
     "legality": "legal",
     "image": "/cards/mandibular-upgrade.webp",
-    "printingCount": 11
+    "printingCount": 11,
+    "prices": {
+      "eur": 48.3,
+      "trendEur": 55.2,
+      "lowEur": 50,
+      "avgEur": 56.74,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1365,
+      "salesCount": 1365,
+      "sold": 1365
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/mandibular-upgrade"
   },
   {
     "id": "28198e04-60e2-4f81-9786-903a9a947d7a",
@@ -2476,7 +3224,18 @@
     },
     "legality": "legal",
     "image": "/cards/mantis-blades.webp",
-    "printingCount": 8
+    "printingCount": 8,
+    "prices": {
+      "eur": 56.82,
+      "trendEur": 54.72,
+      "lowEur": 8.03,
+      "avgEur": 41.7,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1110,
+      "salesCount": 1110,
+      "sold": 1110
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/mantis-blades"
   },
   {
     "id": "d6f16c44-6d56-48ff-8130-154eea5540ca",
@@ -2512,7 +3271,18 @@
     },
     "legality": "legal",
     "image": "/cards/maxtac-av.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 8.66,
+      "trendEur": 80.11,
+      "lowEur": 46.44,
+      "avgEur": 55.48,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 472,
+      "salesCount": 472,
+      "sold": 472
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/maxtac-av"
   },
   {
     "id": "78fee308-5d4e-491c-9596-423dc20da5e3",
@@ -2545,7 +3315,18 @@
     },
     "legality": "legal",
     "image": "/cards/maxtac-heavy.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 0.82,
+      "trendEur": 5.49,
+      "lowEur": 46.49,
+      "avgEur": 12.68,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4443,
+      "salesCount": 4443,
+      "sold": 4443
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/maxtac-heavy"
   },
   {
     "id": "2a8802d3-598c-4ce3-9051-59ecf965ffbf",
@@ -2578,7 +3359,18 @@
     },
     "legality": "legal",
     "image": "/cards/maxtac-squadron.webp",
-    "printingCount": 8
+    "printingCount": 8,
+    "prices": {
+      "eur": 79.57,
+      "trendEur": 65.85,
+      "lowEur": 45.09,
+      "avgEur": 5.88,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3987,
+      "salesCount": 3987,
+      "sold": 3987
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/maxtac-squadron"
   },
   {
     "id": "95840ebd-d00a-49ff-b4e5-e2064cfc13a9",
@@ -2611,7 +3403,18 @@
     },
     "legality": "legal",
     "image": "/cards/maxtac-suppression-team.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 70.49,
+      "trendEur": 41.49,
+      "lowEur": 37,
+      "avgEur": 30.49,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1814,
+      "salesCount": 1814,
+      "sold": 1814
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/maxtac-suppression-team"
   },
   {
     "id": "0f7c1c54-0e2e-44a5-ac7f-5263fbab21d3",
@@ -2646,7 +3449,18 @@
     },
     "legality": "legal",
     "image": "/cards/memory-relapse.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 59.62,
+      "trendEur": 50.65,
+      "lowEur": 38.96,
+      "avgEur": 13.29,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1035,
+      "salesCount": 1035,
+      "sold": 1035
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/memory-relapse"
   },
   {
     "id": "21f68be2-c664-4ae0-a7ef-965a3a5a14c8",
@@ -2682,7 +3496,18 @@
     },
     "legality": "legal",
     "image": "/cards/meredith-stout-stone-cold-corpo.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 58.19,
+      "trendEur": 19.66,
+      "lowEur": 43.68,
+      "avgEur": 27.41,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4909,
+      "salesCount": 4909,
+      "sold": 4909
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/meredith-stout-stone-cold-corpo"
   },
   {
     "id": "066641c5-acc2-45f4-ba67-16a8d20cce73",
@@ -2719,7 +3544,18 @@
     },
     "legality": "legal",
     "image": "/cards/minotaur.webp",
-    "printingCount": 8
+    "printingCount": 8,
+    "prices": {
+      "eur": 74.29,
+      "trendEur": 30.97,
+      "lowEur": 24.99,
+      "avgEur": 19.91,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 792,
+      "salesCount": 792,
+      "sold": 792
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Embracing-Power-Retail-Starter-Deck/minotaur"
   },
   {
     "id": "383abfb4-eedb-47c1-87f0-3ae4973c3619",
@@ -2752,7 +3588,18 @@
     },
     "legality": "legal",
     "image": "/cards/misty-olszewski-mender-of-broken-spirits.webp",
-    "printingCount": 4
+    "printingCount": 4,
+    "prices": {
+      "eur": 64.45,
+      "trendEur": 16.21,
+      "lowEur": 23.15,
+      "avgEur": 62.47,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1370,
+      "salesCount": 1370,
+      "sold": 1370
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/misty-olszewski-mender-of-broken-spirits"
   },
   {
     "id": "920cabc9-f350-4f61-96c6-69e649271456",
@@ -2788,7 +3635,18 @@
     },
     "legality": "legal",
     "image": "/cards/modded-kusanagi.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 10.44,
+      "trendEur": 43.84,
+      "lowEur": 59.45,
+      "avgEur": 10,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1390,
+      "salesCount": 1390,
+      "sold": 1390
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/modded-kusanagi"
   },
   {
     "id": "08b52bdb-be1e-4931-90c4-4354eea5b145",
@@ -2821,7 +3679,18 @@
     },
     "legality": "legal",
     "image": "/cards/modded-muramasa.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 64.42,
+      "trendEur": 23.39,
+      "lowEur": 59.88,
+      "avgEur": 62.93,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1794,
+      "salesCount": 1794,
+      "sold": 1794
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/modded-muramasa"
   },
   {
     "id": "ef77dd1f-3abd-4ce2-becc-97dd768a5022",
@@ -2858,7 +3727,18 @@
     },
     "legality": "legal",
     "image": "/cards/mox-inciters.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 44.9,
+      "trendEur": 87.26,
+      "lowEur": 27.86,
+      "avgEur": 25.01,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1671,
+      "salesCount": 1671,
+      "sold": 1671
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/mox-inciters"
   },
   {
     "id": "619429c9-132f-496e-8aa0-414e850c87ec",
@@ -2894,7 +3774,18 @@
     },
     "legality": "legal",
     "image": "/cards/mt0d12-flathead.webp",
-    "printingCount": 4
+    "printingCount": 4,
+    "prices": {
+      "eur": 60.58,
+      "trendEur": 71.52,
+      "lowEur": 1.88,
+      "avgEur": 56.59,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4322,
+      "salesCount": 4322,
+      "sold": 4322
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/The-Heist-Retail-Starter-Deck/mt0d12-flathead"
   },
   {
     "id": "fc516d53-5fd8-43dd-8349-9e60f0606efa",
@@ -2931,7 +3822,18 @@
     },
     "legality": "legal",
     "image": "/cards/muamar-reyes-el-capita-n.webp",
-    "printingCount": 13
+    "printingCount": 13,
+    "prices": {
+      "eur": 76.04,
+      "trendEur": 44.84,
+      "lowEur": 39.68,
+      "avgEur": 27.11,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3493,
+      "salesCount": 3493,
+      "sold": 3493
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/muamar-reyes-el-capita-n"
   },
   {
     "id": "3c144d6a-0c1a-43e9-bd35-85d6fc46adef",
@@ -2965,7 +3867,18 @@
     },
     "legality": "legal",
     "image": "/cards/nadia-fighting-through-grief.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 63.76,
+      "trendEur": 66.77,
+      "lowEur": 50.02,
+      "avgEur": 31.86,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2595,
+      "salesCount": 2595,
+      "sold": 2595
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/nadia-fighting-through-grief"
   },
   {
     "id": "40c98fdc-45d0-458d-be2c-2697dc337ca5",
@@ -3002,7 +3915,18 @@
     },
     "legality": "legal",
     "image": "/cards/netwatch-netdriver.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 24.79,
+      "trendEur": 53.02,
+      "lowEur": 30.16,
+      "avgEur": 43.62,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3770,
+      "salesCount": 3770,
+      "sold": 3770
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/netwatch-netdriver"
   },
   {
     "id": "e4af26f0-e25d-4e30-8bac-6701f54f3e97",
@@ -3039,7 +3963,18 @@
     },
     "legality": "legal",
     "image": "/cards/nocturne-op55-n1.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 75.03,
+      "trendEur": 76.84,
+      "lowEur": 25.54,
+      "avgEur": 56.5,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2299,
+      "salesCount": 2299,
+      "sold": 2299
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/nocturne-op55-n1"
   },
   {
     "id": "4c098450-e3ae-47e5-98d4-d51a2ab132ce",
@@ -3074,7 +4009,18 @@
     },
     "legality": "legal",
     "image": "/cards/octant.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 45.15,
+      "trendEur": 12.55,
+      "lowEur": 21.51,
+      "avgEur": 38.13,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3797,
+      "salesCount": 3797,
+      "sold": 3797
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/octant"
   },
   {
     "id": "3ce6b982-7bba-46f1-8832-8867ec3588d4",
@@ -3110,7 +4056,18 @@
     },
     "legality": "legal",
     "image": "/cards/offduty-malfini.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 37.99,
+      "trendEur": 29.79,
+      "lowEur": 54.36,
+      "avgEur": 70.36,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4732,
+      "salesCount": 4732,
+      "sold": 4732
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/offduty-malfini"
   },
   {
     "id": "144c3559-3518-4c01-b9e6-af42b7166661",
@@ -3145,7 +4102,18 @@
     },
     "legality": "legal",
     "image": "/cards/over-the-edge.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 61.11,
+      "trendEur": 83.65,
+      "lowEur": 58.22,
+      "avgEur": 13.78,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4757,
+      "salesCount": 4757,
+      "sold": 4757
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/over-the-edge"
   },
   {
     "id": "78ea68b3-1260-416b-9f88-d6be4586232b",
@@ -3182,7 +4150,18 @@
     },
     "legality": "legal",
     "image": "/cards/overwatch-panam-s-gift.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 21.18,
+      "trendEur": 72.63,
+      "lowEur": 29.82,
+      "avgEur": 7.51,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4083,
+      "salesCount": 4083,
+      "sold": 4083
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/overwatch-panam-s-gift"
   },
   {
     "id": "c4ef7be4-4817-4fae-9016-582e999d4996",
@@ -3217,7 +4196,18 @@
     },
     "legality": "legal",
     "image": "/cards/pacifica-netrunner.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 74.06,
+      "trendEur": 25.61,
+      "lowEur": 41.41,
+      "avgEur": 15.07,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 733,
+      "salesCount": 733,
+      "sold": 733
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/pacifica-netrunner"
   },
   {
     "id": "501a3796-9983-400f-86e4-97ffac5d5451",
@@ -3256,7 +4246,18 @@
     },
     "legality": "legal",
     "image": "/cards/padre-man-of-the-cross.webp",
-    "printingCount": 9
+    "printingCount": 9,
+    "prices": {
+      "eur": 38.51,
+      "trendEur": 34.25,
+      "lowEur": 25.25,
+      "avgEur": 60.07,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 482,
+      "salesCount": 482,
+      "sold": 482
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/padre-man-of-the-cross"
   },
   {
     "id": "950f045c-f5a4-4318-9907-b630d64de754",
@@ -3294,7 +4295,18 @@
     },
     "legality": "legal",
     "image": "/cards/panam-palmer-nomad-cavalry.webp",
-    "printingCount": 8
+    "printingCount": 8,
+    "prices": {
+      "eur": 45.23,
+      "trendEur": 48.82,
+      "lowEur": 27.23,
+      "avgEur": 7.01,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2613,
+      "salesCount": 2613,
+      "sold": 2613
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/panam-palmer-nomad-cavalry"
   },
   {
     "id": "34774f04-4f16-40eb-8ee4-999144e572ab",
@@ -3331,7 +4343,18 @@
     },
     "legality": "legal",
     "image": "/cards/panam-palmer-strength-through-family.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 53.12,
+      "trendEur": 81.93,
+      "lowEur": 45.8,
+      "avgEur": 68.83,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3804,
+      "salesCount": 3804,
+      "sold": 3804
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/panam-palmer-strength-through-family"
   },
   {
     "id": "20484778-9294-4148-bd8c-fa78572f4452",
@@ -3366,7 +4389,18 @@
     },
     "legality": "legal",
     "image": "/cards/peace-offering.webp",
-    "printingCount": 5
+    "printingCount": 5,
+    "prices": {
+      "eur": 31.54,
+      "trendEur": 16.27,
+      "lowEur": 4.38,
+      "avgEur": 18.63,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2589,
+      "salesCount": 2589,
+      "sold": 2589
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/peace-offering"
   },
   {
     "id": "0974a7af-dcd7-44d9-b57a-b6a4719afcd6",
@@ -3401,7 +4435,18 @@
     },
     "legality": "legal",
     "image": "/cards/pepe-najarro-working-doubles.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 48.27,
+      "trendEur": 17.69,
+      "lowEur": 43.4,
+      "avgEur": 27.47,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3338,
+      "salesCount": 3338,
+      "sold": 3338
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/pepe-najarro-working-doubles"
   },
   {
     "id": "783a9082-b79c-4b45-bf66-48728ff9b92d",
@@ -3439,7 +4484,18 @@
     },
     "legality": "legal",
     "image": "/cards/placide-voodoo-sentinel.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 26.8,
+      "trendEur": 14.44,
+      "lowEur": 13.85,
+      "avgEur": 27.32,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4946,
+      "salesCount": 4946,
+      "sold": 4946
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/placide-voodoo-sentinel"
   },
   {
     "id": "14d87f2a-8bd7-424f-b65b-3659156cef81",
@@ -3472,7 +4528,18 @@
     },
     "legality": "legal",
     "image": "/cards/psycho-squad.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 30.97,
+      "trendEur": 58.2,
+      "lowEur": 8.31,
+      "avgEur": 50.91,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3817,
+      "salesCount": 3817,
+      "sold": 3817
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/psycho-squad"
   },
   {
     "id": "7977a175-0516-478e-b166-3edb035849a4",
@@ -3507,7 +4574,18 @@
     },
     "legality": "legal",
     "image": "/cards/pyramid-song.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 75.07,
+      "trendEur": 81.01,
+      "lowEur": 49.79,
+      "avgEur": 68.05,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3541,
+      "salesCount": 3541,
+      "sold": 3541
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/pyramid-song"
   },
   {
     "id": "4acee220-f0ae-4bdc-85c9-f8e70ba99673",
@@ -3538,7 +4616,18 @@
     },
     "legality": "not-legal",
     "image": "/cards/rebecca-having-a-moment.webp",
-    "printingCount": 2
+    "printingCount": 2,
+    "prices": {
+      "eur": 6.5,
+      "trendEur": 62.76,
+      "lowEur": 36.11,
+      "avgEur": 35.23,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1636,
+      "salesCount": 1636,
+      "sold": 1636
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Set-1-Promos/rebecca-having-a-moment"
   },
   {
     "id": "ad13a7bc-c49d-4166-8a9c-965e7bfa9b8f",
@@ -3574,7 +4663,18 @@
     },
     "legality": "legal",
     "image": "/cards/reboot-optics.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 39.89,
+      "trendEur": 4.56,
+      "lowEur": 22.19,
+      "avgEur": 32.43,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4454,
+      "salesCount": 4454,
+      "sold": 4454
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/reboot-optics"
   },
   {
     "id": "92edc648-10d6-43d3-b4ab-4ad65a5c7425",
@@ -3609,7 +4709,18 @@
     },
     "legality": "legal",
     "image": "/cards/riding-nomad.webp",
-    "printingCount": 4
+    "printingCount": 4,
+    "prices": {
+      "eur": 24.9,
+      "trendEur": 79.25,
+      "lowEur": 50.98,
+      "avgEur": 72.15,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1994,
+      "salesCount": 1994,
+      "sold": 1994
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/riding-nomad"
   },
   {
     "id": "7da95cf0-f749-439f-b40a-9d3057d2c995",
@@ -3646,7 +4757,18 @@
     },
     "legality": "legal",
     "image": "/cards/riot-shield.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 10.39,
+      "trendEur": 69.1,
+      "lowEur": 16.22,
+      "avgEur": 7.34,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2158,
+      "salesCount": 2158,
+      "sold": 2158
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/riot-shield"
   },
   {
     "id": "65a14367-da52-4578-8162-3c4bac11007d",
@@ -3682,7 +4804,18 @@
     },
     "legality": "legal",
     "image": "/cards/rita-wheeler-no-stupid-questions.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 62.9,
+      "trendEur": 75.99,
+      "lowEur": 0.77,
+      "avgEur": 73.72,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1446,
+      "salesCount": 1446,
+      "sold": 1446
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/rita-wheeler-no-stupid-questions"
   },
   {
     "id": "e64e2978-695b-4fc5-b17b-62c710a11c47",
@@ -3719,7 +4852,18 @@
     },
     "legality": "legal",
     "image": "/cards/river-ward-detective-on-the-hunt.webp",
-    "printingCount": 8
+    "printingCount": 8,
+    "prices": {
+      "eur": 76.32,
+      "trendEur": 87.44,
+      "lowEur": 33.52,
+      "avgEur": 57.15,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4123,
+      "salesCount": 4123,
+      "sold": 4123
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/river-ward-detective-on-the-hunt"
   },
   {
     "id": "7ea6eecc-e55e-4634-93eb-b2b46e79635d",
@@ -3752,7 +4896,18 @@
     },
     "legality": "legal",
     "image": "/cards/rockn-rockerboy.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 51.94,
+      "trendEur": 67.01,
+      "lowEur": 49.94,
+      "avgEur": 10.6,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3493,
+      "salesCount": 3493,
+      "sold": 3493
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/rockn-rockerboy"
   },
   {
     "id": "012b0300-6af1-417e-86a2-dc208a60ac15",
@@ -3788,7 +4943,18 @@
     },
     "legality": "legal",
     "image": "/cards/rogue-amendiares-preem-solo.webp",
-    "printingCount": 10
+    "printingCount": 10,
+    "prices": {
+      "eur": 33.36,
+      "trendEur": 24.84,
+      "lowEur": 16.3,
+      "avgEur": 63.73,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4505,
+      "salesCount": 4505,
+      "sold": 4505
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/rogue-amendiares-preem-solo"
   },
   {
     "id": "9d994a42-4a63-44ad-ad7a-edead6af06a2",
@@ -3825,7 +4991,18 @@
     },
     "legality": "legal",
     "image": "/cards/rogue-amendiares-queen-of-the-afterlife.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 71.07,
+      "trendEur": 31.65,
+      "lowEur": 7.89,
+      "avgEur": 4.53,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4102,
+      "salesCount": 4102,
+      "sold": 4102
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/rogue-amendiares-queen-of-the-afterlife"
   },
   {
     "id": "9e465b11-9743-4275-a71d-d701b059eef0",
@@ -3861,7 +5038,18 @@
     },
     "legality": "legal",
     "image": "/cards/royce-don-t-call-me-simon.webp",
-    "printingCount": 4
+    "printingCount": 4,
+    "prices": {
+      "eur": 1.77,
+      "trendEur": 42.89,
+      "lowEur": 43.07,
+      "avgEur": 69.16,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1196,
+      "salesCount": 1196,
+      "sold": 1196
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/royce-don-t-call-me-simon"
   },
   {
     "id": "9e681d3e-cbfd-4c7b-a69a-72a83dc8b847",
@@ -3898,7 +5086,18 @@
     },
     "legality": "legal",
     "image": "/cards/royce-psycho-on-the-edge.webp",
-    "printingCount": 10
+    "printingCount": 10,
+    "prices": {
+      "eur": 73.73,
+      "trendEur": 28.26,
+      "lowEur": 23.14,
+      "avgEur": 43.69,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3305,
+      "salesCount": 3305,
+      "sold": 3305
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/royce-psycho-on-the-edge"
   },
   {
     "id": "fee335a7-2546-48a5-9bb8-b0886014ce66",
@@ -3932,7 +5131,18 @@
     },
     "legality": "legal",
     "image": "/cards/ruthless-lowlife.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 51.12,
+      "trendEur": 32.41,
+      "lowEur": 13.03,
+      "avgEur": 16.52,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2446,
+      "salesCount": 2446,
+      "sold": 2446
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/ruthless-lowlife"
   },
   {
     "id": "cf50fa24-bf94-4c35-bcc1-c6d56a6f68d8",
@@ -3968,7 +5178,18 @@
     },
     "legality": "legal",
     "image": "/cards/saburo-arasaka-stubborn-patriarch.webp",
-    "printingCount": 8
+    "printingCount": 8,
+    "prices": {
+      "eur": 1.46,
+      "trendEur": 24.57,
+      "lowEur": 13.53,
+      "avgEur": 17.01,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4173,
+      "salesCount": 4173,
+      "sold": 4173
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Embracing-Power-Retail-Starter-Deck/saburo-arasaka-stubborn-patriarch"
   },
   {
     "id": "b4cba235-816d-4888-a308-1c397b9288e7",
@@ -4004,7 +5225,18 @@
     },
     "legality": "legal",
     "image": "/cards/safety-override.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 76.74,
+      "trendEur": 15.97,
+      "lowEur": 6.28,
+      "avgEur": 7.23,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2232,
+      "salesCount": 2232,
+      "sold": 2232
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/safety-override"
   },
   {
     "id": "9611a3ba-d365-453f-89ed-c986a1948edc",
@@ -4040,7 +5272,18 @@
     },
     "legality": "legal",
     "image": "/cards/sandayu-oda-hanako-s-guardian.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 60.6,
+      "trendEur": 84.34,
+      "lowEur": 47.39,
+      "avgEur": 20.53,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3174,
+      "salesCount": 3174,
+      "sold": 3174
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/sandayu-oda-hanako-s-guardian"
   },
   {
     "id": "55153b49-c3a7-4208-a47b-0a91fa7e3b5c",
@@ -4075,7 +5318,18 @@
     },
     "legality": "legal",
     "image": "/cards/sandevistan.webp",
-    "printingCount": 12
+    "printingCount": 12,
+    "prices": {
+      "eur": 31.79,
+      "trendEur": 83.14,
+      "lowEur": 22.95,
+      "avgEur": 52.19,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3495,
+      "salesCount": 3495,
+      "sold": 3495
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/sandevistan"
   },
   {
     "id": "e2dc863c-5bc9-4ad7-9138-2d5b966ed901",
@@ -4115,7 +5369,18 @@
     },
     "legality": "legal",
     "image": "/cards/sasha-yakovleva-won-t-let-you-down.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 22.48,
+      "trendEur": 70.69,
+      "lowEur": 32.42,
+      "avgEur": 55.41,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4927,
+      "salesCount": 4927,
+      "sold": 4927
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/sasha-yakovleva-won-t-let-you-down"
   },
   {
     "id": "4670d02b-b97a-4771-bb7e-65bdc012530e",
@@ -4151,7 +5416,18 @@
     },
     "legality": "legal",
     "image": "/cards/satori-sword-of-saburo.webp",
-    "printingCount": 11
+    "printingCount": 11,
+    "prices": {
+      "eur": 65.56,
+      "trendEur": 69.63,
+      "lowEur": 34.15,
+      "avgEur": 60.68,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2696,
+      "salesCount": 2696,
+      "sold": 2696
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/satori-sword-of-saburo"
   },
   {
     "id": "a29490bb-2836-48b6-a4f9-a44b25c8bfa2",
@@ -4185,7 +5461,18 @@
     },
     "legality": "legal",
     "image": "/cards/saul-bright-stormrider.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 48.98,
+      "trendEur": 16.23,
+      "lowEur": 42.44,
+      "avgEur": 18.83,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4672,
+      "salesCount": 4672,
+      "sold": 4672
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/saul-bright-stormrider"
   },
   {
     "id": "7a62beca-ac54-4c0d-847d-ed85838c5093",
@@ -4221,7 +5508,18 @@
     },
     "legality": "legal",
     "image": "/cards/screw-lovelorn-fool.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 3.45,
+      "trendEur": 26.21,
+      "lowEur": 53.68,
+      "avgEur": 35.46,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3795,
+      "salesCount": 3795,
+      "sold": 3795
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/screw-lovelorn-fool"
   },
   {
     "id": "b05cb065-309e-45a3-bbe0-20f4b6ea71aa",
@@ -4257,7 +5555,18 @@
     },
     "legality": "legal",
     "image": "/cards/secondhand-bombus.webp",
-    "printingCount": 12
+    "printingCount": 12,
+    "prices": {
+      "eur": 48.69,
+      "trendEur": 53.08,
+      "lowEur": 15.59,
+      "avgEur": 29.61,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2968,
+      "salesCount": 2968,
+      "sold": 2968
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/secondhand-bombus"
   },
   {
     "id": "050d0502-94b0-4bee-a7e6-a9b00f31b4ae",
@@ -4292,7 +5601,18 @@
     },
     "legality": "legal",
     "image": "/cards/shattered-memories.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 16.91,
+      "trendEur": 50.92,
+      "lowEur": 28.14,
+      "avgEur": 9.11,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4346,
+      "salesCount": 4346,
+      "sold": 4346
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/shattered-memories"
   },
   {
     "id": "b3b40c68-705b-41ff-ae10-4132497c4a39",
@@ -4329,7 +5649,18 @@
     },
     "legality": "legal",
     "image": "/cards/sketchy-ripper.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 39.58,
+      "trendEur": 21.26,
+      "lowEur": 1.25,
+      "avgEur": 62.19,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1365,
+      "salesCount": 1365,
+      "sold": 1365
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/sketchy-ripper"
   },
   {
     "id": "3c4e7fcb-933d-4712-9ce7-6052a14f8e94",
@@ -4364,7 +5695,18 @@
     },
     "legality": "legal",
     "image": "/cards/swordwise-huscle.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 42.2,
+      "trendEur": 26.41,
+      "lowEur": 50.67,
+      "avgEur": 74.62,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4354,
+      "salesCount": 4354,
+      "sold": 4354
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/swordwise-huscle"
   },
   {
     "id": "f3ba5ef7-5e91-4956-a887-b88a4b854867",
@@ -4400,7 +5742,18 @@
     },
     "legality": "legal",
     "image": "/cards/synapse-burnout.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 58.8,
+      "trendEur": 23.28,
+      "lowEur": 45.42,
+      "avgEur": 69.3,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2302,
+      "salesCount": 2302,
+      "sold": 2302
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/synapse-burnout"
   },
   {
     "id": "5a5a177c-6ed8-4bd9-8b11-13c2b64414e2",
@@ -4436,7 +5789,18 @@
     },
     "legality": "legal",
     "image": "/cards/t-bug-amateur-philosopher.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 13.73,
+      "trendEur": 68.67,
+      "lowEur": 54.38,
+      "avgEur": 7.8,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1098,
+      "salesCount": 1098,
+      "sold": 1098
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/t-bug-amateur-philosopher"
   },
   {
     "id": "1535c19d-54e5-4289-9cb7-15ab429c0092",
@@ -4472,7 +5836,18 @@
     },
     "legality": "legal",
     "image": "/cards/take-control.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 27.07,
+      "trendEur": 11.67,
+      "lowEur": 21.05,
+      "avgEur": 41.3,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 16,
+      "salesCount": 16,
+      "sold": 16
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/take-control"
   },
   {
     "id": "39665784-d2f1-43e8-a958-894bac716d71",
@@ -4507,7 +5882,18 @@
     },
     "legality": "legal",
     "image": "/cards/tetratronic-rippler.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 31.09,
+      "trendEur": 85.83,
+      "lowEur": 11.31,
+      "avgEur": 74.49,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 989,
+      "salesCount": 989,
+      "sold": 989
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/tetratronic-rippler"
   },
   {
     "id": "5ea00b3a-7e85-4c7d-91ad-90e0cf370c27",
@@ -4542,7 +5928,18 @@
     },
     "legality": "legal",
     "image": "/cards/the-heist.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 38.08,
+      "trendEur": 34.59,
+      "lowEur": 24.19,
+      "avgEur": 43.39,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1890,
+      "salesCount": 1890,
+      "sold": 1890
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/the-heist"
   },
   {
     "id": "1263e2bf-bc15-4550-ad07-b028602d1354",
@@ -4579,7 +5976,18 @@
     },
     "legality": "legal",
     "image": "/cards/the-relic-experimental-biochip.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 0.63,
+      "trendEur": 41.96,
+      "lowEur": 20.66,
+      "avgEur": 48.21,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2797,
+      "salesCount": 2797,
+      "sold": 2797
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/the-relic-experimental-biochip"
   },
   {
     "id": "2993d637-d44d-4add-8473-26d67c0d1bc0",
@@ -4615,7 +6023,18 @@
     },
     "legality": "legal",
     "image": "/cards/three-mouths-one-desire.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 70.99,
+      "trendEur": 56.44,
+      "lowEur": 45.77,
+      "avgEur": 9.03,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3829,
+      "salesCount": 3829,
+      "sold": 3829
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/three-mouths-one-desire"
   },
   {
     "id": "9a0fd5a3-a00b-425c-a251-755eeab12bfe",
@@ -4650,7 +6069,18 @@
     },
     "legality": "legal",
     "image": "/cards/towerfall.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 36.23,
+      "trendEur": 60.65,
+      "lowEur": 43.59,
+      "avgEur": 31.07,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 301,
+      "salesCount": 301,
+      "sold": 301
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/towerfall"
   },
   {
     "id": "2a4a1f1a-9888-403e-90a9-4021c3f52674",
@@ -4684,7 +6114,18 @@
     },
     "legality": "legal",
     "image": "/cards/trauma-team-operatives.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 61.94,
+      "trendEur": 50.54,
+      "lowEur": 6.42,
+      "avgEur": 35.71,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2802,
+      "salesCount": 2802,
+      "sold": 2802
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/trauma-team-operatives"
   },
   {
     "id": "ec857ab0-995e-4c32-84b6-7ba57b2f6137",
@@ -4719,7 +6160,18 @@
     },
     "legality": "legal",
     "image": "/cards/trust-no-one.webp",
-    "printingCount": 5
+    "printingCount": 5,
+    "prices": {
+      "eur": 5.03,
+      "trendEur": 67.76,
+      "lowEur": 32.19,
+      "avgEur": 35.32,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 2106,
+      "salesCount": 2106,
+      "sold": 2106
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/trust-no-one"
   },
   {
     "id": "31e5b986-1e67-439c-81fc-49f8938bd002",
@@ -4755,7 +6207,18 @@
     },
     "legality": "legal",
     "image": "/cards/tyger-s-whisper.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 1.98,
+      "trendEur": 2.6,
+      "lowEur": 13.63,
+      "avgEur": 47.85,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1364,
+      "salesCount": 1364,
+      "sold": 1364
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/tyger-s-whisper"
   },
   {
     "id": "5b8f8d4f-c62e-4bde-a086-2ce15bd9449d",
@@ -4791,7 +6254,18 @@
     },
     "legality": "legal",
     "image": "/cards/unlikely-bond.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 18.34,
+      "trendEur": 42.43,
+      "lowEur": 35.94,
+      "avgEur": 39.31,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 714,
+      "salesCount": 714,
+      "sold": 714
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/unlikely-bond"
   },
   {
     "id": "627186b3-cffb-4228-aed4-b3ee35235fb6",
@@ -4828,7 +6302,18 @@
     },
     "legality": "legal",
     "image": "/cards/v-corporate-exile.webp",
-    "printingCount": 8
+    "printingCount": 8,
+    "prices": {
+      "eur": 2.02,
+      "trendEur": 89.97,
+      "lowEur": 5.31,
+      "avgEur": 8.72,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1025,
+      "salesCount": 1025,
+      "sold": 1025
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/The-Heist-Retail-Starter-Deck/v-corporate-exile"
   },
   {
     "id": "9ed58d18-df78-4689-b28f-77260243c522",
@@ -4862,7 +6347,18 @@
     },
     "legality": "legal",
     "image": "/cards/v-roamer-of-the-badlands.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 68.18,
+      "trendEur": 74.34,
+      "lowEur": 17.1,
+      "avgEur": 67.98,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 883,
+      "salesCount": 883,
+      "sold": 883
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/v-roamer-of-the-badlands"
   },
   {
     "id": "81a8dec7-9541-4020-93e1-7d798a57dcbc",
@@ -4899,7 +6395,18 @@
     },
     "legality": "legal",
     "image": "/cards/v-streetkid.webp",
-    "printingCount": 14
+    "printingCount": 14,
+    "prices": {
+      "eur": 2.86,
+      "trendEur": 14.42,
+      "lowEur": 16.52,
+      "avgEur": 66.45,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4617,
+      "salesCount": 4617,
+      "sold": 4617
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/v-streetkid"
   },
   {
     "id": "5cf0c12a-814e-4801-8171-7fe8c09fad21",
@@ -4935,7 +6442,18 @@
     },
     "legality": "legal",
     "image": "/cards/valentino-guerrera.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 45.37,
+      "trendEur": 22.31,
+      "lowEur": 5.34,
+      "avgEur": 61.32,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 13,
+      "salesCount": 13,
+      "sold": 13
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/valentino-guerrera"
   },
   {
     "id": "5d6afeed-1532-4a01-bb40-a011030a7785",
@@ -4972,7 +6490,18 @@
     },
     "legality": "legal",
     "image": "/cards/valentino-street-racer.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 49.65,
+      "trendEur": 41.59,
+      "lowEur": 38.35,
+      "avgEur": 12.03,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 969,
+      "salesCount": 969,
+      "sold": 969
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/valentino-street-racer"
   },
   {
     "id": "92d23553-8b0d-49cd-8cbe-6f00b3377298",
@@ -5005,7 +6534,18 @@
     },
     "legality": "legal",
     "image": "/cards/viktor-vektor-drop-your-illusions.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 37.45,
+      "trendEur": 53.19,
+      "lowEur": 14.81,
+      "avgEur": 14.27,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1436,
+      "salesCount": 1436,
+      "sold": 1436
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/viktor-vektor-drop-your-illusions"
   },
   {
     "id": "f090dc44-d7f0-4aec-a19e-9213155a6611",
@@ -5041,7 +6581,18 @@
     },
     "legality": "legal",
     "image": "/cards/viktor-vektor-sit-down-and-relax.webp",
-    "printingCount": 8
+    "printingCount": 8,
+    "prices": {
+      "eur": 49.67,
+      "trendEur": 8.99,
+      "lowEur": 6.84,
+      "avgEur": 8.36,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1341,
+      "salesCount": 1341,
+      "sold": 1341
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/The-Heist-Retail-Starter-Deck/viktor-vektor-sit-down-and-relax"
   },
   {
     "id": "647bb074-197f-4059-bac5-251b47c98287",
@@ -5076,7 +6627,18 @@
     },
     "legality": "legal",
     "image": "/cards/viktor-vektor-you-might-feel-a-little-pinch.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 15.49,
+      "trendEur": 55.58,
+      "lowEur": 12.84,
+      "avgEur": 45.44,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4333,
+      "salesCount": 4333,
+      "sold": 4333
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/viktor-vektor-you-might-feel-a-little-pinch"
   },
   {
     "id": "99f5e311-8dfd-42a9-abd0-2e50ac68679e",
@@ -5114,7 +6676,18 @@
     },
     "legality": "legal",
     "image": "/cards/wakako-okada-peace-and-harmony.webp",
-    "printingCount": 9
+    "printingCount": 9,
+    "prices": {
+      "eur": 11.81,
+      "trendEur": 89.87,
+      "lowEur": 4.04,
+      "avgEur": 22.4,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 3964,
+      "salesCount": 3964,
+      "sold": 3964
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/wakako-okada-peace-and-harmony"
   },
   {
     "id": "404748b4-f30e-4bf1-8991-5ad449da755a",
@@ -5150,7 +6723,18 @@
     },
     "legality": "legal",
     "image": "/cards/we-gotta-live-together.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 58.65,
+      "trendEur": 31.28,
+      "lowEur": 52.7,
+      "avgEur": 53.58,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1289,
+      "salesCount": 1289,
+      "sold": 1289
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/we-gotta-live-together"
   },
   {
     "id": "b7a94000-c026-433e-82fa-901bf22db54e",
@@ -5185,7 +6769,18 @@
     },
     "legality": "legal",
     "image": "/cards/westbrook-netrunner.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 19.25,
+      "trendEur": 55.17,
+      "lowEur": 14.2,
+      "avgEur": 10.6,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 644,
+      "salesCount": 644,
+      "sold": 644
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/westbrook-netrunner"
   },
   {
     "id": "3126fa21-ea19-4096-8233-d63797bb9fe4",
@@ -5220,7 +6815,18 @@
     },
     "legality": "legal",
     "image": "/cards/wild-in-the-streets.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 38.13,
+      "trendEur": 32.55,
+      "lowEur": 46.52,
+      "avgEur": 46.16,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 572,
+      "salesCount": 572,
+      "sold": 572
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/wild-in-the-streets"
   },
   {
     "id": "67b47cff-2237-4765-86fb-9b2b3abecbb1",
@@ -5255,7 +6861,18 @@
     },
     "legality": "legal",
     "image": "/cards/wraith-marauders.webp",
-    "printingCount": 7
+    "printingCount": 7,
+    "prices": {
+      "eur": 36.57,
+      "trendEur": 62.03,
+      "lowEur": 9.06,
+      "avgEur": 30.19,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1049,
+      "salesCount": 1049,
+      "sold": 1049
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/wraith-marauders"
   },
   {
     "id": "31fa5825-946a-4ca2-afa8-8f07b9898d6a",
@@ -5291,7 +6908,18 @@
     },
     "legality": "legal",
     "image": "/cards/yorinobu-arasaka-embracing-destruction.webp",
-    "printingCount": 8
+    "printingCount": 8,
+    "prices": {
+      "eur": 6.79,
+      "trendEur": 18.27,
+      "lowEur": 0.64,
+      "avgEur": 55.54,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 487,
+      "salesCount": 487,
+      "sold": 487
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Embracing-Power-Retail-Starter-Deck/yorinobu-arasaka-embracing-destruction"
   },
   {
     "id": "6cf6456d-d020-4c6c-9041-66d503a01a0a",
@@ -5327,7 +6955,18 @@
     },
     "legality": "legal",
     "image": "/cards/yorinobu-arasaka-steel-dragon.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 68.12,
+      "trendEur": 7.71,
+      "lowEur": 22.33,
+      "avgEur": 20.86,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4708,
+      "salesCount": 4708,
+      "sold": 4708
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/yorinobu-arasaka-steel-dragon"
   },
   {
     "id": "1d7f3d02-27b5-4ab8-af99-f8f2e0fd62cf",
@@ -5363,7 +7002,18 @@
     },
     "legality": "legal",
     "image": "/cards/zetatech-berserk.webp",
-    "printingCount": 3
+    "printingCount": 3,
+    "prices": {
+      "eur": 25.61,
+      "trendEur": 13.85,
+      "lowEur": 51.55,
+      "avgEur": 42.68,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 4705,
+      "salesCount": 4705,
+      "sold": 4705
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/zetatech-berserk"
   },
   {
     "id": "b88d436f-1ec7-4f62-9dbc-c5f5e0d0a0df",
@@ -5399,6 +7049,17 @@
     },
     "legality": "legal",
     "image": "/cards/zetatech-faceplate.webp",
-    "printingCount": 6
+    "printingCount": 6,
+    "prices": {
+      "eur": 63.2,
+      "trendEur": 27.25,
+      "lowEur": 18.12,
+      "avgEur": 9.41,
+      "updatedAt": "2026-11-01T01:16:40.955Z",
+      "soldCount": 1499,
+      "salesCount": 1499,
+      "sold": 1499
+    },
+    "cardmarketUrl": "https://www.cardmarket.com/en/Cyberpunk/Products/Singles/Welcome-to-Night-City-Retail/zetatech-faceplate"
   }
 ]

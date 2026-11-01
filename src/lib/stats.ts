@@ -76,7 +76,13 @@ export type MatchStats = {
   byFormat: { format: string; total: number; wins: number }[];
 };
 
-export function matchStats(matches: MatchRecord[], decks: Deck[]): MatchStats {
+export type SplitMatchStats = {
+  normal: MatchStats;
+  tournament: MatchStats;
+  all: MatchStats;
+};
+
+function computeMatchStats(matches: MatchRecord[], decks: Deck[]): MatchStats {
   const sorted = matches.slice().sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
   const wins = matches.filter((match) => match.result === "win").length;
   const losses = matches.filter((match) => match.result === "loss").length;
@@ -133,6 +139,20 @@ export function matchStats(matches: MatchRecord[], decks: Deck[]): MatchStats {
     currentStreak,
     byDeck,
     byFormat: [...formatMap.entries()].map(([format, entry]) => ({ format, ...entry })),
+  };
+}
+
+export function matchStats(matches: MatchRecord[], decks: Deck[]): MatchStats {
+  return computeMatchStats(matches, decks);
+}
+
+export function matchStatsSplit(matches: MatchRecord[], decks: Deck[]): SplitMatchStats {
+  const normal = matches.filter((m) => m.type !== "tournament" && !m.tournamentId);
+  const tournament = matches.filter((m) => m.type === "tournament" || !!m.tournamentId);
+  return {
+    normal: computeMatchStats(normal, decks),
+    tournament: computeMatchStats(tournament, decks),
+    all: computeMatchStats(matches, decks),
   };
 }
 

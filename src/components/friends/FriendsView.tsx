@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { UserPlus, Users, ExternalLink, Trash2, Copy, Check } from "lucide-react";
+import { UserPlus, Users, ExternalLink, Trash2, Copy, Check, MessageSquare, User } from "lucide-react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useVaultStore } from "@/lib/store";
@@ -10,20 +10,24 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Modal } from "@/components/ui/Modal";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { relativeDate } from "@/lib/utils";
+import { getOrCreateConversation } from "@/lib/chat";
 
 export function FriendsView() {
   const user = useVaultStore((state) => state.user);
   const friends = useVaultStore((state) => state.friends);
   const addFriend = useVaultStore((state) => state.addFriend);
   const removeFriend = useVaultStore((state) => state.removeFriend);
+  const addTestFriend = useVaultStore((state) => state.addTestFriend);
   const friendCode = useVaultStore((state) => state.friendCode);
   const ensureFriendCode = useVaultStore((state) => state.ensureFriendCode);
+  const avatarId = useVaultStore((state) => state.avatarId);
 
   const [addOpen, setAddOpen] = useState(false);
   const [codeInput, setCodeInput] = useState("");
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [adding, setAdding] = useState(false);
+  const [startingChat, setStartingChat] = useState<string | null>(null);
 
   const copyCode = async () => {
     const code = friendCode || ensureFriendCode();
@@ -42,9 +46,6 @@ export function FriendsView() {
     setAdding(true);
     setError(null);
     try {
-      // Try to find user by friendCode - scan approach not ideal, but for this app let's store mapping or search by checking common pattern
-      // Better: look up in a mapping collection or just try to find by querying users? Firestore doesn't support case-insensitive contains easily
-      // Alternative: store a collection 'friendCodes' with doc id = code -> { uid }
       const codeRef = doc(db, "friendCodes", code);
       const codeSnap = await getDoc(codeRef);
       if (!codeSnap.exists()) {
@@ -73,6 +74,27 @@ export function FriendsView() {
     }
   };
 
+  const startChat = async (friendUid: string, friendCodeVal?: string) => {
+    if (!user) {
+      alert("Sign in required");
+      return;
+    }
+    setStartingChat(friendUid);
+    try {
+      const conversationId = await getOrCreateConversation(
+        user.uid,
+        friendUid,
+        { friendCode: friendCode || undefined, displayName: user.displayName },
+        { friendCode: friendCodeVal },
+      );
+      window.location.href = `/chat/${conversationId}`;
+    } catch (e) {
+      console.error(e);
+      alert(e instanceof Error ? e.message : "Failed to start chat - check Firestore permissions");
+      setStartingChat(null);
+    }
+  };
+
   return (
     <div>
       <PageHeader
@@ -85,6 +107,11 @@ export function FriendsView() {
               <button type="button" className="btn-cyber btn-cyber-ghost" onClick={copyCode}>
                 {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                 {copied ? "Copied" : `Copy Code ${(friendCode || ensureFriendCode())}`}
+              </button>
+            ) : null}
+            {process.env.NODE_ENV !== "production" ? (
+              <button type="button" className="btn-cyber btn-cyber-ghost" onClick={() => addTestFriend?.()}>
+                Add Test Friend
               </button>
             ) : null}
             <button type="button" className="btn-cyber" onClick={() => setAddOpen(true)} disabled={!user}>
@@ -119,8 +146,15 @@ export function FriendsView() {
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {friends.map((friend) => (
             <article key={friend.uid} className="hud-panel hud-panel-hover flex flex-col">
-              <div className="flex items-start justify-between gap-3 border-b border-line px-4 py-3">
-                <div className="min-w-0">
+              <div className="flex items-center gap-3 border-b border-line px-4 py-3">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden border border-cp-cyan/40 bg-cp-cyan/10">
+                  {avatarId ? (
+                    <img src={`/avatars/${avatarId}.webp`} alt="Profile avatar" className="h-full w-full object-cover" />
+                  ) : (
+                    <User className="h-6 w-6 text-cp-cyan" />
+                  )}
+                </div>
+                <div className="min-w-0 flex-1">
                   <Link href={`/users/${friend.uid}`} className="block">
                     <h2 className="font-display truncate text-lg font-bold uppercase leading-tight tracking-[0.04em] text-fog transition-colors hover:text-cp-yellow">
                       {friend.friendCode || friend.uid.slice(0, 12)}
@@ -131,13 +165,21 @@ export function FriendsView() {
                   </p>
                 </div>
               </div>
-              <div className="flex-1 px-4 py-3">
+              <div className="flex-1 px-4 py-2">
                 <p className="text-xs text-muted">View public decks from this user.</p>
               </div>
               <div className="flex items-center gap-1 border-t border-line px-3 py-2">
-                <Link href={`/users/${friend.uid}`} className="btn-cyber flex-1 !min-h-8 !py-1.5 !text-[9px]">
-                  View Decks
-                  <ExternalLink className="h-3 w-3" />
+                <button
+                  type="button"
+                  className="btn-cyber flex-1 !min-h-8 !py-1.5 !text-[9px]"
+                  onClick={() => startChat(friend.uid, friend.friendCode)}
+                  disabled={startingChat === friend.uid}
+                >
+                  <MessageSquare className="h-3 w-3" />
+                  {startingChat === friend.uid ? "Opening..." : "Chat"}
+                </button>
+                <Link href={`/users/${friend.uid}`} className="icon-btn h-8 w-8" aria-label="View decks">
+                  <ExternalLink className="h-3.5 w-3.5" />
                 </Link>
                 <button
                   type="button"

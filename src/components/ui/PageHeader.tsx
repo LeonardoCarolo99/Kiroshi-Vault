@@ -10,7 +10,12 @@ type PageHeaderProps = {
 
 export function PageHeader({ eyebrow, title, description, actions, className }: PageHeaderProps) {
   return (
-    <header className={cn("mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between", className)}>
+    <header
+      className={cn(
+        "mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between animate-slide-in-fade",
+        className,
+      )}
+    >
       <div>
         {eyebrow ? (
           <div className="mb-2 flex items-center gap-2">

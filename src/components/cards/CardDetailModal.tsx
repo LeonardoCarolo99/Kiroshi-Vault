@@ -193,7 +193,22 @@ export function CardDetailModal({ card, owned, onClose, onAdjust, deckContext }:
             <span className="badge" style={{ borderColor: `${color}66`, color }}>
               {card.color ?? "Colorless"}
             </span>
-            <span className="badge badge-cyan">{card.type}</span>
+            <span
+              className={cn(
+                "badge font-bold",
+                card.type === "Unit" && "border-cp-cyan/80 bg-cp-cyan/15 text-cp-cyan",
+                card.type === "Gear" && "border-orange-400/80 bg-orange-400/15 text-orange-400",
+                card.type === "Program" && "border-violet-400/80 bg-violet-400/15 text-violet-400",
+                card.type === "Event" && "border-pink-400/80 bg-pink-400/15 text-pink-400",
+                card.type === "Action" && "border-amber-300/80 bg-amber-300/15 text-amber-300",
+                card.type === "Resource" && "border-lime-400/80 bg-lime-400/15 text-lime-400",
+                card.type === "Upgrade" && "border-sky-400/80 bg-sky-400/15 text-sky-400",
+                !["Unit", "Gear", "Program", "Event", "Action", "Resource", "Upgrade"].includes(card.type) &&
+                  "text-fog"
+              )}
+            >
+              {card.type}
+            </span>
             <span className="badge" style={{ borderColor: `${rarityColor}66`, color: rarityColor }}>
               {rarity}
             </span>

@@ -33,8 +33,10 @@ export function CollectionView() {
   const adjustCollection = useVaultStore((state) => state.adjustCollection);
   const setCollectionCount = useVaultStore((state) => state.setCollectionCount);
   const buyList = useVaultStore((state) => state.buyList);
+  const buyLists = useVaultStore((state) => (state as any).buyLists) as import("@/lib/types").BuyList[] | undefined;
   const addBuyListEntry = useVaultStore((state) => state.addBuyListEntry);
   const adjustBuyListObtained = useVaultStore((state) => state.adjustBuyListObtained);
+  const createBuyList = useVaultStore((state) => (state as any).createBuyList) as ((name?: string) => string) | undefined;
 
   const [filters, setFilters] = useState<CollectionFilters>(DEFAULT_FILTERS);
   const [sort, setSort] = useState<SortKey>("name-asc");
@@ -164,7 +166,7 @@ export function CollectionView() {
           }
         />
       ) : view === "grid" ? (
-        <div className="stagger mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+        <div className="stagger mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
           {visible.map((card) => (
             <CardTile
               key={card.id}
@@ -206,15 +208,24 @@ export function CollectionView() {
                       <span className="ml-1.5 text-[11px] text-muted">{card.subname}</span>
                     ) : null}
                   </button>
-                  <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[9px] tracking-[0.08em] text-muted">
+                  <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[10px] tracking-[0.1em] text-muted">
                     <span style={{ color }}>{card.color ?? "—"}</span>
                     <span>·</span>
-                    <span>{card.type}</span>
+                    <span
+                      className={cn(
+                        card.type === "Unit" && "text-cp-cyan",
+                        card.type === "Gear" && "text-orange-400",
+                        card.type === "Program" && "text-violet-400",
+                        card.type === "Event" && "text-pink-400",
+                        card.type === "Action" && "text-amber-400",
+                        card.type === "Resource" && "text-lime-400",
+                        card.type === "Upgrade" && "text-sky-400"
+                      )}
+                    >
+                      {card.type}
+                    </span>
                     <span>·</span>
                     <span style={{ color: RARITY_COLOR[card.rarity] ?? "#7f91a8" }}>{card.rarity}</span>
-                    {card.cost != null ? <span>· C{card.cost}</span> : null}
-                    {card.power != null ? <span>· P{card.power}</span> : null}
-                    {card.ram != null ? <span>· R{card.ram}</span> : null}
                     {card.prices?.eur != null ? (
                       <span className="flex items-center gap-0.5 text-cp-green">
                         <Euro className="h-2.5 w-2.5" />
@@ -224,7 +235,7 @@ export function CollectionView() {
                   </div>
                 </div>
                 <div className="hidden items-center gap-2 sm:flex">
-                  <span className="hud-label text-[8px]">Owned</span>
+                  <span className="hud-label text-[9px]">Owned</span>
                   <Stepper
                     compact
                     value={owned}
@@ -236,11 +247,23 @@ export function CollectionView() {
                   type="button"
                   className="icon-btn shrink-0"
                   onClick={() => {
-                    const existing = buyList.find((item) => item.cardId === card.id && item.obtained < item.quantity);
+                    // Add to buy list (CardMarket-style)
+                    const state = useVaultStore.getState() as any;
+                    let listId: string | undefined;
+                    if (Array.isArray(state.buyLists) && state.buyLists.length > 0) {
+                      listId = state.buyLists[0].id;
+                    } else if (createBuyList) {
+                      listId = createBuyList("My Buy List");
+                    }
+                    const existing = buyList.find((item: any) => 
+                      item.cardId === card.id && 
+                      item.obtained < item.quantity &&
+                      ((item as any).listId === listId || (! (item as any).listId))
+                    );
                     if (existing) {
-                      adjustBuyListObtained(existing.id, 1);
+                      state.updateBuyListEntry?.(existing.id, { quantity: (existing.quantity || 1) + 1 });
                     } else {
-                      addBuyListEntry({ cardId: card.id, quantity: 1, priority: "normal", notes: "" });
+                      addBuyListEntry({ cardId: card.id, quantity: 1, priority: "normal", notes: "", listId });
                     }
                   }}
                   aria-label={`Add ${card.displayName} to buy list`}

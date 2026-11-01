@@ -20,7 +20,7 @@ export function Stepper({ value, onChange, min = 0, max = 999, compact, label }:
     <div
       className={cn(
         "inline-flex items-center border border-line bg-black/35",
-        compact ? "h-7" : "h-9",
+        compact ? "h-8" : "h-9",
       )}
       aria-label={label}
     >
@@ -28,7 +28,7 @@ export function Stepper({ value, onChange, min = 0, max = 999, compact, label }:
         type="button"
         className={cn(
           "flex items-center justify-center text-muted transition-colors hover:bg-white/5 hover:text-fog disabled:opacity-30",
-          compact ? "h-7 w-7" : "h-9 w-9",
+          compact ? "h-8 w-8" : "h-9 w-9",
         )}
         onClick={() => {
           playClick();
@@ -37,12 +37,12 @@ export function Stepper({ value, onChange, min = 0, max = 999, compact, label }:
         disabled={value <= min}
         aria-label="Decrease"
       >
-        <Minus className={compact ? "h-3 w-3" : "h-3.5 w-3.5"} />
+        <Minus className={compact ? "h-3.5 w-3.5" : "h-3.5 w-3.5"} />
       </button>
       <span
         className={cn(
-          "font-mono flex min-w-7 items-center justify-center border-x border-line text-center tabular-nums",
-          compact ? "h-7 px-1 text-[11px]" : "h-9 px-2 text-sm",
+          "font-mono flex min-w-9 flex-1 items-center justify-center border-x border-line text-center tabular-nums font-bold",
+          compact ? "h-8 px-2 text-sm" : "h-9 px-2 text-sm",
           value > 0 ? "text-cp-yellow" : "text-muted",
         )}
       >
@@ -52,7 +52,7 @@ export function Stepper({ value, onChange, min = 0, max = 999, compact, label }:
         type="button"
         className={cn(
           "flex items-center justify-center text-muted transition-colors hover:bg-white/5 hover:text-fog disabled:opacity-30",
-          compact ? "h-7 w-7" : "h-9 w-9",
+          compact ? "h-8 w-8" : "h-9 w-9",
         )}
         onClick={() => {
           playClick();
@@ -61,7 +61,7 @@ export function Stepper({ value, onChange, min = 0, max = 999, compact, label }:
         disabled={value >= max}
         aria-label="Increase"
       >
-        <Plus className={compact ? "h-3 w-3" : "h-3.5 w-3.5"} />
+        <Plus className={compact ? "h-3.5 w-3.5" : "h-3.5 w-3.5"} />
       </button>
     </div>
   );

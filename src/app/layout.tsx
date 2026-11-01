@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Chakra_Petch, Saira, Share_Tech_Mono } from "next/font/google";
 import { AppShell } from "@/components/AppShell";
 import { AuthSyncProvider } from "@/components/auth/AuthSyncProvider";
+import { PriceSyncProvider } from "@/components/prices/PriceSyncProvider";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import "./globals.css";
 
@@ -64,7 +65,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full">
         <AuthSyncProvider>
-          <AppShell>{children}</AppShell>
+          <PriceSyncProvider>
+            <AppShell>{children}</AppShell>
+          </PriceSyncProvider>
         </AuthSyncProvider>
         <ServiceWorkerRegister />
       </body>

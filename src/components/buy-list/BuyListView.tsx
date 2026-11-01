@@ -28,23 +28,52 @@ const PRIORITY_LABEL: Record<BuyListPriority, string> = {
 };
 
 export function BuyListView() {
+  const buyLists = useVaultStore((state) => (state as any).buyLists) as import("@/lib/types").BuyList[] | undefined;
   const buyList = useVaultStore((state) => state.buyList);
   const collection = useVaultStore((state) => state.collection);
   const addBuyListEntry = useVaultStore((state) => state.addBuyListEntry);
   const adjustBuyListObtained = useVaultStore((state) => state.adjustBuyListObtained);
   const removeBuyListEntry = useVaultStore((state) => state.removeBuyListEntry);
   const clearObtainedBuyList = useVaultStore((state) => state.clearObtainedBuyList);
+  const createBuyList = useVaultStore((state) => (state as any).createBuyList) as ((name?: string, description?: string) => string) | undefined;
+  const updateBuyList = useVaultStore((state) => (state as any).updateBuyList) as ((id: string, patch: any) => void) | undefined;
+  const deleteBuyList = useVaultStore((state) => (state as any).deleteBuyList) as ((id: string) => void) | undefined;
 
   const [addOpen, setAddOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [detailCard, setDetailCard] = useState<Card | null>(null);
   const [priorityFilter, setPriorityFilter] = useState<"all" | BuyListPriority>("all");
   const [showCompleted, setShowCompleted] = useState(false);
+  const [activeListId, setActiveListId] = useState<string | null>(null);
+  const [newListName, setNewListName] = useState("");
+  const [creatingList, setCreatingList] = useState(false);
 
   const ownedCount = useMemo(() => Object.values(collection).filter((c) => c > 0).length, [collection]);
 
+  const lists = useMemo(() => {
+    const l = buyLists && Array.isArray(buyLists) ? buyLists : [];
+    if (l.length === 0 && createBuyList) {
+      // Create default list if none exists
+      const id = createBuyList("My Buy List");
+      return [{ id, name: "My Buy List", createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() }];
+    }
+    return l;
+  }, [buyLists, createBuyList]);
+
+  const currentListId = useMemo(() => {
+    if (activeListId && lists.some((l) => l.id === activeListId)) return activeListId;
+    if (lists.length > 0) return lists[0].id;
+    return null;
+  }, [activeListId, lists]);
+
   const items = useMemo(() => {
     return buyList
+      .filter((item: any) => {
+        if (!currentListId) return true;
+        if ((item as any).listId) return (item as any).listId === currentListId;
+        // Legacy items without listId go to first list
+        return true;
+      })
       .map((item) => {
         const card = getCard(item.cardId);
         if (!card) return null;
@@ -59,7 +88,7 @@ export function BuyListView() {
         if (a.obtained < a.quantity && b.obtained >= b.quantity) return -1;
         return b.createdAt.localeCompare(a.createdAt);
       });
-  }, [buyList]);
+  }, [buyList, currentListId]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -84,13 +113,20 @@ export function BuyListView() {
   }, [addOpen, query]);
 
   const addCard = (card: Card) => {
-    const existing = buyList.find((item) => item.cardId === card.id && item.obtained < item.quantity);
+    // Add to buy list - like CardMarket wanted lists, add as a new entry or increment quantity
+    // Look for existing unfulfilled entry in current list
+    const existing = buyList.find((item: any) => 
+      item.cardId === card.id && 
+      item.obtained < item.quantity &&
+      ((item as any).listId === currentListId || (! (item as any).listId && currentListId))
+    );
     if (existing) {
-      adjustBuyListObtained(existing.id, 1);
+      // Increment quantity to buy more
+      useVaultStore.getState().updateBuyListEntry(existing.id, { quantity: (existing.quantity || 1) + 1 });
     } else {
-      addBuyListEntry({ cardId: card.id, quantity: 1, priority: "normal", notes: "" });
+      addBuyListEntry({ cardId: card.id, quantity: 1, priority: "normal", notes: "", listId: currentListId || undefined });
     }
-    setQuery("");
+    // Don't reset query - let user keep adding cards
   };
 
   return (
@@ -100,7 +136,7 @@ export function BuyListView() {
         title="Buy List"
         description="Queue cards to buy. Track what you've picked up and cross off your shopping list."
         actions={
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="badge badge-yellow">
               <ShoppingCart className="h-3 w-3" />
               {pending} pending
@@ -109,6 +145,28 @@ export function BuyListView() {
               <CheckCircle2 className="h-3 w-3" />
               {completed} complete
             </span>
+            {lists.length > 0 ? (
+              <select
+                value={currentListId || ""}
+                onChange={(e) => setActiveListId(e.target.value)}
+                className="hud-input h-9 text-xs"
+              >
+                {lists.map((l) => (
+                  <option key={l.id} value={l.id}>{l.name}</option>
+                ))}
+              </select>
+            ) : null}
+            <button
+              type="button"
+              className="btn-cyber btn-cyber-ghost"
+              onClick={() => {
+                setCreatingList(true);
+                setNewListName("");
+              }}
+            >
+              <Plus className="h-4 w-4" />
+              New List
+            </button>
             <button type="button" className="btn-cyber" onClick={() => setAddOpen(true)}>
               <ListPlus className="h-4 w-4" />
               Add Cards
@@ -154,11 +212,11 @@ export function BuyListView() {
           ))}
         </div>
         <button type="button" onClick={() => setShowCompleted((v) => !v)} className={cn("btn-cyber btn-cyber-ghost h-10", showCompleted && "text-cp-green")}>{showCompleted ? "Hide Completed" : "Show Completed"}</button>
-        {completed > 0 ? <button type="button" onClick={clearObtainedBuyList} className="btn-cyber btn-cyber-ghost h-10">Clear Done</button> : null}
+        {completed > 0 ? <button type="button" onClick={() => clearObtainedBuyList(currentListId || undefined)} className="btn-cyber btn-cyber-ghost h-10">Clear Done</button> : null}
       </div>
 
       {items.length === 0 ? (
-        <EmptyState icon={<ShoppingCart className="h-6 w-6" />} title="Nothing on your shopping list" description="Add cards you need for upcoming decks or to complete your set." action={<button type="button" className="btn-cyber" onClick={() => setAddOpen(true)}><Plus className="h-4 w-4" />Add First Card</button>} />
+        <EmptyState icon={<ShoppingCart className="h-6 w-6" />} title="Nothing on this buy list" description="Add cards you need for upcoming decks or to complete your set." action={<button type="button" className="btn-cyber" onClick={() => setAddOpen(true)}><Plus className="h-4 w-4" />Add Cards</button>} />
       ) : filtered.length === 0 ? (
         <EmptyState icon={<AlertCircle className="h-6 w-6" />} title="No items match" description="Try changing your filters or search terms." action={<button type="button" className="btn-cyber" onClick={() => { setQuery(""); setPriorityFilter("all"); setShowCompleted(true); }}>Reset Filters</button>} />
       ) : (
@@ -207,7 +265,7 @@ export function BuyListView() {
         </div>
       )}
 
-      <Modal open={addOpen} onClose={() => { setAddOpen(false); setQuery(""); }} title="Add to Buy List" size="xl">
+      <Modal open={addOpen} onClose={() => { setAddOpen(false); /* keep query for convenience */ }} title={currentListId && lists.find(l=>l.id===currentListId)?.name ? `Add to ${lists.find(l=>l.id===currentListId)?.name}` : "Add to Buy List"} size="xl">
         <div className="space-y-4">
           <div className="relative">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
@@ -220,14 +278,18 @@ export function BuyListView() {
             <div className="grid max-h-[60vh] grid-cols-2 gap-3 overflow-y-auto pr-1 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
               {quickResults.map((card) => {
                 const color = card.color ? COLOR_HEX[card.color] : "#7f91a8";
-                const existing = buyList.find((item) => item.cardId === card.id && item.obtained < item.quantity);
+                const existing = buyList.find((item: any) => 
+                  item.cardId === card.id && 
+                  item.obtained < item.quantity &&
+                  ((item as any).listId === currentListId || (! (item as any).listId && currentListId))
+                );
                 return (
                   <button
                     key={card.id}
                     type="button"
                     onClick={() => addCard(card)}
                     className="group relative overflow-hidden border border-line bg-black/40 text-left transition-all hover:border-cp-yellow/60 hover:shadow-[0_0_0_1px_rgba(245,228,0,0.25)]"
-                    title={existing ? "Add another copy" : "Add to buy list"}
+                    title={existing ? "Add another copy to this list" : "Add to buy list"}
                   >
                     <div className="relative aspect-[3/4] w-full">
                       <Image src={card.image} alt={card.displayName} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
@@ -247,7 +309,36 @@ export function BuyListView() {
               })}
             </div>
           )}
-          <p className="text-center font-mono text-[8px] tracking-[0.14em] text-muted/70 uppercase">Click a card to add to your buy list</p>
+          <p className="text-center font-mono text-[8px] tracking-[0.14em] text-muted/70 uppercase">Click a card to add to your buy list • Search stays open</p>
+        </div>
+      </Modal>
+
+      <Modal open={creatingList} onClose={() => setCreatingList(false)} title="Create Buy List" size="sm">
+        <div className="space-y-3">
+          <input
+            value={newListName}
+            onChange={(e) => setNewListName(e.target.value)}
+            placeholder="e.g., NetRunner Aggro, Collection Completion"
+            className="hud-input h-10 w-full"
+            autoFocus
+          />
+          <div className="flex justify-end gap-2">
+            <button type="button" className="btn-cyber btn-cyber-ghost" onClick={() => setCreatingList(false)}>Cancel</button>
+            <button
+              type="button"
+              className="btn-cyber"
+              disabled={!newListName.trim() || !createBuyList}
+              onClick={() => {
+                if (createBuyList && newListName.trim()) {
+                  const id = createBuyList(newListName.trim());
+                  setActiveListId(id);
+                }
+                setCreatingList(false);
+              }}
+            >
+              Create
+            </button>
+          </div>
         </div>
       </Modal>
 

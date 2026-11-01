@@ -101,21 +101,25 @@ export function Dashboard() {
           </div>
 
           <div className="grid w-full grid-cols-2 gap-2 sm:max-w-md">
-            <Link href="/matches" className="btn-cyber">
+            <Link href="/matches" className="btn-cyber group relative overflow-hidden">
               <Plus className="h-4 w-4" />
-              Log Match
+              <span className="relative z-10">Log Match</span>
+              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
             </Link>
-            <Link href="/decks" className="btn-cyber">
+            <Link href="/decks" className="btn-cyber group relative overflow-hidden">
               <Plus className="h-4 w-4" />
-              New Deck
+              <span className="relative z-10">New Deck</span>
+              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
             </Link>
-            <Link href="/collection" className="btn-cyber btn-cyber-ghost">
+            <Link href="/collection" className="btn-cyber btn-cyber-ghost group relative overflow-hidden">
               <ScanEye className="h-4 w-4" />
-              Scan Vault
+              <span className="relative z-10">Scan Vault</span>
+              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
             </Link>
-            <Link href="/hand-tester" className="btn-cyber btn-cyber-ghost">
+            <Link href="/hand-tester" className="btn-cyber btn-cyber-ghost group relative overflow-hidden hidden sm:flex">
               <Hand className="h-4 w-4" />
-              Test Hand
+              <span className="relative z-10">Test Hand</span>
+              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
             </Link>
           </div>
         </div>
@@ -390,7 +394,7 @@ export function Dashboard() {
               Quick Ops
             </h2>
             <div className="mt-3 space-y-2">
-              <Link href="/hand-tester" className="flex items-center gap-3 border border-line bg-black/20 p-3 transition-colors hover:border-cp-yellow/40 hover:bg-cp-yellow/5">
+              <Link href="/hand-tester" className="hidden sm:flex items-center gap-3 border border-line bg-black/20 p-3 transition-colors hover:border-cp-yellow/40 hover:bg-cp-yellow/5">
                 <Hand className="h-4 w-4 text-cp-yellow" />
                 <div className="min-w-0 flex-1">
                   <p className="text-[12px] font-medium text-fog">Opening Hand Tester</p>

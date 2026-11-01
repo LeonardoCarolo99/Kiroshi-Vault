@@ -2,15 +2,18 @@
 
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import type { BuyListEntry, Deck, MatchRecord } from "@/lib/types";
+import type { BuyListEntry, BuyList, Deck, MatchRecord, Tournament } from "@/lib/types";
 
 export type VaultSnapshot = {
   collection: Record<string, number>;
   decks: Deck[];
   matches: MatchRecord[];
+  tournaments?: Tournament[];
+  buyLists?: BuyList[];
   buyList?: BuyListEntry[];
   friends?: import("@/lib/types").Friend[];
   friendCode?: string | null;
+  meleeAccount?: import("@/lib/types").MeleeAccount | null;
   updatedAt?: unknown;
 };
 
@@ -28,9 +31,12 @@ export async function loadVaultFromCloud(uid: string): Promise<VaultSnapshot | n
     collection: data.collection ?? {},
     decks: Array.isArray(data.decks) ? data.decks : [],
     matches: Array.isArray(data.matches) ? data.matches : [],
+    tournaments: Array.isArray((data as any).tournaments) ? (data as any).tournaments : [],
+    buyLists: Array.isArray((data as any).buyLists) ? (data as any).buyLists : [],
     buyList: Array.isArray(data.buyList) ? data.buyList : [],
     friends: Array.isArray(data.friends) ? data.friends : [],
     friendCode: typeof data.friendCode === "string" ? data.friendCode : null,
+    meleeAccount: (data as any).meleeAccount ?? null,
     updatedAt: data.updatedAt,
   };
 }
@@ -41,9 +47,11 @@ export async function saveVaultToCloud(
     collection: Record<string, number>;
     decks: Deck[];
     matches: MatchRecord[];
+    tournaments?: Tournament[];
     buyList?: BuyListEntry[];
     friends?: import("@/lib/types").Friend[];
     friendCode?: string | null;
+    meleeAccount?: import("@/lib/types").MeleeAccount | null;
   },
 ): Promise<void> {
   if (!db) throw new Error("Firestore not initialized");
@@ -53,11 +61,14 @@ export async function saveVaultToCloud(
       collection: snapshot.collection,
       decks: snapshot.decks,
       matches: snapshot.matches,
+      tournaments: snapshot.tournaments ?? [],
+      buyLists: (snapshot as any).buyLists ?? [],
       buyList: snapshot.buyList ?? [],
       friends: snapshot.friends ?? [],
       friendCode: snapshot.friendCode ?? null,
+      meleeAccount: snapshot.meleeAccount ?? null,
       updatedAt: serverTimestamp(),
-    },
+    } as any,
     { merge: true },
   );
 }

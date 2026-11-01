@@ -96,12 +96,12 @@ export function FilterPanel({
     <div className="space-y-3">
       <div className="flex flex-col gap-2 sm:flex-row">
         <div className="relative flex-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
+          <Search className="pointer-events-none absolute left-1/2 top-1/2 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 text-muted sm:block" />
           <input
             value={filters.query}
             onChange={(event) => set({ query: event.target.value })}
             placeholder="Search by name, type, tag, rules text..."
-            className="hud-input h-11 pl-10 pr-9"
+            className="hud-input h-11 w-full pl-3 pr-9 sm:pl-10"
             aria-label="Search cards"
           />
           {filters.query ? (
@@ -132,7 +132,7 @@ export function FilterPanel({
         <select
           value={sort}
           onChange={(event) => onSort(event.target.value as SortKey)}
-          className="hud-select h-11 w-full sm:w-48"
+          className="hud-select h-11 w-44 shrink-0"
           aria-label="Sort cards"
         >
           {SORT_OPTIONS.map((option) => (

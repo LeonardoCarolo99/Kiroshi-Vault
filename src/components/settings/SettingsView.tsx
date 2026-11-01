@@ -20,6 +20,7 @@ import {
   User,
   Volume2,
   VolumeX,
+  Image as ImageIcon,
 } from "lucide-react";
 import { useVaultStore } from "@/lib/store";
 import { cardMeta, cards } from "@/lib/cards";
@@ -30,6 +31,7 @@ import { formatDateTime } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import { signInWithGoogle, signInAnon, signOutUser } from "@/lib/auth";
 import { useSound } from "@/hooks/useSound";
+import { AVATAR_OPTIONS } from "@/lib/types";
 
 export function SettingsView() {
   const collection = useVaultStore((state) => state.collection);
@@ -44,6 +46,11 @@ export function SettingsView() {
   const syncFromCloud = useVaultStore((state) => state.syncFromCloud);
   const friendCode = useVaultStore((state) => state.friendCode);
   const ensureFriendCode = useVaultStore((state) => state.ensureFriendCode);
+  const avatarId = useVaultStore((state) => state.avatarId);
+  const setAvatarId = useVaultStore((state) => state.setAvatarId);
+  const meleeAccount = (useVaultStore((state: any) => state.meleeAccount)) as any;
+  const linkMeleeAccount = useVaultStore((state: any) => state.linkMeleeAccount);
+  const [meleeInput, setMeleeInput] = useState("");
   const { setEnabled: setSoundEnabled, playClick, playToggle, setVolume, getVolume } = useSound();
 
   const fileRef = useRef<HTMLInputElement>(null);
@@ -161,6 +168,99 @@ export function SettingsView() {
       ) : null}
 
       <div className="grid gap-4 xl:grid-cols-2">
+        <section className="hud-panel p-5">
+          <div className="flex items-center gap-2">
+            <ImageIcon className="h-4 w-4 text-cp-cyan" />
+            <p className="hud-label text-cp-cyan">Profile</p>
+          </div>
+          <h2 className="font-display mt-1 text-xl font-bold uppercase tracking-[0.05em] text-fog">
+            Avatar
+          </h2>
+          <div className="mt-3 space-y-2">
+            <div className="flex items-center justify-between gap-2 border border-line bg-black/25 p-2">
+              <div>
+                <p className="text-[11px] text-fog">Melee.gg</p>
+                <p className="font-mono text-[8px] tracking-[0.08em] text-muted">{meleeAccount?.username || meleeAccount?.profileId ? `${meleeAccount.username || meleeAccount.profileId}` : "Not linked"}</p>
+              </div>
+              {meleeAccount ? (
+                <button type="button" className="btn-cyber btn-cyber-ghost px-2 py-1" onClick={() => { const fn: any = linkMeleeAccount as any; if (typeof fn === "function") fn(null); }}>
+                  Unlink
+                </button>
+              ) : null}
+            </div>
+            {!meleeAccount ? (
+              <div className="flex gap-2">
+                <input
+                  value={meleeInput}
+                  onChange={(event) => setMeleeInput(event.target.value)}
+                  placeholder="Melee.gg profile URL or username"
+                  className="hud-input flex-1"
+                />
+                <button
+                  type="button"
+                  className="btn-cyber px-2 py-1"
+                  onClick={async () => {
+                    if (!meleeInput.trim()) return;
+                    const val = meleeInput.trim();
+                    try {
+                      const res = await fetch(`/api/melee/profile?q=${encodeURIComponent(val)}`);
+                      const data = await res.json().catch(() => ({}));
+                      linkMeleeAccount?.({
+                        username: val,
+                        profileUrl: data?.url || (val.startsWith("http") ? val : `https://melee.gg/Profile/Index/${encodeURIComponent(val)}`),
+                        linkedAt: new Date().toISOString(),
+                        lastSyncedAt: new Date().toISOString(),
+                      });
+                    } catch {
+                      linkMeleeAccount?.({
+                        username: val,
+                        profileUrl: val.startsWith("http") ? val : `https://melee.gg/Profile/Index/${encodeURIComponent(val)}`,
+                        linkedAt: new Date().toISOString(),
+                        lastSyncedAt: new Date().toISOString(),
+                      });
+                    }
+                    setMeleeInput("");
+                  }}
+                >
+                  Link Account
+                </button>
+              </div>
+            ) : (
+              <p className="font-mono text-[8px] tracking-[0.08em] text-muted">Tournaments will sync from your linked profile.</p>
+            )}
+          </div>
+          <p className="mt-2 text-xs leading-relaxed text-muted">
+            Choose a profile avatar to display in Friends and Chat.
+          </p>
+          <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-6">
+            {AVATAR_OPTIONS.map((avatar) => {
+              const active = avatarId === avatar.id;
+              return (
+                <button
+                  key={avatar.id}
+                  type="button"
+                  onClick={() => { if (typeof setAvatarId === "function") setAvatarId(active ? null : avatar.id); }}
+                  className={cn(
+                    "relative flex aspect-square items-center justify-center overflow-hidden border transition-all",
+                    active
+                      ? "border-cp-yellow bg-cp-yellow/10"
+                      : "border-line bg-black/20 hover:border-cp-cyan/50",
+                  )}
+                  title={avatar.label}
+                >
+                  <img
+                    src={`/avatars/${avatar.id}.webp`}
+                    alt={avatar.label}
+                    className="h-full w-full object-cover"
+                  />
+                  {active && <span className="absolute -right-1 -top-1 h-2 w-2 bg-cp-yellow" />}
+                </button>
+              );
+            })}
+          </div>
+          <p className="mt-2 text-[9px] text-muted">Square avatars. More art coming soon.</p>
+        </section>
+
         <section className="hud-panel p-5">
           <div className="flex items-center gap-2">
             {soundsOn ? <Volume2 className="h-4 w-4 text-cp-cyan" /> : <VolumeX className="h-4 w-4 text-muted" />}

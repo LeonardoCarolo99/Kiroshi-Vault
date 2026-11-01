@@ -70,7 +70,7 @@ export function Modal({
         aria-modal="true"
         aria-label={title ?? "Dialog"}
         className={cn(
-          "hud-panel relative my-0 w-full animate-scale overflow-hidden shadow-[0_40px_140px_rgba(0,0,0,0.85)] sm:my-8",
+          "hud-panel relative my-0 w-full animate-slide-in-fade overflow-hidden shadow-[0_40px_140px_rgba(0,0,0,0.85)] sm:my-8",
           SIZES[size],
           className,
         )}
