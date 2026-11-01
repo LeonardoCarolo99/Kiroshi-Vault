@@ -1,0 +1,10 @@
+import { MarketView } from '@/components/market/MarketView';
+
+export const metadata = {
+  title: 'Market',
+};
+
+export default function MarketPage() {
+  return <MarketView />;
+}
+
